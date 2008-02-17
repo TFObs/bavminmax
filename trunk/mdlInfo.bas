@@ -89,8 +89,17 @@ With frmSterninfo
         "DEC   " & umwand(4) & ":" & umwand(5) & ":" & umwand(6)
 
  End With
+ 
+        If frmAladin.Visible Then
+          If frmSterninfo.lblKoord.Caption <> "" Then
+            result = Split(frmSterninfo.lblKoord.Caption, vbCrLf)
+            frmAladin.txtObj.text = Trim(Mid(CStr(result(0)), 3, Len(CStr(result(0))) - 2)) & " " & Trim(Mid(CStr(result(1)), 4, Len(CStr(result(1))) - 2))
+          End If
         
-
+        frmAladin.txtStern.text = frmSterninfo.lblStern.Caption
+        
+        End If
+        
       'Recordset schliessen, Speicher freigeben
       rsa.Close
       Set rsa = Nothing

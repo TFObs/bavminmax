@@ -2,7 +2,7 @@ VERSION 5.00
 Begin VB.Form frmAladin 
    BorderStyle     =   3  'Fester Dialog
    Caption         =   "Internet-Recherche"
-   ClientHeight    =   6630
+   ClientHeight    =   6420
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   7470
@@ -10,10 +10,28 @@ Begin VB.Form frmAladin
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6630
+   ScaleHeight     =   6420
    ScaleWidth      =   7470
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows-Standard
+   Begin VB.TextBox txtStern 
+      Alignment       =   2  'Zentriert
+      BackColor       =   &H00C0FFFF&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   5040
+      TabIndex        =   32
+      Top             =   2520
+      Width           =   1575
+   End
    Begin VB.Frame fraInfo 
       Caption         =   "sonst. Informationen"
       BeginProperty Font 
@@ -526,6 +544,23 @@ Begin VB.Form frmAladin
       Top             =   5760
       Width           =   3135
    End
+   Begin VB.Label Label5 
+      Caption         =   "Stern:"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Left            =   5040
+      TabIndex        =   31
+      Top             =   2280
+      Width           =   615
+   End
 End
 Attribute VB_Name = "frmAladin"
 Attribute VB_GlobalNameSpace = False
@@ -533,17 +568,38 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Dim fs As New FileSystemObject
 Dim result
+Dim Connstr As String
+Dim SearchStar
 
 Public Sub Form_Load()
 result = CheckInetConnection(Me.hwnd)
 If result = False Then Exit Sub
+
+cmdDSS.Visible = False
+
 chkPOSS.Value = 1
 chkSIM.Value = 1
 chkUSNOA.Value = 1
 chkESA.Value = 1
 chkHog.Value = 1
 chk2MASS.Value = 1
+
+    'Füllen der ComboBox für die Bildgröße
+    With cmbPicMeas
+    .AddItem "15' x 15'"
+    .AddItem "30' x 30'"
+    .AddItem "45' x 45'"
+    .AddItem "60' x 60'"
+    End With
+    cmbPicMeas.ListIndex = 1
+
+If frmSterninfo.Visible Then
+    cmdDSS.Visible = True
+    txtStern.text = frmSterninfo.lblStern
+End If
+floatwindow Me.hwnd
 End Sub
 
 Private Function GetAladinURL(ByVal Koord As String)
@@ -625,8 +681,10 @@ Else: GoTo errhandler
 End If
 Exit Function
 errhandler:
-MsgBox Err.Number & Err.Description & vbCrLf & "Bitte Eingabe überprüfen!"
+unfloatwindow Me.hwnd
+MsgBox "Fehler: " & Err.Number & " : " & Err.Description & vbCrLf & "Bitte Eingabe überprüfen!"
 GetAladinURL = "-"
+floatwindow Me.hwnd
 End Function
 
 Private Sub cmdopen_Click()
@@ -634,8 +692,134 @@ result = CheckInetConnection(Me.hwnd)
 
 If result = False Then Exit Sub
 result = GetAladinURL(txtObj.text)
-If Not result = "-" Then frmInternet.URLGoTo Me.hwnd, result
+If Not result = "-" Then URLGoTo Me.hwnd, result
 End Sub
 
+Private Sub cmdAAVSO_Click()
+
+  If GetSearchStar <> "-" Then
+    Connstr = "http://www.aavso.org/cgi-bin/vsp.pl?action=render&name=" & _
+    Trim(SearchStar(0)) & "+" & Trim(SearchStar(1)) & "&ra=&dec=&charttitle=&chartcomment=&aavsoscale=C&" & _
+    "fov=" & (cmbPicMeas.ListIndex) * 15 + 15 & "&resolution=75&maglimit=12&ccdbox=0&north=up&east=left&Submit=Plot+Chart"
+    URLGoTo Me.hwnd, Connstr
+  End If
+
+End Sub
+
+Private Sub cmdAAVSO_D_Click()
+
+  If GetSearchStar <> "-" Then
+    Connstr = "http://www.aavso.org/cgi-bin/vsp.pl?action=render&name=" & _
+    Trim(SearchStar(0)) & "+" & Trim(SearchStar(1)) & "&ra=&dec=&charttitle=&chartcomment=&aavsoscale=C&" & _
+    "fov=" & (cmbPicMeas.ListIndex) * 15 + 15 & "&resolution=75&maglimit=12&ccdbox=0&north=up&east=left&" & _
+    "dss=on&Submit=Plot+Chart"
+    URLGoTo Me.hwnd, Connstr
+  End If
+
+End Sub
+
+Private Sub cmdBAV_Click()
+
+  If GetSearchStar <> "-" Then
+    Connstr = "http://www.bavdata-astro.de/~tl/cgi-bin/vs_html?stern=" & _
+    Trim(SearchStar(0)) & "+" & Trim(SearchStar(1)) & _
+    "&datum0=&datum1=&perioden=0&bmr=bmr&lkdb=Lichtenknecker+Database&minfoto=nein&" & _
+    "filter=&quality=&lang=de&listobs=html&epoche=&periode="
+    URLGoTo Me.hwnd, Connstr
+ End If
+
+End Sub
+
+Private Sub cmdDSS_Click()
+'http://archive.stsci.edu/cgi-bin/dss_search?v=poss2ukstu_red&r=17+33+59.38&d=-01+04+51.6&e=J2000&h=15.0&w=15.0&f=gif&c=none&fov=NONE&v3=
+Connstr = "http://archive.stsci.edu/cgi-bin/dss_search?v=poss2ukstu_red&r=" & frmSterninfo.lblStarRA & "&d=" & frmSterninfo.lblStarDec & "&e=J2000&" _
+& "h=" & (cmbPicMeas.ListIndex) * 15 + 15 & "&w=" & (cmbPicMeas.ListIndex) * 15 + 15 & "&f=gif&c=none&fov=NONE&v3="
+URLGoTo Me.hwnd, Connstr
+End Sub
+
+Private Sub cmdGCVS_Click()
+
+  If GetSearchStar <> "-" Then
+    Connstr = "http://www.sai.msu.su/groups/cluster/gcvs/cgi-bin/search.cgi?search=" & _
+    Trim(SearchStar(0)) & "+" & Trim(SearchStar(1))
+    URLGoTo Me.hwnd, Connstr
+  End If
+
+End Sub
+
+Private Sub cmdGEOS_Click()
+
+  If GetSearchStar <> "-" Then
+    Connstr = "http://dbrr.ast.obs-mip.fr/listostar.html#" & Trim(SearchStar(1))
+    URLGoTo Me.hwnd, Connstr
+  End If
+
+End Sub
+
+Private Sub cmdKreiner_Click()
+
+  If GetSearchStar <> "-" Then
+    Connstr = "http://www.as.wsp.krakow.pl/o-c/data/getdata.php3?" & _
+    Trim(SearchStar(0)) & "%20" & Trim(SearchStar(1))
+    URLGoTo Me.hwnd, Connstr
+  End If
+
+End Sub
+
+Private Sub cmdOCGate_Click()
+
+  If GetSearchStar <> "-" Then
+    Connstr = "http://var.astro.cz/ocgate/ocgate.php?star=" & _
+    Trim(SearchStar(0)) & "+" & Trim(SearchStar(1)) & "&submit=Submit&lang=en"
+    URLGoTo Me.hwnd, Connstr
+  End If
+
+End Sub
+
+Private Sub cmdOCSearch_Click()
+
+  If GetSearchStar <> "-" Then
+    Connstr = "http://var.astro.cz/gsg/vsgateway.php?star=" & _
+    Trim(SearchStar(0)) & "+" & Trim(SearchStar(1)) & "&all=yes&alldata=yes&oejv=yes&gcvs=yes" & _
+    "&nsv=yes&brka=yes&meka=yes&czev=yes&bcvs=yes&dssplate=yes&usecoords=GCVS&rezim=search_now"
+    URLGoTo Me.hwnd, Connstr
+  End If
+
+End Sub
+
+Private Sub cmdSimbad_Click()
+
+  If GetSearchStar <> "-" Then
+   Connstr = "http://simbad.u-strasbg.fr/simbad/sim-id?protocol=html&Ident=" & _
+   Trim(SearchStar(0)) & "+" & Trim(SearchStar(1)) & "&NbIdent=1&Radius=2&Radius.unit=arcmin&submit=submit+id"
+   URLGoTo Me.hwnd, Connstr
+  End If
+
+End Sub
+
+Private Function GetSearchStar()
+ If frmSterninfo.Visible Then
+   SearchStar = Split(frmSterninfo.lblStern.Caption, " ")
+Else
+   SearchStar = Split(txtStern.text, " ")
+End If
+
+If UBound(SearchStar) <> 1 Then
+GetSearchStar = "-"
+Else
+GetSearchStar = SearchStar
+End If
+End Function
+
+
+Private Sub URLGoTo(ByVal hwnd As Long, ByVal URL As String)
+
+  ' hWnd: Das Fensterhandle des
+  ' aufrufenden Formulars
+
+  Screen.MousePointer = 11
+  Call ShellExecute(hwnd, "Open", URL, "", "", 2)
+  Screen.MousePointer = 0
+End Sub
 
 

@@ -6,7 +6,7 @@ Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MSHFLXGD.OCX"
 Begin VB.Form frmHaupt 
    BackColor       =   &H8000000A&
    BorderStyle     =   1  'Fest Einfach
-   Caption         =   "BAV Min/Max  V1.08"
+   Caption         =   "BAV Min/Max  V1.08a"
    ClientHeight    =   8145
    ClientLeft      =   150
    ClientTop       =   720
@@ -19,14 +19,6 @@ Begin VB.Form frmHaupt
    ScaleMode       =   0  'Benutzerdefiniert
    ScaleWidth      =   6861.694
    StartUpPosition =   3  'Windows-Standard
-   Begin VB.CommandButton cmdRecherche 
-      Caption         =   "Recherche"
-      Height          =   495
-      Left            =   4680
-      TabIndex        =   36
-      Top             =   720
-      Width           =   1335
-   End
    Begin VB.CommandButton cmdListe 
       BackColor       =   &H00C0C000&
       Height          =   615
@@ -39,15 +31,14 @@ Begin VB.Form frmHaupt
       Width           =   975
    End
    Begin VB.CommandButton cmdInternet 
-      Enabled         =   0   'False
       Height          =   495
-      Left            =   6120
+      Left            =   5280
       Picture         =   "frmHaupt.frx":0BD4
       Style           =   1  'Grafisch
       TabIndex        =   34
-      ToolTipText     =   "Internet Informationen"
+      ToolTipText     =   "Internet-Recherche"
       Top             =   720
-      Width           =   615
+      Width           =   1455
    End
    Begin VB.CommandButton cmdÖffnen 
       Height          =   495
@@ -291,6 +282,7 @@ Begin VB.Form frmHaupt
       Index           =   1
       Left            =   120
       TabIndex        =   0
+      ToolTipText     =   "Internet-Recherche"
       Top             =   1800
       Width           =   6615
       Begin VB.Timer Timer1 
@@ -575,10 +567,10 @@ Begin VB.Form frmHaupt
          End
       End
    End
-   Begin VB.Menu helKorr 
-      Caption         =   "heliozentrische Korrektur"
+   Begin VB.Menu Berech 
+      Caption         =   "Berechnungen"
       Begin VB.Menu hKorrberech 
-         Caption         =   "berechnen"
+         Caption         =   "heliozentrische Korrektur"
       End
    End
    Begin VB.Menu DB 
@@ -668,12 +660,12 @@ Private Sub cmdinfo_Click()
         frmSterninfo.Show
         cmdInfo.Picture = Image1
         cmdInfo.ToolTipText = "Informationsfenster ausblenden"
-        cmdInternet.Enabled = True
+        'cmdInternet.Enabled = True
     Else
         cmdInfo.Picture = Image2
-        cmdInternet.Enabled = False
+        'cmdInternet.Enabled = False
         cmdInfo.ToolTipText = "Informationsfenster öffnen"
-        Unload frmInternet
+        
         Unload frmSterninfo
     End If
     
@@ -721,7 +713,7 @@ Private Sub cmdAbfrag_Click()
     Me.Width = 7050
     frmOrt.Visible = False
     
-  Unload frmInternet
+  Unload frmAladin
   Unload frmBerechnungsfilter
   Unload frmSterninfo
   
@@ -734,7 +726,7 @@ Private Sub cmdAbfrag_Click()
   cmdAbfrag.Enabled = False
   cmdInfo.Picture = Image2
   cmdInfo.ToolTipText = "Informationsfenster ausblenden"
-  cmdInternet.Enabled = False
+  'cmdInternet.Enabled = False
   cmdListe.Enabled = True
 End Sub
 
@@ -752,18 +744,23 @@ End Sub
 Private Sub cmdInternet_Click()
 result = CheckInetConnection(Me.hwnd)
 If result = False Then
-Unload frmInternet
+Unload frmAladin
 Exit Sub
 End If
 
-frmInternet.Show
+If frmSterninfo.lblKoord.Caption <> "" Then
+result = Split(frmSterninfo.lblKoord.Caption, vbCrLf)
+frmAladin.txtObj.text = Trim(Mid(CStr(result(0)), 3, Len(CStr(result(0))) - 2)) & " " & Trim(Mid(CStr(result(1)), 4, Len(CStr(result(1))) - 2))
+End If
+
+frmAladin.Show
 End Sub
 
 'Öffnen einer bestehenden Abfrage
 Private Sub cmdÖffnen_Click()
 Set dbsBAVSterne = New ADODB.Connection
 Set rstAbfrage = New ADODB.Recordset
-Dim vstrfile, Y
+Dim vstrfile, y
 
 Me.Rahmen(2).Visible = True
 'Me.Width = 11040
@@ -885,23 +882,23 @@ End With
 
 'Erstellen der Spalten im Recordset
 With rsergebnis
-For Y = 1 To grdergebnis.Rows - 1
+For y = 1 To grdergebnis.Rows - 1
  
   .AddNew
-  .Fields("Stbld") = grdergebnis.TextMatrix(Y, 1)
-  .Fields("stern") = grdergebnis.TextMatrix(Y, 2)
-  .Fields("Datum") = grdergebnis.TextMatrix(Y, 3)
-  .Fields("Uhrzeit") = grdergebnis.TextMatrix(Y, 4)
+  .Fields("Stbld") = grdergebnis.TextMatrix(y, 1)
+  .Fields("stern") = grdergebnis.TextMatrix(y, 2)
+  .Fields("Datum") = grdergebnis.TextMatrix(y, 3)
+  .Fields("Uhrzeit") = grdergebnis.TextMatrix(y, 4)
   
-  .Fields("stundenwinkel") = grdergebnis.TextMatrix(Y, 5)
-  .Fields("Höhe") = grdergebnis.TextMatrix(Y, 6)
-  .Fields("Azimut") = grdergebnis.TextMatrix(Y, 7)
-  .Fields("BProg") = grdergebnis.TextMatrix(Y, 8)
-  .Fields("Typ") = grdergebnis.TextMatrix(Y, 9)
-  .Fields("Epochenzahl") = grdergebnis.TextMatrix(Y, 10)
-  .Fields("Monddist") = grdergebnis.TextMatrix(Y, 11)
+  .Fields("stundenwinkel") = grdergebnis.TextMatrix(y, 5)
+  .Fields("Höhe") = grdergebnis.TextMatrix(y, 6)
+  .Fields("Azimut") = grdergebnis.TextMatrix(y, 7)
+  .Fields("BProg") = grdergebnis.TextMatrix(y, 8)
+  .Fields("Typ") = grdergebnis.TextMatrix(y, 9)
+  .Fields("Epochenzahl") = grdergebnis.TextMatrix(y, 10)
+  .Fields("Monddist") = grdergebnis.TextMatrix(y, 11)
 
-Next Y
+Next y
 
 .Update
 .Save pfad & "\ergebnisse.dat"
@@ -976,13 +973,7 @@ Private Sub cmdOrtOK_Click()
     Me.cmdListe.Enabled = True
 End Sub
 
-Private Sub cmdRecherche_Click()
-If frmSterninfo.lblKoord.Caption <> "" Then
-result = Split(frmSterninfo.lblKoord.Caption, vbCrLf)
-frmAladin.txtObj.text = Trim(Mid(CStr(result(0)), 3, Len(CStr(result(0))) - 2)) & " " & Trim(Mid(CStr(result(1)), 4, Len(CStr(result(1))) - 2))
-End If
-frmAladin.Show
-End Sub
+
 
 Private Sub DBGcvs_aktual_Click()
 
@@ -1146,7 +1137,7 @@ Dim result
     
     Set fs = Nothing
     Unload frmBerechnungsfilter
-    Unload frmInternet
+    Unload frmAladin
     Unload frmSterninfo
     Unload frmGridGross
     Unload frmHelioz
@@ -1172,6 +1163,8 @@ burger.Checked = True
 SaH.Checked = False
 Call UnloadAll
 End Sub
+
+
 
 
 
@@ -1214,7 +1207,7 @@ Private Sub ort_Click()
     If cmdErgebnis.Enabled = True Then
         Unload frmBerechnungsfilter
         Unload frmSterninfo
-        Unload frmInternet
+        Unload frmAladin
     End If
     
     'Register ausblenden
@@ -1236,7 +1229,7 @@ End Sub
 Private Sub Form_Resize()
     Dim i As Byte
     
-       For i = 1 To Me.Rahmen.UBound - 1
+       For i = 1 To Me.Rahmen.Ubound - 1
         Me.Rahmen(i).Width = Me.Rahmen(1).Width
         Me.Rahmen(i).Top = Me.Rahmen(1).Top
         Me.Rahmen(i).Left = Me.Rahmen(1).Left
@@ -1628,6 +1621,7 @@ grdergebnis.ColAlignment = 4
       grdergebnis.Visible = True
       Exit Sub
   If fs.FileExists(pfad & "\filter.dat") Then fs.DeleteFile (pfad & "\filter.dat")
+  frmGridGross.grossGrid_füllen
 Abbruch:
       MsgBox "Fehler: " & Err.Number & vbCrLf & _
              Err.Description, vbCritical
@@ -1639,7 +1633,7 @@ End Sub
 Private Sub cmdListspeichern_Click()
 Dim datei As String, zeile As String
 Dim spalten As Long, zeilen As Long
-Dim x As Long, Y As Long
+Dim x As Long, y As Long
 Dim ikanal As Integer
         
         'Ermitteln des Dateinamens
@@ -1663,14 +1657,14 @@ Dim ikanal As Integer
         spalten = grdergebnis.Cols
         zeilen = grdergebnis.Rows
         zeile = ";"
-        For Y = 0 To zeilen - 1
+        For y = 0 To zeilen - 1
             For x = 1 To spalten - 1
-                zeile = zeile & grdergebnis.TextMatrix(Y, x) & ";"
+                zeile = zeile & grdergebnis.TextMatrix(y, x) & ";"
             Next x
   
             Print #ikanal, zeile
             zeile = ";" 'Löschen des Zeileninhalts
-        Next Y
+        Next y
         
     Close #ikanal
   
@@ -1741,7 +1735,7 @@ End If
 End Sub
 
 Private Sub grdergebnis_MouseUp(Button As Integer, _
-  Shift As Integer, x As Single, Y As Single)
+  Shift As Integer, x As Single, y As Single)
   
   ' Rechtsklick?
   If Button = vbRightButton Then
@@ -1768,7 +1762,7 @@ Private Sub grdergebnis_MouseUp(Button As Integer, _
         .col = nCol
         
         If x >= .CellLeft And x <= .CellLeft + .CellWidth And _
-          Y >= .CellTop And Y <= .CellTop + .CellHeight Then
+          y >= .CellTop And y <= .CellTop + .CellHeight Then
         
           ' Beispiel: PopUp-Menü anzeigen
          
@@ -1804,8 +1798,8 @@ Private Sub cmdListdrucken_Click()
 End Sub
 
 Private Sub UnloadAll()
-  Unload frmInternet
-  cmdInternet.Enabled = False
+  Unload frmAladin
+  'cmdInternet.Enabled = False
   Unload frmBerechnungsfilter
   Unload frmSterninfo
   Me.Form_Load

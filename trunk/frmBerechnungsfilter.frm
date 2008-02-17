@@ -537,6 +537,7 @@ End If
 
 
 frmHaupt.gridfüllen (sSQL)
+frmGridGross.grossGrid_füllen
 If frmGridGross.Visible Then
 Unload frmGridGross
  frmGridGross.Show
@@ -703,7 +704,7 @@ End Sub
 
 
 Private Sub Form_Unload(Cancel As Integer)
-If frmInternet.Visible = False Then
+If frmAladin.Visible = False Then
 sSQL = ""
 frmHaupt.gridfüllen
 End If

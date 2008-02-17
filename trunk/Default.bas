@@ -61,6 +61,25 @@ Public dicStbld As Dictionary
     Public Database
     Public sorter As Byte
 
+'Deklaration: Globale Form API-Konstanten
+Public Const SWP_NOMOVE As Long = &H2
+Public Const SWP_NOSIZE As Long = &H1
+Public Const HWND_TOPMOST As Long = -1&
+Public Const HWND_NOTOPMOST As Long = -2&
+
+'Deklaration: Globale Form API-Funktionen
+Public Declare Function SetWindowPos Lib "user32" (ByVal hwnd As Long, _
+    ByVal hWndInsertAfter As Long, ByVal x As Long, ByVal y As Long, _
+    ByVal cx As Long, _
+    ByVal cy As Long, ByVal wFlags As Long) As Long
+
+Public Function floatwindow(hwnd)
+floatwindow = SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE + SWP_NOSIZE)
+End Function
+
+Public Function unfloatwindow(hwnd)
+unfloatwindow = SetWindowPos(hwnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE + SWP_NOSIZE)
+End Function
 Public Sub INISetValue(ByVal Path$, ByVal Sect$, ByVal Key$, _
                         ByVal Value$)
   Dim result&
