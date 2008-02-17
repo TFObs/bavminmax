@@ -69,7 +69,7 @@ Private Sub Form_Load()
      grossGrid_füllen
 End Sub
 
-Sub grossGrid_füllen()
+Public Sub grossGrid_füllen()
 Dim Y, x As Integer
 Dim text As String
 
