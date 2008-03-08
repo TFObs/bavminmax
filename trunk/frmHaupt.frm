@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{8E27C92E-1264-101C-8A2F-040224009C02}#7.0#0"; "MSCAL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MsComCtl.ocx"
 Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MSHFLXGD.OCX"
 Begin VB.Form frmHaupt 
    BackColor       =   &H8000000A&
@@ -569,6 +569,9 @@ Begin VB.Form frmHaupt
    End
    Begin VB.Menu Berech 
       Caption         =   "Berechnungen"
+      Begin VB.Menu mnuEinzel 
+         Caption         =   "Einzelextrema"
+      End
       Begin VB.Menu hKorrberech 
          Caption         =   "heliozentrische Korrektur"
       End
@@ -633,16 +636,18 @@ Const LOCALE_USER_DEFAULT = &H400
 Const LOCALE_SYSTEM_DEFAULT As Long = &H400
 
 
-Dim dbsBAVSterne As ADODB.Connection 'Grunddaten
+Dim dbsbavsterne As ADODB.Connection 'Grunddaten
 Dim rstAbfrage As ADODB.Recordset    'Abfrage auf Grunddaten
 Dim rsergebnis As ADODB.Recordset    'temporäre Ergebnisdatei ergebnisse.dat
 Dim fs As New FileSystemObject
 Dim result
+Dim TOPROW As Integer
+Dim lngResult As Long
 
 
 
 Private Sub Berechnungsfilter_Click()
- frmBerechnungsfilter.Show
+ frmBerechnungsfilter.show
 End Sub
 
 Private Sub Beenden_Click()
@@ -657,7 +662,7 @@ Private Sub cmdinfo_Click()
 
     'Ändern des Icon bei Klick
     If cmdInfo.Picture = Image2 Then
-        frmSterninfo.Show
+        frmSterninfo.show
         cmdInfo.Picture = Image1
         cmdInfo.ToolTipText = "Informationsfenster ausblenden"
         'cmdInternet.Enabled = True
@@ -704,7 +709,7 @@ Private Sub cmdErgebnis_Click()
     cmdFilter_Click
 End Sub
 
-Private Sub cmdAbfrag_Click()
+Public Sub cmdAbfrag_Click()
 
  If Rahmen(1).Visible Then Exit Sub
  
@@ -731,18 +736,18 @@ Private Sub cmdAbfrag_Click()
 End Sub
 
 Private Sub cmdFilter_Click()
- frmBerechnungsfilter.Show
+ frmBerechnungsfilter.show
 End Sub
 
 Private Sub cmdGridgross_Click()
 
 If frmGridGross.Visible Then Unload frmGridGross
- frmGridGross.Show
+ frmGridGross.show
  
 End Sub
 
 Private Sub cmdInternet_Click()
-result = CheckInetConnection(Me.hwnd)
+result = CheckInetConnection(Me.hWnd)
 If result = False Then
 Unload frmAladin
 Exit Sub
@@ -753,12 +758,12 @@ result = Split(frmSterninfo.lblKoord.Caption, vbCrLf)
 frmAladin.txtObj.text = Trim(Mid(CStr(result(0)), 3, Len(CStr(result(0))) - 2)) & " " & Trim(Mid(CStr(result(1)), 4, Len(CStr(result(1))) - 2))
 End If
 
-frmAladin.Show
+frmAladin.show
 End Sub
 
 'Öffnen einer bestehenden Abfrage
 Private Sub cmdÖffnen_Click()
-Set dbsBAVSterne = New ADODB.Connection
+Set dbsbavsterne = New ADODB.Connection
 Set rstAbfrage = New ADODB.Recordset
 Dim vstrfile, y
 
@@ -832,6 +837,10 @@ grdergebnis.Visible = True
         .ColWidth(8) = 0
         .ColWidth(9) = 1300
         Database = 3
+    ElseIf Trim(.TextMatrix(1, 8)) = "EIGEN" Then
+        .ColWidth(8) = 0
+        .ColWidth(9) = 1300
+        Database = 4
     Else: .ColWidth(9) = 0
         .ColWidth(8) = 1300
         Database = 1
@@ -909,7 +918,7 @@ Next y
         If Database < 2 Then
         
             'Verbindung zur Datenbank herstellen
-            With dbsBAVSterne
+            With dbsbavsterne
                 .Provider = "microsoft.Jet.oledb.4.0"
                 If Database = 0 Then
                     .ConnectionString = pfad & "\Bav_sterne.mdb"
@@ -919,7 +928,7 @@ Next y
                 .Open
              End With
              
-            .ActiveConnection = dbsBAVSterne
+            .ActiveConnection = dbsbavsterne
             .LockType = adLockOptimistic
             .CursorLocation = adUseClient
             .CursorType = adOpenForwardOnly ' Kleinster Verwaltungsaufwand
@@ -927,7 +936,7 @@ Next y
             
         ElseIf Database = 2 Then .Open pfad & "\Kreiner.dat"
         ElseIf Database = 3 Then .Open pfad & "\GCVS.dat"
-        
+        ElseIf Database = 4 Then .Open pfad & "\Einzel.dat"
         End If
         .Save pfad & "\info.dat"
     End With
@@ -935,7 +944,7 @@ Next y
 'Zerstören der Objekte
 Set rstAbfrage = Nothing
 Set rsergebnis = Nothing
-Set dbsBAVSterne = Nothing
+Set dbsbavsterne = Nothing
 Set fs = Nothing
 
 cmbGrundlage.Enabled = False
@@ -977,18 +986,18 @@ End Sub
 
 Private Sub DBGcvs_aktual_Click()
 
-result = CheckInetConnection(Me.hwnd)
+result = CheckInetConnection(Me.hWnd)
 If result = False Then Exit Sub
-frmGCVS.Show
+frmGCVS.show
 End Sub
 
 
 
 Private Sub DBKrein_aktual_Click()
 
-result = CheckInetConnection(Me.hwnd)
+result = CheckInetConnection(Me.hWnd)
 If result = False Then Exit Sub
-frmKrein.Show
+frmKrein.show
 End Sub
 
 Public Sub Form_Load()
@@ -1020,6 +1029,9 @@ End If
 '"mit einem einfachen Klick wird die Spalte sortiert"
 sorter = 7
 
+If hook = 0 Then MInit Me
+
+TOPROW = 1
 
 'Einstellungen für Trennzeichen und Datum/Zeit
 dezimal = GetTrennzeichen(LOCALE_SDECIMAL)
@@ -1092,6 +1104,9 @@ End If
 If fs.FileExists(App.Path & "\GCVS.dat") = True Then
 .AddItem ("GCVS")
 End If
+If fs.FileExists(App.Path & "\Einzel.dat") = True Then
+.AddItem ("Einzeln")
+End If
 .ListIndex = 0
 End With
 
@@ -1111,10 +1126,13 @@ Set rsergebnis = Nothing
 cmdAbfrag.Enabled = False
 End Sub
 
-
+Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
+Mende
+End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
 Dim result
+Mende
     'Löschen der Abfragedateien bei Programmende
     If fs.FileExists(pfad & "\ergebnisse.dat") Then
         fs.DeleteFile (pfad & "\ergebnisse.dat")
@@ -1142,7 +1160,12 @@ Dim result
     Unload frmGridGross
     Unload frmHelioz
     Unload frmGrafik
-    Call HtmlHelp(frmHaupt.hwnd, "", HH_CLOSE_ALL, 0)
+    Unload frmSingleBerech
+    Unload frmKrein
+    Unload frmGridGross
+    Unload frmGCVS
+  
+    Call HtmlHelp(frmHaupt.hWnd, "", HH_CLOSE_ALL, 0)
     Unload Me
 
 End Sub
@@ -1165,9 +1188,6 @@ Call UnloadAll
 End Sub
 
 
-
-
-
 Private Sub hilfe_Click()
 Dim HDatei As String
     HDatei = App.Path & "\BAVMinMax.chm"
@@ -1175,7 +1195,11 @@ Dim HDatei As String
 End Sub
 
 Private Sub hKorrberech_Click()
-frmHelioz.Show
+frmHelioz.show
+End Sub
+
+Private Sub mnuEinzel_Click()
+frmSingleBerech.show
 End Sub
 
 Private Sub naut_Click()
@@ -1229,7 +1253,7 @@ End Sub
 Private Sub Form_Resize()
     Dim i As Byte
     
-       For i = 1 To Me.Rahmen.Ubound - 1
+       For i = 1 To Me.Rahmen.UBound - 1
         Me.Rahmen(i).Width = Me.Rahmen(1).Width
         Me.Rahmen(i).Top = Me.Rahmen(1).Top
         Me.Rahmen(i).Left = Me.Rahmen(1).Left
@@ -1261,7 +1285,7 @@ End Sub
 
 
 Public Sub cmdListe_click()
-Set dbsBAVSterne = New ADODB.Connection
+Set dbsbavsterne = New ADODB.Connection
 Set rstAbfrage = New ADODB.Recordset
 Set rsergebnis = New ADODB.Recordset
 Dim APeriode, EPeriode, ereignis
@@ -1318,7 +1342,7 @@ grdergebnis.Clear
    
     
     'Verbindung zur Datenbank herstellen
-    With dbsBAVSterne
+    With dbsbavsterne
         .Provider = "microsoft.Jet.oledb.4.0"
         
         'Auswahl der Datengrundlage, mit der die Berechnung durchgeführt wird
@@ -1339,7 +1363,7 @@ grdergebnis.Clear
     
     With rstAbfrage
       If cmbGrundlage.ListIndex < 2 Then
-        .ActiveConnection = dbsBAVSterne
+        .ActiveConnection = dbsbavsterne
         .LockType = adLockOptimistic
         .CursorLocation = adUseClient
         .CursorType = adOpenForwardOnly ' Kleinster Verwaltungsaufwand
@@ -1350,6 +1374,9 @@ grdergebnis.Clear
      ElseIf cmbGrundlage.List(cmbGrundlage.ListIndex) = "GCVS" Then
         Database = 3
         .Open pfad & "\GCVS.dat"
+    ElseIf cmbGrundlage.List(cmbGrundlage.ListIndex) = "Einzeln" Then
+        Database = 4
+        .Open pfad & "\Einzel.dat"
     End If
         
       'Öffnen der Ergebnisdatei und springen zu ersten Eintrag
@@ -1498,7 +1525,7 @@ cmdErgebnis.Enabled = True
 'rsergebnis.Close
 rstAbfrage.Save pfad & "\info.dat"
 rstAbfrage.Close
-If Database < 2 Then dbsBAVSterne.Close
+If Database < 2 Then dbsbavsterne.Close
 
 
 End With
@@ -1508,7 +1535,7 @@ Me.MousePointer = 1
 'Set rsergebnis = Nothing
 Set rstAbfrage = Nothing
 Set rsergebnis = Nothing
-Set dbsBAVSterne = Nothing
+Set dbsbavsterne = Nothing
 Set fs = Nothing
 'cmbGrundlage.Enabled = False
 
@@ -1802,6 +1829,43 @@ Private Sub UnloadAll()
   'cmdInternet.Enabled = False
   Unload frmBerechnungsfilter
   Unload frmSterninfo
+  Unload frmSternauswahl
+  
+  
   Me.Form_Load
   cmbGrundlage.Enabled = True
 End Sub
+
+
+'//--[ScrollUp]---------------------------//
+'
+'  called from the MainModule WndProc sub
+'  when a up-scrolling mouse message is
+'  received
+'
+Public Sub ScrollUp()
+    ' scroll up..
+    If TOPROW > 1 Then
+        TOPROW = TOPROW - 1
+        frmHaupt.grdergebnis.TOPROW = TOPROW
+        frmGridGross.grdGross.TOPROW = TOPROW
+    End If
+End Sub
+
+'//--[ScrollDown]---------------------------//
+'
+'  called from the MainModule WndProc sub
+'  when a down-scrolling mouse message is
+'  received
+'
+Public Sub ScrollDown()
+    ' scroll down..
+    If TOPROW < frmHaupt.grdergebnis.Rows - 1 Then
+        TOPROW = TOPROW + 1
+        frmHaupt.grdergebnis.TOPROW = TOPROW
+        frmGridGross.grdGross.TOPROW = TOPROW
+    End If
+End Sub
+
+
+

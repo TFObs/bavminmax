@@ -105,7 +105,7 @@ Dim text As String
  
 End Sub
 
-' AutoSize für das MSFlexGrid-Control
+' AutoSize für das mshflexgrid-Control
  Function Grid_AutoSize(oGrid As MSHFlexGrid, oLabel As Label)
   Dim nRow As Long
   Dim nCol As Long
