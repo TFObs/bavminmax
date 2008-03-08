@@ -118,11 +118,38 @@ Begin VB.Form frmSterninfo
    End
    Begin VB.Frame Frame1 
       Caption         =   "Datenbank-Infos"
-      Height          =   6135
+      Height          =   6255
       Left            =   120
       TabIndex        =   0
-      Top             =   2040
+      Top             =   1920
       Width           =   2055
+      Begin VB.Label Label15 
+         Caption         =   "Quelle/BP:"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   31
+         Top             =   1800
+         Width           =   855
+      End
+      Begin VB.Label lblQuelle 
+         Alignment       =   2  'Zentriert
+         BackColor       =   &H00C0E0FF&
+         BorderStyle     =   1  'Fest Einfach
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Left            =   960
+         TabIndex        =   30
+         Top             =   1800
+         Width           =   975
+      End
       Begin VB.Label Label14 
          Caption         =   "Mo:"
          Height          =   375
@@ -148,7 +175,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   720
          TabIndex        =   27
-         Top             =   3840
+         Top             =   3960
          Width           =   855
       End
       Begin VB.Label lblkd 
@@ -158,7 +185,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   720
          TabIndex        =   26
-         Top             =   4200
+         Top             =   4320
          Width           =   855
       End
       Begin VB.Label lblMM 
@@ -168,7 +195,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   720
          TabIndex        =   25
-         Top             =   4560
+         Top             =   4680
          Width           =   855
       End
       Begin VB.Label lblMinI 
@@ -178,7 +205,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   720
          TabIndex        =   24
-         Top             =   2640
+         Top             =   2880
          Width           =   855
       End
       Begin VB.Label lblMinII 
@@ -188,7 +215,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   720
          TabIndex        =   23
-         Top             =   3000
+         Top             =   3240
          Width           =   855
       End
       Begin VB.Label lblMax 
@@ -198,7 +225,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   720
          TabIndex        =   22
-         Top             =   2280
+         Top             =   2520
          Width           =   855
       End
       Begin VB.Label lblPeriode 
@@ -256,7 +283,7 @@ Begin VB.Form frmSterninfo
          Height          =   495
          Left            =   120
          TabIndex        =   13
-         Top             =   5520
+         Top             =   5640
          Width           =   1815
       End
       Begin VB.Label Label12 
@@ -264,7 +291,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   12
-         Top             =   4560
+         Top             =   4680
          Width           =   615
       End
       Begin VB.Label Label11 
@@ -272,7 +299,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   11
-         Top             =   4200
+         Top             =   4320
          Width           =   615
       End
       Begin VB.Label Label10 
@@ -280,7 +307,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   10
-         Top             =   3840
+         Top             =   3960
          Width           =   615
       End
       Begin VB.Label Label9 
@@ -288,7 +315,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   9
-         Top             =   3000
+         Top             =   3240
          Width           =   615
       End
       Begin VB.Label Label8 
@@ -296,7 +323,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   8
-         Top             =   2640
+         Top             =   2880
          Width           =   615
       End
       Begin VB.Label Label7 
@@ -304,7 +331,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   7
-         Top             =   2280
+         Top             =   2520
          Width           =   615
       End
       Begin VB.Label Label3 
@@ -330,7 +357,7 @@ Begin VB.Form frmSterninfo
          Height          =   495
          Left            =   240
          TabIndex        =   5
-         Top             =   4920
+         Top             =   5040
          Width           =   1695
       End
       Begin VB.Label Label5 
@@ -348,7 +375,7 @@ Begin VB.Form frmSterninfo
          Height          =   375
          Left            =   240
          TabIndex        =   4
-         Top             =   3480
+         Top             =   3660
          Width           =   1695
       End
       Begin VB.Label Label4 
@@ -366,7 +393,7 @@ Begin VB.Form frmSterninfo
          Height          =   375
          Left            =   240
          TabIndex        =   3
-         Top             =   1920
+         Top             =   2205
          Width           =   1695
       End
       Begin VB.Label Label2 
@@ -503,6 +530,8 @@ lblDist.Caption = "Monddistanz: " & Format(Round(monddist), "# °")
 imgMoonPhase.Picture = imgPhase(mond(6))
 
 End Sub
+
+
 
 
 

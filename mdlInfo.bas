@@ -51,6 +51,9 @@ infostbld = Right(infostern, 3)
 infostern = Trim(Left(infostern, Len(infostern) - 3))
 sSQLi = "Kürzel = '" & infostern & "' AND Stbld = '" & infostbld & "'"
 
+If Not grid.TextMatrix(grid.Row, 8) = "" Then _
+sSQLi = sSQLi & " AND BP = '" & grid.TextMatrix(grid.Row, 8) & "'"
+
 Set Abf = rsa
 Abf.Filter = sSQLi
 
@@ -59,13 +62,16 @@ On Error Resume Next
 'Füllen der Labels aus dem Recordset
 With frmSterninfo
         .lblStern.Caption = infostern & " " & infostbld
+        frmAladin.txtStern.text = .lblStern.Caption
+         If frmAladin.chkAladDirekt.Value = 1 Then frmaladain.txtObj.text = frmAladin.txtStern.text
         .lblTyp.Caption = Abf.Fields("Typ").Value
-        .lblEpoche.Caption = Abf.Fields("Epoche").Value
-        .lblPeriode.Caption = Abf.Fields("Periode").Value
-        .lblMax.Caption = Abf.Fields("Max").Value
-        .lblMinI.Caption = Abf.Fields("MinI").Value
-        .lblMinII.Caption = Abf.Fields("MinII").Value
-        .lblD.Caption = Abf.Fields("D").Value
+        .lblEpoche.Caption = Format(Abf.Fields("Epoche").Value, "#.0000")
+        .lblPeriode.Caption = Format(Abf.Fields("Periode").Value, "#.0000")
+        .lblQuelle.Caption = Abf.Fields("BP").Value
+        .lblMax.Caption = Format(Abf.Fields("Max").Value, "#.00")
+        .lblMinI.Caption = Format(Abf.Fields("MinI").Value, "#.00")
+        .lblMinII.Caption = Format(Abf.Fields("MinII").Value, "#.00")
+        .lblD.Caption = Format(Abf.Fields("D").Value, "#.00")
         .lblkd.Caption = Abf.Fields("kd").Value
         .lblMM.Caption = Abf.Fields("M-m").Value
         If InStr(1, Abf.Fields("m").Value, ".") Then
@@ -97,7 +103,8 @@ With frmSterninfo
           End If
         
         frmAladin.txtStern.text = frmSterninfo.lblStern.Caption
-        
+        If frmAladin.chkAladDirekt.Value = 1 Then frmaladain.txtObj.text = frmAladin.txtStern.text
+       frmAladin.cmdDSS.Visible = True
         End If
         
       'Recordset schliessen, Speicher freigeben
