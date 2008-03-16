@@ -76,10 +76,10 @@ Public Function MouseProc(ByVal nCode As Long, ByVal wParam As Long, _
           Select Case wParam
             Case WM_MBUTTONDOWN
               MouseWheelDown lParam.pt.x, lParam.pt.y
-              Debug.Print "Button down:" & lParam.pt.x & "," & lParam.pt.y
+              'Debug.Print "Button down:" & lParam.pt.x & "," & lParam.pt.y
             Case WM_MBUTTONUP
               MouseWheelUp lParam.pt.x, lParam.pt.y
-              Debug.Print "Button up:" & lParam.pt.x & "," & lParam.pt.y
+              'Debug.Print "Button up:" & lParam.pt.x & "," & lParam.pt.y
           End Select
         End If
     End Select
@@ -96,7 +96,7 @@ Public Function WindowProc(ByVal hWnd As Long, ByVal uMsg As Long, _
         YPos = lParam / 65536
 
         MouseWheelRotation Delta, nKeys, XPos, YPos, hWnd
-        Debug.Print "Mousewheel at (" & XPos & "," & YPos & ") Delta:" & _
+        'Debug.Print "Mousewheel at (" & XPos & "," & YPos & ") Delta:" & _
                     Delta & "  Keys:" & nKeys
     End Select
 

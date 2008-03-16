@@ -242,7 +242,7 @@ If optD_Down = True Then
     
     If result = False Then
     'Testen oder Herstellen der Internetverbindung
-    result = RASConnect(Me.hwnd)
+    result = RASConnect(Me.hWnd)
     End If
     
     If result = False Then
@@ -253,9 +253,16 @@ If optD_Down = True Then
       Exit Sub
     ElseIf result = True Then
     
-    
-    result = URLDownloadToFile(0, "http://www.sai.msu.su/groups/cluster/gcvs/gcvs/iii/iii.dat", _
-    App.Path & "\gcvs.txt", 0, 0)
+    result = MsgBox("Achtung! Der Download kann bei langsamer Internetverbindung " & _
+    "sehr lange dauern." & vbCrLf & "Der Download benötigt sämtliche Systemresourcen und der PC " & Chr(34) & _
+    "hängt" & Chr(34) & " in dieser Zeit scheinbar." & vbCrLf & vbCrLf & _
+    "Weiter mit OK..", vbExclamation + vbOKCancel, "Hinweis zum Download")
+        If result = 1 Then
+        result = URLDownloadToFile(0, "http://www.sai.msu.su/groups/cluster/gcvs/gcvs/iii/iii.dat", _
+        App.Path & "\gcvs.txt", 0, 0)
+        Else
+        Exit Sub
+        End If
     End If
     
 End If
@@ -368,6 +375,14 @@ Wend
     Set rsa = Nothing
     Set fs = Nothing
     frmHaupt.Form_Load
+    
+     For x = 1 To frmHaupt.cmbGrundlage.ListCount
+   If frmHaupt.cmbGrundlage.List(x) = "GCVS" Then
+    frmHaupt.cmbGrundlage.ListIndex = x
+    Exit For
+   End If
+ Next
+
     MsgBox "Die GCVS-Datenbank kann jetzt für" & vbCrLf & "Berechnungen verwendet werden..", vbInformation, "Implementierung erfolgreich"
     frmHaupt.cmdListe.Enabled = True
     frmHaupt.cmbGrundlage.Enabled = True

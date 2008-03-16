@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmAladin 
-   BorderStyle     =   3  'Fester Dialog
+   BorderStyle     =   1  'Fest Einfach
    Caption         =   "Internet-Recherche"
    ClientHeight    =   6420
    ClientLeft      =   45
@@ -9,10 +9,8 @@ Begin VB.Form frmAladin
    Icon            =   "frmAladin.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   MinButton       =   0   'False
    ScaleHeight     =   6420
    ScaleWidth      =   7470
-   ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows-Standard
    Begin VB.CheckBox chkAladDirekt 
       Caption         =   "für Previewer übernehmen"
@@ -30,6 +28,7 @@ Begin VB.Form frmAladin
       TabIndex        =   33
       ToolTipText     =   "Fenster in den Hintergrund"
       Top             =   6000
+      Visible         =   0   'False
       Width           =   495
    End
    Begin VB.TextBox txtStern 

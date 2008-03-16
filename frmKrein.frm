@@ -178,7 +178,7 @@ If optD_Down = True Then
     
     If result = False Then
     'Testen oder Herstellen der Internetverbindung
-    result = RASConnect(Me.hwnd)
+    result = RASConnect(Me.hWnd)
     End If
     
     If result = False Then
@@ -304,6 +304,14 @@ Wend
     Set rsa = Nothing
     Set fs = Nothing
     frmHaupt.Form_Load
+    
+     For x = 1 To frmHaupt.cmbGrundlage.ListCount
+        If frmHaupt.cmbGrundlage.List(x) = "Kreiner" Then
+            frmHaupt.cmbGrundlage.ListIndex = x
+        Exit For
+        End If
+    Next
+
     MsgBox "Die Kreiner-Datenbank kann jetzt für" & vbCrLf & "Berechnungen verwendet werden..", vbInformation, "Implementierung erfolgreich"
     frmHaupt.cmdListe.Enabled = True
     frmHaupt.cmbGrundlage.Enabled = True

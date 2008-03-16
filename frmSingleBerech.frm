@@ -1,17 +1,16 @@
 VERSION 5.00
 Begin VB.Form frmSingleBerech 
-   BorderStyle     =   4  'Festes Werkzeugfenster
+   BorderStyle     =   1  'Fest Einfach
    Caption         =   "Extrema von Einzelsternen"
-   ClientHeight    =   6780
+   ClientHeight    =   2940
    ClientLeft      =   45
-   ClientTop       =   285
-   ClientWidth     =   7140
+   ClientTop       =   330
+   ClientWidth     =   7155
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6780
-   ScaleWidth      =   7140
-   ShowInTaskbar   =   0   'False
+   ScaleHeight     =   2940
+   ScaleWidth      =   7155
    StartUpPosition =   3  'Windows-Standard
    Begin VB.OptionButton Option2 
       Caption         =   "Neueingabe in eigene Datenbank"
@@ -19,6 +18,7 @@ Begin VB.Form frmSingleBerech
       Left            =   480
       TabIndex        =   28
       Top             =   600
+      Visible         =   0   'False
       Width           =   2775
    End
    Begin VB.OptionButton Option1 
@@ -28,6 +28,7 @@ Begin VB.Form frmSingleBerech
       TabIndex        =   27
       Top             =   120
       Value           =   -1  'True
+      Visible         =   0   'False
       Width           =   3015
    End
    Begin VB.Frame Frame2 
@@ -44,7 +45,7 @@ Begin VB.Form frmSingleBerech
       Height          =   2655
       Left            =   120
       TabIndex        =   21
-      Top             =   1200
+      Top             =   120
       Width           =   6975
       Begin VB.TextBox Text1 
          Alignment       =   2  'Zentriert
@@ -434,7 +435,7 @@ On Error GoTo errhandler
        .Save pfad & "\recordsets.dat"
    End With
  
-For x = 0 To 4
+For x = 0 To 5
 
 Set rssingleabfrage = New ADODB.Recordset
 
@@ -474,11 +475,25 @@ Set rssingleabfrage = New ADODB.Recordset
         End If
 
         ElseIf x = 4 Then
-    
-        If fs.FileExists(pfad & "\Einzel.dat") Then
-          .Open pfad & "\Einzel.dat"
+        
+        If fs.FileExists(pfad & "\BAVBA_EA.dat") Then
+          .Open pfad & "\BAVBA_EA.dat.dat"
           .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
         End If
+        
+        ElseIf x = 5 Then
+        
+        If fs.FileExists(pfad & "\BAVBA_RR.dat") Then
+          .Open pfad & "BAVBA_RR.dat"
+          .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
+        End If
+        
+        'Für Spätere Erweiterungen: Berechnungen aus eigener Datenbank
+        'ElseIf x = 6 Then
+        'If fs.FileExists(pfad & "\Einzel.dat") Then
+         ' .Open pfad & "\Einzel.dat"
+         ' .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
+        'End If
 
         End If
         
@@ -551,6 +566,11 @@ Next x
           If Not IsInList(Listentext) Then ListRecherche.AddItem Listentext
           .MoveNext
         Loop
+     ElseIf .RecordCount = 0 Then
+        MsgBox "Es konnte kein Eintrag in den Datenbanken " & vbCrLf & "gefunden werden. Bitte " & _
+        "ändern Sie die Abfrage.", vbInformation, "Kein Eintrag vorhanden"
+        Exit Sub
+             
     End If
     
   End With
@@ -773,10 +793,17 @@ End If
 
 Unload Me
 
-frmHaupt.Form_Load
-frmHaupt.cmbGrundlage.ListIndex = frmHaupt.cmbGrundlage.ListCount - 1
-frmHaupt.cmdListe.Enabled = True
-frmHaupt.cmbGrundlage.Enabled = True
+ frmHaupt.Form_Load
+ frmHaupt.cmdListe.Enabled = True
+ frmHaupt.cmbGrundlage.Enabled = True
+ 
+ For x = 1 To frmHaupt.cmbGrundlage.ListCount
+ If frmHaupt.cmbGrundlage.List(x) = "Einzeln" Then
+    frmHaupt.cmbGrundlage.ListIndex = x
+    Exit For
+ End If
+ Next
+ 
 Unload frmSterninfo
 Unload frmAladin
 Unload frmBerechnungsfilter
