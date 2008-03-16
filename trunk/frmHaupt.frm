@@ -1,23 +1,23 @@
 VERSION 5.00
 Object = "{8E27C92E-1264-101C-8A2F-040224009C02}#7.0#0"; "MSCAL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MsComCtl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MSHFLXGD.OCX"
 Begin VB.Form frmHaupt 
    BackColor       =   &H8000000A&
    BorderStyle     =   1  'Fest Einfach
-   Caption         =   "BAV Min/Max  V1.08a"
+   Caption         =   "BAV Min/Max  V1.08b"
    ClientHeight    =   8145
    ClientLeft      =   150
    ClientTop       =   720
-   ClientWidth     =   6810
+   ClientWidth     =   6735
    Icon            =   "frmHaupt.frx":0000
    LinkTopic       =   "Form3"
    MaxButton       =   0   'False
    PaletteMode     =   1  'ZReihenfolge
    ScaleHeight     =   8145
    ScaleMode       =   0  'Benutzerdefiniert
-   ScaleWidth      =   6861.694
+   ScaleWidth      =   6786.125
    StartUpPosition =   3  'Windows-Standard
    Begin VB.CommandButton cmdListe 
       BackColor       =   &H00C0C000&
@@ -32,13 +32,13 @@ Begin VB.Form frmHaupt
    End
    Begin VB.CommandButton cmdInternet 
       Height          =   495
-      Left            =   5280
+      Left            =   5400
       Picture         =   "frmHaupt.frx":0BD4
       Style           =   1  'Grafisch
       TabIndex        =   34
       ToolTipText     =   "Internet-Recherche"
       Top             =   720
-      Width           =   1455
+      Width           =   1335
    End
    Begin VB.CommandButton cmd÷ffnen 
       Height          =   495
@@ -268,12 +268,13 @@ Begin VB.Form frmHaupt
       End
       Begin VB.Label Label6 
          Alignment       =   2  'Zentriert
-         Caption         =   "Noch keine Berechnungsergebnisse vorhanden..."
-         Height          =   975
-         Left            =   1200
+         AutoSize        =   -1  'True
+         Caption         =   "Keine Berechnungsergebnisse vorhanden..."
+         Height          =   195
+         Left            =   900
          TabIndex        =   9
          Top             =   2160
-         Width           =   2535
+         Width           =   3135
       End
    End
    Begin VB.Frame Rahmen 
@@ -590,6 +591,15 @@ Begin VB.Form frmHaupt
             Caption         =   "laden/aktualisieren"
          End
       End
+      Begin VB.Menu DBBAVAuf 
+         Caption         =   "BAV-Beobachtungsaufrufe"
+         Begin VB.Menu DB_BAVEA_aktual 
+            Caption         =   "Bedeckungsver‰nderliche"
+         End
+         Begin VB.Menu DB_BAVRR_aktual 
+            Caption         =   "kurzper Pulsationssterne"
+         End
+      End
    End
    Begin VB.Menu hilfe 
       Caption         =   "Hilfe"
@@ -736,7 +746,7 @@ Public Sub cmdAbfrag_Click()
 End Sub
 
 Private Sub cmdFilter_Click()
- frmBerechnungsfilter.show
+ If Not grdergebnis.ColHeaderCaption(0, 1) = "" Then frmBerechnungsfilter.show
 End Sub
 
 Private Sub cmdGridgross_Click()
@@ -984,6 +994,30 @@ End Sub
 
 
 
+Private Sub DB_BAVEA_aktual_Click()
+Dim BAVUrl As String
+
+BAVUrl = "http://www.bav-astro.de/ea/beob_aufr_" & _
+Format(Date, "yy") & "_" & Format(Date, "mm") & ".html"
+
+result = CheckInetConnection(Me.hWnd)
+If result = False Then Exit Sub
+Call CreateBAV_Database_EA(App.Path & "\testbav_EA.txt", BAVUrl)
+
+End Sub
+
+Private Sub DB_BAVRR_aktual_Click()
+Dim BAVUrl As String
+
+BAVUrl = "http://www.bav-astro.de/rrlyr/beob_aufr_" & _
+Format(Date, "yy") & "_" & Format(Date, "mm") & ".html"
+
+result = CheckInetConnection(Me.hWnd)
+If result = False Then Exit Sub
+Call CreateBAV_Database_RR(App.Path & "\testbav_RR.txt", BAVUrl)
+
+End Sub
+
 Private Sub DBGcvs_aktual_Click()
 
 result = CheckInetConnection(Me.hWnd)
@@ -1007,6 +1041,7 @@ Dim result
 Dim dezimal$, Tausend$
 Dim DatumsFormat$, ZeitFormat$
 
+
 pi = 4 * Atn(1)
 pi = pi / 180
 
@@ -1024,6 +1059,11 @@ MsgBox "Besch‰digte oder fehlende Konfigurationsdatei," & vbCrLf _
 DoEvents
 Call DefaultWerte
 End If
+
+Unload frmSterninfo
+Unload frmBerechnungsfilter
+Unload frmAladin
+Unload frmSingleBerech
 
 'grdergebnis.ToolTipText = "Mit Doppelklick auf den Spaltenkopf wird eine Spalte ausgeblendet," & vbCrLf & _
 '"mit einem einfachen Klick wird die Spalte sortiert"
@@ -1107,6 +1147,13 @@ End If
 If fs.FileExists(App.Path & "\Einzel.dat") = True Then
 .AddItem ("Einzeln")
 End If
+If fs.FileExists(App.Path & "\BAVBA_EA.dat") = True Then
+.AddItem ("BAV-BA_EA")
+End If
+If fs.FileExists(App.Path & "\BAVBA_RR.dat") = True Then
+.AddItem ("BAV-BA_RR")
+End If
+
 .ListIndex = 0
 End With
 
@@ -1377,6 +1424,12 @@ grdergebnis.Clear
     ElseIf cmbGrundlage.List(cmbGrundlage.ListIndex) = "Einzeln" Then
         Database = 4
         .Open pfad & "\Einzel.dat"
+    ElseIf cmbGrundlage.List(cmbGrundlage.ListIndex) = "BAV-BA_EA" Then
+        Database = 5
+        .Open pfad & "\BAVBA_EA.dat"
+    ElseIf cmbGrundlage.List(cmbGrundlage.ListIndex) = "BAV-BA_RR" Then
+        Database = 6
+        .Open pfad & "\BAVBA_RR.dat"
     End If
         
       '÷ffnen der Ergebnisdatei und springen zu ersten Eintrag
@@ -1516,17 +1569,21 @@ grdergebnis.Clear
     Loop
 Balken.Value = 0
 lblfertig.Caption = "Berechnungen beendet!"
-'‹bernahme der Spalten in Recordset
-rsergebnis.Save pfad & "\ergebnisse.dat"
-cmdFilter.Enabled = True
-cmdErgebnis.Enabled = True
-'Schlieﬂen beider *.mdb's  und
-'des Recordsets
-'rsergebnis.Close
-rstAbfrage.Save pfad & "\info.dat"
-rstAbfrage.Close
-If Database < 2 Then dbsbavsterne.Close
-
+  If rsergebnis.RecordCount > 0 Then
+    '‹bernahme der Spalten in Recordset
+    rsergebnis.Save pfad & "\ergebnisse.dat"
+    cmdFilter.Enabled = True
+    cmdErgebnis.Enabled = True
+    'Schlieﬂen beider *.mdb's  und
+    'des Recordsets
+    'rsergebnis.Close
+    rstAbfrage.Save pfad & "\info.dat"
+    rstAbfrage.Close
+    If Database < 2 Then dbsbavsterne.Close
+    Else
+    MsgBox "Es konnte kein Ereignis berechnet werden." & vbCrLf & "Bitte versuchen sie ein anderes " & vbCrLf & _
+    "Berechnungsintervall.", vbInformation, "Kein Ereignis gefunden"
+    End If
 
 End With
 Me.MousePointer = 1

@@ -46,6 +46,7 @@ With frmSterninfo
    
  Set Abf = New ADODB.Recordset
  
+
 infostern = grid.TextMatrix(grid.Row, 2)
 infostbld = Right(infostern, 3)
 infostern = Trim(Left(infostern, Len(infostern) - 3))

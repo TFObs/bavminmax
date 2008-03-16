@@ -398,17 +398,17 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Declare Function GetWindowPlacement Lib "user32" _
-        (ByVal hwnd As Long, lpwndpl As WINDOWPLACEMENT) As _
+        (ByVal hWnd As Long, lpwndpl As WINDOWPLACEMENT) As _
         Long
         
 Private Declare Function SetWindowPos Lib "user32" (ByVal _
-        hwnd As Long, ByVal hWndInsertAfter As Long, ByVal x _
-        As Long, ByVal Y As Long, ByVal cx As Long, ByVal _
+        hWnd As Long, ByVal hWndInsertAfter As Long, ByVal x _
+        As Long, ByVal y As Long, ByVal cx As Long, ByVal _
         cy As Long, ByVal wFlags As Long) As Long
 
 Private Type POINTAPI
   x As Long
-  Y As Long
+  y As Long
 End Type
 
 Private Type RECT
@@ -540,7 +540,7 @@ frmHaupt.gridfüllen (sSQL)
 frmGridGross.grossGrid_füllen
 If frmGridGross.Visible Then
 Unload frmGridGross
- frmGridGross.Show
+ frmGridGross.show
  End If
 End Sub
 
@@ -572,13 +572,14 @@ Private Sub Form_Load()
 Dim stbldwerte
 Dim x As Integer
 
+   
 'Ergebnisdatei vorhanden?
 If Not fs.FileExists(datei) Then
  fs.CreateTextFile datei
  DefaultWerte
 End If
 
- frmHaupt.Show
+ frmHaupt.show
  cmbBpro.Clear
  
  'BAV_Sterne oder BAV_sonstige?
@@ -725,14 +726,14 @@ Private Sub Timer1_Timer()
     TwpY = Screen.TwipsPerPixelY
     
     WPM.Length = Len(WPM)
-    If GetWindowPlacement(frmHaupt.hwnd, WPM) = 0 Then Exit Sub
+    If GetWindowPlacement(frmHaupt.hWnd, WPM) = 0 Then Exit Sub
       
     Select Case WPM.showCmd
       Case SW_HIDE:      Me.Visible = False
       
       Case SW_NORMAL:    Me.WindowState = vbNormal
                          If OnTop Then
-                           Call SetWindowPos(Me.hwnd, HWND_NOTOPMOST, _
+                           Call SetWindowPos(Me.hWnd, HWND_NOTOPMOST, _
                                              0, 0, 0, 0, SWP_NOSIZE Or _
                                              SWP_NOMOVE)
                            OnTop = False
@@ -754,7 +755,7 @@ Private Sub Timer1_Timer()
       Case SW_MAXIMIZE:
                          If Not OnTop Then
                            OnTop = True
-                           Call SetWindowPos(Me.hwnd, HWND_TOPMOST, 0, _
+                           Call SetWindowPos(Me.hWnd, HWND_TOPMOST, 0, _
                                              0, 0, 0, SWP_NOSIZE Or _
                                              SWP_NOMOVE)
                          End If
