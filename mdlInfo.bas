@@ -69,6 +69,13 @@ With frmSterninfo
         .lblEpoche.Caption = Format(Abf.Fields("Epoche").Value, "#.0000")
         .lblPeriode.Caption = Format(Abf.Fields("Periode").Value, "#.0000")
         .lblQuelle.Caption = Abf.Fields("BP").Value
+        
+        'If Database < 2 Then
+            .lblLBeo.Caption = Abf.Fields("LBeob").Value
+            'Else
+            '.lblLBeo.Caption = "k.A."
+        'End If
+            
         .lblMax.Caption = Format(Abf.Fields("Max").Value, "#.00")
         .lblMinI.Caption = Format(Abf.Fields("MinI").Value, "#.00")
         .lblMinII.Caption = Format(Abf.Fields("MinII").Value, "#.00")

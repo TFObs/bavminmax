@@ -281,6 +281,7 @@ With rsa
      .Fields.Append ("Kürzel"), adVarChar, 6
      .Fields.Append ("Stbld"), adChar, 3
      .Fields.Append ("BP"), adChar, 4
+     .Fields.Append ("LBeob"), adDouble
      .Fields.Append ("Max"), adDouble
      .Fields.Append ("MinI"), adVarChar, 5
      .Fields.Append ("Spektr"), adVarChar, 17
@@ -339,7 +340,7 @@ While Not einstrom.AtEndOfStream
         .Fields("MinI") = Trim(Mid(zeile(5), 2, 5))
         .Fields("Spektr") = Trim(zeile(11))
         .Fields("Typ") = Trim(zeile(3))
-        
+        .Fields("LBeob") = 0
         If InStr(1, zeile(7), ":") <> 0 Then
            zeile(7) = Trim(Left(zeile(7), InStr(zeile(7), ":") - 1))
            Else

@@ -477,14 +477,14 @@ Set rssingleabfrage = New ADODB.Recordset
         ElseIf x = 4 Then
         
         If fs.FileExists(pfad & "\BAVBA_EA.dat") Then
-          .Open pfad & "\BAVBA_EA.dat.dat"
+          .Open pfad & "\BAVBA_EA.dat"
           .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
         End If
         
         ElseIf x = 5 Then
         
         If fs.FileExists(pfad & "\BAVBA_RR.dat") Then
-          .Open pfad & "BAVBA_RR.dat"
+          .Open pfad & "\BAVBA_RR.dat"
           .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
         End If
         
