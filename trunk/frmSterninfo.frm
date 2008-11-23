@@ -123,6 +123,33 @@ Begin VB.Form frmSterninfo
       TabIndex        =   0
       Top             =   1920
       Width           =   2055
+      Begin VB.Label lblLBeo 
+         Alignment       =   2  'Zentriert
+         BackColor       =   &H0080C0FF&
+         BorderStyle     =   1  'Fest Einfach
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Left            =   600
+         TabIndex        =   33
+         Top             =   2160
+         Width           =   1335
+      End
+      Begin VB.Label Label13 
+         Caption         =   "L.B.:"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   32
+         Top             =   2160
+         Width           =   495
+      End
       Begin VB.Label Label15 
          Caption         =   "Quelle/BP:"
          Height          =   255
@@ -175,7 +202,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   720
          TabIndex        =   27
-         Top             =   3960
+         Top             =   4320
          Width           =   855
       End
       Begin VB.Label lblkd 
@@ -185,7 +212,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   720
          TabIndex        =   26
-         Top             =   4320
+         Top             =   4680
          Width           =   855
       End
       Begin VB.Label lblMM 
@@ -195,7 +222,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   720
          TabIndex        =   25
-         Top             =   4680
+         Top             =   5040
          Width           =   855
       End
       Begin VB.Label lblMinI 
@@ -205,7 +232,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   720
          TabIndex        =   24
-         Top             =   2880
+         Top             =   3240
          Width           =   855
       End
       Begin VB.Label lblMinII 
@@ -215,7 +242,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   720
          TabIndex        =   23
-         Top             =   3240
+         Top             =   3600
          Width           =   855
       End
       Begin VB.Label lblMax 
@@ -225,7 +252,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   720
          TabIndex        =   22
-         Top             =   2520
+         Top             =   2880
          Width           =   855
       End
       Begin VB.Label lblPeriode 
@@ -291,7 +318,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   12
-         Top             =   4680
+         Top             =   5040
          Width           =   615
       End
       Begin VB.Label Label11 
@@ -299,7 +326,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   11
-         Top             =   4320
+         Top             =   4680
          Width           =   615
       End
       Begin VB.Label Label10 
@@ -307,7 +334,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   10
-         Top             =   3960
+         Top             =   4320
          Width           =   615
       End
       Begin VB.Label Label9 
@@ -315,7 +342,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   9
-         Top             =   3240
+         Top             =   3600
          Width           =   615
       End
       Begin VB.Label Label8 
@@ -323,7 +350,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   8
-         Top             =   2880
+         Top             =   3240
          Width           =   615
       End
       Begin VB.Label Label7 
@@ -331,7 +358,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   7
-         Top             =   2520
+         Top             =   2880
          Width           =   615
       End
       Begin VB.Label Label3 
@@ -344,7 +371,7 @@ Begin VB.Form frmSterninfo
       End
       Begin VB.Label Label6 
          Alignment       =   2  'Zentriert
-         Caption         =   "Koordinaten [J2000]"
+         Caption         =   "Koord [J2000]"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   9.75
@@ -354,10 +381,10 @@ Begin VB.Form frmSterninfo
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   495
-         Left            =   240
+         Height          =   255
+         Left            =   120
          TabIndex        =   5
-         Top             =   5040
+         Top             =   5400
          Width           =   1695
       End
       Begin VB.Label Label5 
@@ -375,7 +402,7 @@ Begin VB.Form frmSterninfo
          Height          =   375
          Left            =   240
          TabIndex        =   4
-         Top             =   3660
+         Top             =   4020
          Width           =   1695
       End
       Begin VB.Label Label4 
@@ -393,7 +420,7 @@ Begin VB.Form frmSterninfo
          Height          =   375
          Left            =   240
          TabIndex        =   3
-         Top             =   2205
+         Top             =   2565
          Width           =   1695
       End
       Begin VB.Label Label2 
@@ -462,17 +489,17 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Declare Function GetWindowPlacement Lib "user32" _
-        (ByVal hwnd As Long, lpwndpl As WINDOWPLACEMENT) As _
+        (ByVal hWnd As Long, lpwndpl As WINDOWPLACEMENT) As _
         Long
         
 Private Declare Function SetWindowPos Lib "user32" (ByVal _
-        hwnd As Long, ByVal hWndInsertAfter As Long, ByVal x _
-        As Long, ByVal Y As Long, ByVal cx As Long, ByVal _
+        hWnd As Long, ByVal hWndInsertAfter As Long, ByVal x _
+        As Long, ByVal y As Long, ByVal cx As Long, ByVal _
         cy As Long, ByVal wFlags As Long) As Long
 
 Private Type POINTAPI
   x As Long
-  Y As Long
+  y As Long
 End Type
 
 Private Type RECT
@@ -547,14 +574,14 @@ Private Sub Timer1_Timer()
     TwpY = Screen.TwipsPerPixelY
     
     WPM.Length = Len(WPM)
-    If GetWindowPlacement(frmHaupt.hwnd, WPM) = 0 Then Exit Sub
+    If GetWindowPlacement(frmHaupt.hWnd, WPM) = 0 Then Exit Sub
       
     Select Case WPM.showCmd
       Case SW_HIDE:      Me.Visible = False
       
       Case SW_NORMAL:    Me.WindowState = vbNormal
                          If OnTop Then
-                           Call SetWindowPos(Me.hwnd, HWND_NOTOPMOST, _
+                           Call SetWindowPos(Me.hWnd, HWND_NOTOPMOST, _
                                              0, 0, 0, 0, SWP_NOSIZE Or _
                                              SWP_NOMOVE)
                            OnTop = False
@@ -576,7 +603,7 @@ Private Sub Timer1_Timer()
       Case SW_MAXIMIZE:
                          If Not OnTop Then
                            OnTop = True
-                           Call SetWindowPos(Me.hwnd, HWND_TOPMOST, 0, _
+                           Call SetWindowPos(Me.hWnd, HWND_TOPMOST, 0, _
                                              0, 0, 0, SWP_NOSIZE Or _
                                              SWP_NOMOVE)
                          End If

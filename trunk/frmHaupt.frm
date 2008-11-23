@@ -6,7 +6,7 @@ Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MSHFLXGD.OCX"
 Begin VB.Form frmHaupt 
    BackColor       =   &H8000000A&
    BorderStyle     =   1  'Fest Einfach
-   Caption         =   "BAV Min/Max  V1.08b"
+   Caption         =   "BAV Min/Max  V1.08c"
    ClientHeight    =   8145
    ClientLeft      =   150
    ClientTop       =   720
@@ -593,6 +593,7 @@ Begin VB.Form frmHaupt
       End
       Begin VB.Menu DBBAVAuf 
          Caption         =   "BAV-Beobachtungsaufrufe"
+         Visible         =   0   'False
          Begin VB.Menu DB_BAVEA_aktual 
             Caption         =   "Bedeckungsveränderliche"
          End
@@ -781,10 +782,7 @@ Me.Rahmen(2).Visible = True
 'Me.Width = 11040
 Me.Rahmen(1).Visible = False
 
-'infodatei vorhanden?
-If fs.FileExists(App.Path & "\info.dat") Then
-  fs.DeleteFile (App.Path & "\info.dat")
-End If
+
 
  'Ermitteln des Dateinamens
         With cdlSpeichern
@@ -804,6 +802,11 @@ End If
         
  cmdErgebnis.Enabled = False
  
+ 'infodatei vorhanden?
+If fs.FileExists(App.Path & "\info.dat") Then
+  fs.DeleteFile (App.Path & "\info.dat")
+End If
+
  'Grid aus Datei füllen
  DoEvents
  
@@ -1038,6 +1041,7 @@ Public Sub Form_Load()
 If App.PrevInstance Then End
 Set rsergebnis = New ADODB.Recordset
 Dim result
+Dim daemmfil As String
 Dim dezimal$, Tausend$
 Dim DatumsFormat$, ZeitFormat$
 
@@ -1069,7 +1073,7 @@ Unload frmSingleBerech
 '"mit einem einfachen Klick wird die Spalte sortiert"
 sorter = 7
 
-If hook = 0 Then MInit Me
+'If hook = 0 Then MInit Me
 
 TOPROW = 1
 
@@ -1158,6 +1162,16 @@ End If
 End With
 
 'Übernahme der Einstellungen
+daemmfil = INIGetValue(App.Path & "\Prog.ini", "Auf- Untergang", "Dämmerung")
+
+'Berücksichtigung des Filters für Sonnenaufgang
+Select Case daemmfil
+    Case Is = "bürgerlich": burger.Checked = True: astro.Checked = False: naut.Checked = False: SaH.Checked = False
+    Case Is = "nautisch": burger.Checked = False: astro.Checked = False: naut.Checked = True: SaH.Checked = False
+    Case Is = "astronomisch": burger.Checked = False: astro.Checked = True: naut.Checked = False: SaH.Checked = False
+    Case Is = "S. am Horizont": burger.Checked = False: astro.Checked = False: naut.Checked = False: SaH.Checked = True
+    Case Else:: burger.Checked = False: astro.Checked = True: naut.Checked = False: SaH.Checked = False
+End Select
 
 'ort_Click
 'cmdOrtOK_Click
@@ -1223,6 +1237,7 @@ astro.Checked = True
 burger.Checked = False
 SaH.Checked = False
 Call UnloadAll
+cmdListe.Enabled = True
 End Sub
 
 Private Sub burger_Click()
@@ -1232,6 +1247,7 @@ astro.Checked = False
 burger.Checked = True
 SaH.Checked = False
 Call UnloadAll
+cmdListe.Enabled = True
 End Sub
 
 
@@ -1256,6 +1272,7 @@ astro.Checked = False
 burger.Checked = False
 SaH.Checked = False
 Call UnloadAll
+cmdListe.Enabled = True
 End Sub
 
 Private Sub Register_Click(Index As Long)
@@ -1269,6 +1286,7 @@ astro.Checked = False
 burger.Checked = False
 SaH.Checked = True
 Call UnloadAll
+cmdListe.Enabled = True
 End Sub
 
 
@@ -1692,7 +1710,15 @@ End If
 grdergebnis.ColAlignmentFixed = flexAlignCenterCenter
 grdergebnis.Sort = 5
 grdergebnis.ColAlignment = 4
-    
+
+'Form Berechnungsfilter anpassen
+
+For zähler = 1 To 11
+    If frmHaupt.grdergebnis.ColWidth(zähler) = 0 Then
+          frmBerechnungsfilter.chkSpalte(zähler).Value = 0
+    End If
+Next
+
       'Recordset schliessen, Speicher freigeben
       rsa.Close
       Set rsa = Nothing

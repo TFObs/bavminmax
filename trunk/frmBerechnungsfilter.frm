@@ -535,7 +535,6 @@ End If
 End If
  
 
-
 frmHaupt.gridfüllen (sSQL)
 frmGridGross.grossGrid_füllen
 If frmGridGross.Visible Then

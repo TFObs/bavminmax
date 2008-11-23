@@ -22,24 +22,36 @@ Begin VB.Form frmHelioz
       TabIndex        =   21
       Top             =   2760
       Width           =   4455
+      Begin VB.CommandButton cmdClipboard 
+         BackColor       =   &H80000007&
+         Height          =   615
+         Left            =   3360
+         Picture         =   "frmHelioz.frx":08CA
+         Style           =   1  'Grafisch
+         TabIndex        =   43
+         ToolTipText     =   "Speichern in Zwischenablage"
+         Top             =   840
+         Visible         =   0   'False
+         Width           =   615
+      End
       Begin VB.CommandButton cmdGraph 
          BackColor       =   &H00000000&
          Height          =   615
          Left            =   3360
          MaskColor       =   &H00FFFFFF&
-         Picture         =   "frmHelioz.frx":08CA
+         Picture         =   "frmHelioz.frx":0DBB
          Style           =   1  'Grafisch
          TabIndex        =   31
          Top             =   1560
          Visible         =   0   'False
-         Width           =   735
+         Width           =   615
       End
       Begin VB.CommandButton cmdHcorr 
          Caption         =   "Korrektur berechnen"
          Height          =   495
-         Left            =   360
+         Left            =   240
          TabIndex        =   22
-         Top             =   600
+         Top             =   480
          Width           =   1335
       End
       Begin VB.Label Label16 
@@ -59,7 +71,7 @@ Begin VB.Form frmHelioz
          Index           =   2
          Left            =   1800
          TabIndex        =   38
-         Top             =   675
+         Top             =   650
          Width           =   255
       End
       Begin VB.Shape Shape1 
@@ -86,7 +98,7 @@ Begin VB.Form frmHelioz
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   3360
+         Left            =   3240
          TabIndex        =   32
          Top             =   2160
          Visible         =   0   'False
@@ -114,17 +126,17 @@ Begin VB.Form frmHelioz
          Alignment       =   2  'Zentriert
          BorderStyle     =   1  'Fest Einfach
          Height          =   255
-         Left            =   2760
+         Left            =   2640
          TabIndex        =   29
-         Top             =   720
+         Top             =   480
          Width           =   1095
       End
       Begin VB.Label Label9 
          Caption         =   "Korrektur :"
          Height          =   255
-         Left            =   2760
+         Left            =   2640
          TabIndex        =   28
-         Top             =   360
+         Top             =   240
          Width           =   1215
       End
       Begin VB.Label Label8 
@@ -342,7 +354,7 @@ Begin VB.Form frmHelioz
       Begin VB.CommandButton cmdJDTi 
          Height          =   735
          Left            =   480
-         Picture         =   "frmHelioz.frx":1194
+         Picture         =   "frmHelioz.frx":1685
          Style           =   1  'Grafisch
          TabIndex        =   10
          Top             =   2640
@@ -351,7 +363,7 @@ Begin VB.Form frmHelioz
       Begin VB.CommandButton cmdTiJD 
          Height          =   735
          Left            =   1440
-         Picture         =   "frmHelioz.frx":1436
+         Picture         =   "frmHelioz.frx":1927
          Style           =   1  'Grafisch
          TabIndex        =   9
          Top             =   3120
@@ -694,10 +706,19 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Dim result
+Dim ClipboardText As String
+
+Private Sub cmdClipboard_Click()
+Clipboard.Clear
+Clipboard.SetText txtStern.text & vbTab & txtTag.text & "." & txtmonat.text & "." & txtjahr.text & vbTab & _
+txtstunde.text & ":" & txtminute.text & ":" & txtsekunde.text & vbTab & txtJD.text & vbTab & _
+Trim(Left(Label10.Caption, InStr(1, Label10.Caption, "d") - 1)) & vbTab & Label2.Caption
+MsgBox "Ergebnisse in Zwischenablage" & vbCrLf & "gespeichert.", vbInformation, "Ergebnisse gespeichert"
+End Sub
 
 Private Sub cmdGraph_Click()
 If Not frmGrafik.Visible Then
-frmGrafik.Show
+frmGrafik.show
 Call frmGrafik.zeichnen(RA, DEC)
 Else: Unload frmGrafik
 End If
@@ -721,6 +742,7 @@ zeit = CDbl(txtstunde.text + txtminute.text / 60 + txtsekunde.text / 3600)
 stez = STZT(txtTag.text, txtmonat.text, txtjahr.text, zeit, gLänge)
 lblAirmass.Caption = "Luftmasse: " & Format(airmass(gBreite, nDEC, stdw(nRA, stez)), "#.00")
 cmdGraph.Visible = True
+cmdClipboard.Visible = True
 Label13.Visible = True
 Call frmGrafik.zeichnen(nRA, nDEC)
 End Sub
@@ -754,8 +776,8 @@ If Opt_Eingabe = True Then
     Dim Koord, erg, stern, vz
     Label3.Caption = "_ _ _"
     Label10.Caption = ""
-    Dim werte As Collection
-    Set werte = New Collection
+    Dim Werte As Collection
+    Set Werte = New Collection
     ikanal = FreeFile
     datei = App.Path & "\sternkoord.txt"
     Open datei For Input As ikanal
@@ -763,12 +785,12 @@ If Opt_Eingabe = True Then
     Input #ikanal, zeile
     stern = Left(zeile, InStr(1, zeile, ";") - 1)
     Koord = Right(zeile, Len(zeile) - Len(stern) - 1)
-    werte.Add Koord, stern
+    Werte.Add Koord, stern
     Loop
     Close #ikanal
 
     On Error GoTo ndatbank
-    Koord = werte.Item(txtStern.text)
+    Koord = Werte.Item(txtStern.text)
     RA = Left(Koord, InStr(1, Koord, ";") - 1)
     DEC = Right(Koord, Len(Koord) - Len(RA) - 1)
 
@@ -778,7 +800,7 @@ If Opt_Eingabe = True Then
     Frame3.Enabled = True
     result = Hkorr(CDbl(txtJD.text), RA, DEC, True)
     
-ElseIf Opt_Liste = True Then frmSternauswahl.Show
+ElseIf Opt_Liste = True Then frmSternauswahl.show
 End If
 Exit Sub
 
