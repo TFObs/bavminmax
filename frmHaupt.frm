@@ -6,7 +6,7 @@ Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MSHFLXGD.OCX"
 Begin VB.Form frmHaupt 
    BackColor       =   &H8000000A&
    BorderStyle     =   1  'Fest Einfach
-   Caption         =   "BAV Min/Max  V1.08c"
+   Caption         =   "BAV Min/Max  V1.08d"
    ClientHeight    =   8145
    ClientLeft      =   150
    ClientTop       =   720
@@ -1152,10 +1152,10 @@ If fs.FileExists(App.Path & "\Einzel.dat") = True Then
 .AddItem ("Einzeln")
 End If
 If fs.FileExists(App.Path & "\BAVBA_EA.dat") = True Then
-.AddItem ("BAV-BA_EA")
+'.AddItem ("BAV-BA_EA")
 End If
 If fs.FileExists(App.Path & "\BAVBA_RR.dat") = True Then
-.AddItem ("BAV-BA_RR")
+'.AddItem ("BAV-BA_RR")
 End If
 
 .ListIndex = 0
@@ -1318,7 +1318,7 @@ End Sub
 Private Sub Form_Resize()
     Dim i As Byte
     
-       For i = 1 To Me.Rahmen.UBound - 1
+       For i = 1 To Me.Rahmen.ubound - 1
         Me.Rahmen(i).Width = Me.Rahmen(1).Width
         Me.Rahmen(i).Top = Me.Rahmen(1).Top
         Me.Rahmen(i).Left = Me.Rahmen(1).Left
@@ -1364,6 +1364,7 @@ Dim Tag, Jahr, Sauf, Sunter
 Dim aktHoehe As Double, aktAzimut As Double
 Dim überw
 Dim ephem, monddist
+Dim sPeriode
 'lblfertig.Caption = ""
 lblfertig.Visible = True
 
@@ -1466,11 +1467,19 @@ grdergebnis.Clear
         'Berechnung der Ereignisse im gewählten Zeitraum
         BAnfang = JulDat(Left(Kalender.Value, 2), Mid(Kalender.Value, 4, 2), Mid(Kalender.Value, 7, 4))
         bende = JulDat(ende.Day, ende.Month, ende.year)
-        EPeriode = Fix((bende - (!epoche + 2400000)) / !periode)
-        APeriode = Fix((BAnfang - (!epoche + 2400000)) / !periode)
-   
+        
+        sPeriode = Split(!periode, " ")
+        
+        EPeriode = Fix((bende - (!epoche + 2400000)) / sPeriode(0))
+            APeriode = Fix((BAnfang - (!epoche + 2400000)) / sPeriode(0))
+        
+        
         For x = APeriode To EPeriode
-             ereignis = (!epoche + 2400000) + x * !periode
+             If UBound(sPeriode) = 1 Then
+             ereignis = (!epoche + 2400000) + x * sPeriode(0) + x ^ 2 * sPeriode(1)
+             Else
+             ereignis = (!epoche + 2400000) + x * sPeriode(0)
+             End If
    
             If ereignis > BAnfang And ereignis < bende Then
             
