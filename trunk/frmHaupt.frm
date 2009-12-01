@@ -6,7 +6,7 @@ Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MSHFLXGD.OCX"
 Begin VB.Form frmHaupt 
    BackColor       =   &H8000000A&
    BorderStyle     =   1  'Fest Einfach
-   Caption         =   "BAV Min/Max  V1.08d"
+   Caption         =   "BAV Min/Max  V1.08f"
    ClientHeight    =   8145
    ClientLeft      =   150
    ClientTop       =   720
@@ -593,17 +593,23 @@ Begin VB.Form frmHaupt
       End
       Begin VB.Menu DBBAVAuf 
          Caption         =   "BAV-Beobachtungsaufrufe"
-         Visible         =   0   'False
          Begin VB.Menu DB_BAVEA_aktual 
             Caption         =   "Bedeckungsveränderliche"
          End
          Begin VB.Menu DB_BAVRR_aktual 
             Caption         =   "kurzper Pulsationssterne"
+            Visible         =   0   'False
          End
       End
    End
-   Begin VB.Menu hilfe 
+   Begin VB.Menu help 
       Caption         =   "Hilfe"
+      Begin VB.Menu hilfe 
+         Caption         =   "Hilfedatei"
+      End
+      Begin VB.Menu Ueber 
+         Caption         =   "über.."
+      End
    End
 End
 Attribute VB_Name = "frmHaupt"
@@ -1000,7 +1006,7 @@ End Sub
 Private Sub DB_BAVEA_aktual_Click()
 Dim BAVUrl As String
 
-BAVUrl = "http://www.bav-astro.de/ea/beob_aufr_" & _
+BAVUrl = "http://www.bav-astro.de/ea/beob_aufr.php?jahr=" & Format(Date, "YYYY") & "&monat=" & Format(Date, "mm") '"http://www.bav-astro.de/ea/beob_aufr_" & _
 Format(Date, "yy") & "_" & Format(Date, "mm") & ".html"
 
 result = CheckInetConnection(Me.hWnd)
@@ -1012,7 +1018,7 @@ End Sub
 Private Sub DB_BAVRR_aktual_Click()
 Dim BAVUrl As String
 
-BAVUrl = "http://www.bav-astro.de/rrlyr/beob_aufr_" & _
+BAVUrl = "http://www.bav-astro.de/ea/beob_aufr.php?jahr=9&monat=1" '"http://www.bav-astro.de/rrlyr/beob_aufr_" & _
 Format(Date, "yy") & "_" & Format(Date, "mm") & ".html"
 
 result = CheckInetConnection(Me.hWnd)
@@ -1152,7 +1158,7 @@ If fs.FileExists(App.Path & "\Einzel.dat") = True Then
 .AddItem ("Einzeln")
 End If
 If fs.FileExists(App.Path & "\BAVBA_EA.dat") = True Then
-'.AddItem ("BAV-BA_EA")
+.AddItem ("BAV-BA_EA")
 End If
 If fs.FileExists(App.Path & "\BAVBA_RR.dat") = True Then
 '.AddItem ("BAV-BA_RR")
@@ -1318,7 +1324,7 @@ End Sub
 Private Sub Form_Resize()
     Dim i As Byte
     
-       For i = 1 To Me.Rahmen.ubound - 1
+       For i = 1 To Me.Rahmen.UBound - 1
         Me.Rahmen(i).Width = Me.Rahmen(1).Width
         Me.Rahmen(i).Top = Me.Rahmen(1).Top
         Me.Rahmen(i).Left = Me.Rahmen(1).Left
@@ -1961,3 +1967,10 @@ End Sub
 
 
 
+Private Sub Ueber_Click()
+MsgBox "BAV MinMax, Version 1.0.8f, Stand: 01.12.2009" & vbCrLf & vbCrLf & _
+"geschrieben von: Jörg Hanisch, Gescher" & vbCrLf & _
+"Alle Rechte vorbehalen" & vbCrLf & vbCrLf & _
+"Fragen, Anregungen, (Spenden ;)) bitte per E-Mail an: " & vbCrLf & _
+"hanisch.joerg@gmx.de", vbInformation, "Informationen über das Programm"
+End Sub

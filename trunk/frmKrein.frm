@@ -210,6 +210,7 @@ End If
      .Fields.Append ("BP"), adChar, 3
      .Fields.Append ("LBeob"), adDouble
      .Fields.Append ("Max"), adDouble
+     .Fields.Append ("MinI"), adDouble
      .Fields.Append ("Spektr"), adVarChar, 11
      .Fields.Append ("D"), adDouble, 4
      .Fields.Append ("kD"), adDouble, 4
@@ -248,6 +249,10 @@ zeile1 = einstrom.ReadLine
 While InStr(1, zeile1, "^") = False
  zeile1 = einstrom.ReadLine
 Wend
+zeile1 = einstrom.ReadLine
+
+'RT    And 2006  8.55 F8V       EA/DW/RS    for  ALL //bis Anfang 2009
+'RT    And 2006  8.55  9.47 F8V       EA/DW/RS   ALL  minima elements //ab 03-2009
 
 rsa.Open
 zähler = 1
@@ -263,7 +268,7 @@ Not Trim(Mid(zeile2, 39, 10)) = "" Then
      .AddNew
      .Fields("ID") = zähler
      
-     If InStr(1, Right(Trim(Mid(zeile1, 44, 10)), 3), "sec", vbTextCompare) <> 0 Then
+     If InStr(1, Right(Trim(Mid(zeile1, 49, 10)), 3), "sec", vbTextCompare) <> 0 Then
         .Fields("Kürzel") = Trim(Left(zeile1, 6)) & "*"
      Else
         .Fields("Kürzel") = Trim(Left(zeile1, 6))
@@ -273,12 +278,17 @@ Not Trim(Mid(zeile2, 39, 10)) = "" Then
      .Fields("BP") = "KRE"
      .Fields("LBeob") = Trim(Mid(zeile1, 11, 5))
      .Fields("Max") = IIf(Trim(Mid(zeile1, 16, 5)) = "", 0, Trim(Mid(zeile1, 16, 5)))
-     .Fields("Spektr") = Trim(Mid(zeile1, 21, 11))
-     .Fields("D") = Trim(Mid(zeile2, 30, 5))
-     .Fields("kD") = Trim(Mid(zeile2, 35, 4))
+     .Fields("MinI") = IIf(Trim(Mid(zeile1, 22, 5)) = "", 0, Trim(Mid(zeile1, 22, 5)))
+     .Fields("Spektr") = Trim(Mid(zeile1, 28, 10))
+     
+'23 11 10.1 +53 01 33 2000.0  0.06 0.0 0.6289286 2452500.3510 0.5
+'23 11 10.1 +53 01 33 2000.0   0.107 0.0 0.6289286 2452500.3510 0.5
+
+     .Fields("D") = Trim(Mid(zeile2, 31, 6))
+     .Fields("kD") = Trim(Mid(zeile2, 37, 4))
      .Fields("Typ") = Trim(Mid(zeile1, 32, 12))
-     .Fields("Epoche") = Trim(Mid(zeile2, 51, 11))
-     .Fields("Periode") = Trim(Mid(zeile2, 39, 10))
+     .Fields("Epoche") = Trim(Mid(zeile2, 53, 11))
+     .Fields("Periode") = Trim(Mid(zeile2, 41, 10))
      .Fields("for") = Right(Trim(Mid(zeile1, 44, 10)), 3)
      .Fields("hh") = Left(zeile2, 2)
      .Fields("mm") = Mid(zeile2, 4, 2)
