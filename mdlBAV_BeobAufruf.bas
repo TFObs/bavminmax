@@ -141,6 +141,7 @@ Dim BAVBeobAuf As Recordset
 Dim fs As FileSystemObject
 Dim tempVal, realval
 '"http://www.bav-astro.de/ea/beob_aufr_08_01.html"
+'http://www.bav-astro.de/ea/beob_aufr.php?jahr=8&monat=12
 'http://bav-astro.de/rrlyr/beob_aufr_08_03.html
 StarArray = (GetBAVStardata(TemporaryPath, BAV_URL))
 

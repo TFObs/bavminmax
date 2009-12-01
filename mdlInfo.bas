@@ -67,7 +67,7 @@ With frmSterninfo
          If frmAladin.chkAladDirekt.Value = 1 Then frmaladain.txtObj.text = frmAladin.txtStern.text
         .lblTyp.Caption = Abf.Fields("Typ").Value
         .lblEpoche.Caption = Format(Abf.Fields("Epoche").Value, "#.0000")
-        .lblPeriode.Caption = Format(Abf.Fields("Periode").Value, "#.0000")
+        .lblPeriode.Caption = Format(Abf.Fields("Periode").Value, "#.000000")
         .lblQuelle.Caption = Abf.Fields("BP").Value
         
         'If Database < 2 Then

@@ -826,10 +826,13 @@ Private Sub cmdGEOS_Click()
 End Sub
 
 Private Sub cmdKreiner_Click()
-
+Dim kreistar As String
   If GetSearchStar <> "-" Then
-    Connstr = "http://www.as.wsp.krakow.pl/o-c/data/getdata.php3?" & _
-    Trim(searchstar(0)) & "%20" & Trim(searchstar(1))
+    'Connstr = "http://www.as.wsp.krakow.pl/o-c/data/getdata.php3?" & _
+    Trim(searchstar(0)) & " " & Trim(searchstar(1))
+    kreistar = Trim(searchstar(1))
+    kreistar = Left(kreistar, 1) & Chr(Asc(Mid(kreistar, 2, 1)) - 32) & Chr(Asc(Right(kreistar, 1)) - 32)
+    Connstr = "http://www.as.up.krakow.pl/minicalc/" & kreistar & Trim(searchstar(0)) & ".HTM"
     URLGoTo Me.hWnd, Connstr
   End If
 
