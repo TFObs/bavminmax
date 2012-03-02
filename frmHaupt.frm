@@ -4,12 +4,11 @@ Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MSHFLXGD.OCX"
 Begin VB.Form frmHaupt 
-   BackColor       =   &H8000000A&
    BorderStyle     =   1  'Fest Einfach
-   Caption         =   "BAV Min/Max  V1.08f"
+   Caption         =   "BAV Min/Max"
    ClientHeight    =   8145
    ClientLeft      =   150
-   ClientTop       =   720
+   ClientTop       =   840
    ClientWidth     =   6735
    Icon            =   "frmHaupt.frx":0000
    LinkTopic       =   "Form3"
@@ -1006,7 +1005,7 @@ End Sub
 Private Sub DB_BAVEA_aktual_Click()
 Dim BAVUrl As String
 
-BAVUrl = "http://www.bav-astro.de/ea/beob_aufr.php?jahr=" & Format(Date, "YYYY") & "&monat=" & Format(Date, "mm") '"http://www.bav-astro.de/ea/beob_aufr_" & _
+BAVUrl = "http://www.bav-astro.de/ea/beob_aufr.php?jahr=" & Format(Date, "YY") & "&monat=" & Format(Date, "m") '"http://www.bav-astro.de/ea/beob_aufr_" & _
 Format(Date, "yy") & "_" & Format(Date, "mm") & ".html"
 
 result = CheckInetConnection(Me.hWnd)
@@ -1968,7 +1967,7 @@ End Sub
 
 
 Private Sub Ueber_Click()
-MsgBox "BAV MinMax, Version 1.0.8f, Stand: 01.12.2009" & vbCrLf & vbCrLf & _
+MsgBox "BAV MinMax, Version 1.0.9, Stand: 03.03.2012" & vbCrLf & vbCrLf & _
 "geschrieben von: Jörg Hanisch, Gescher" & vbCrLf & _
 "Alle Rechte vorbehalen" & vbCrLf & vbCrLf & _
 "Fragen, Anregungen, (Spenden ;)) bitte per E-Mail an: " & vbCrLf & _
