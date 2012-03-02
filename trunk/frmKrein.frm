@@ -115,8 +115,8 @@ Dim fs As FileSystemObject
 Dim rsa As ADODB.Recordset
 Dim einstrom As TextStream
 Dim ausstrom As TextStream
-Dim zeile1 As String
-Dim zeile2 As String
+Dim zeile1
+Dim zeile2
 Dim zeile As String
 Dim zähler As Integer
 Dim KreinerThere As Boolean
@@ -161,6 +161,7 @@ optD_save = True
 End Sub
 
 Sub DownAndChange()
+
 
 Set fs = New FileSystemObject
 Set rsa = New ADODB.Recordset
@@ -249,57 +250,101 @@ zeile1 = einstrom.ReadLine
 While InStr(1, zeile1, "^") = False
  zeile1 = einstrom.ReadLine
 Wend
-zeile1 = einstrom.ReadLine
+'zeile1 = einstrom.ReadLine
 
 'RT    And 2006  8.55 F8V       EA/DW/RS    for  ALL //bis Anfang 2009
 'RT    And 2006  8.55  9.47 F8V       EA/DW/RS   ALL  minima elements //ab 03-2009
+'RT  And 2009  8.97 |F8V+K1 EA/RS for  PRI //ab 2012
 
 rsa.Open
 zähler = 1
-
+Dim zeile3
 While Not einstrom.AtEndOfStream
-zeile1 = einstrom.ReadLine
-zeile2 = einstrom.ReadLine
-'On Error Resume Next
-If Not Trim(Mid(zeile2, 51, 11)) = "" And Not Trim(Left(zeile2, 2)) = "" And _
-Not Trim(Mid(zeile2, 39, 10)) = "" Then
+zeile3 = einstrom.ReadLine
+zeile1 = Split(Replace(zeile3, "  ", " "), " ")
 
+zeile2 = einstrom.ReadLine
+If Mid(zeile2, 1, 1) = " " Then zeile2 = "0" & Right(zeile2, Len(zeile2) - 1)
+zeile2 = Split(Replace(zeile2, "  ", " "), " ")
+
+
+'On Error Resume Next
+'If Not Trim(Mid(zeile2, 51, 11)) = "" And Not Trim(Left(zeile2, 2)) = "" And _
+'Not Trim(Mid(zeile2, 39, 10)) = "" and Then
+If UBound(zeile1) > 4 Then
   With rsa
      .AddNew
      .Fields("ID") = zähler
-     
-     If InStr(1, Right(Trim(Mid(zeile1, 49, 10)), 3), "sec", vbTextCompare) <> 0 Then
-        .Fields("Kürzel") = Trim(Left(zeile1, 6)) & "*"
-     Else
-        .Fields("Kürzel") = Trim(Left(zeile1, 6))
+     .Fields("Kürzel") = IIf(InStr(1, zeile1(UBound(zeile1)), "sec", vbTextCompare) <> 0, zeile1(0) & "*", zeile1(0))
+     .Fields("Stbld") = zeile1(1)
+     .Fields("BP") = "KRE"
+     .Fields("LBeob") = zeile1(2)
+     .Fields("Max") = IIf(InStr(1, zeile1(3), "|") <> 0, 0, zeile1(3))
+     .Fields("MinI") = 0
+     If Len(zeile1(4)) > 1 Then
+        If Left(zeile1(4), 1) = "|" Then zeile1(4) = Right(zeile1(4), Len(zeile1(4)) - 1)
+        .Fields("spektr") = zeile1(4)
+        Else
+        .Fields("spektr") = ""
      End If
      
-     .Fields("Stbld") = Trim(Mid(zeile1, 7, 3))
-     .Fields("BP") = "KRE"
-     .Fields("LBeob") = Trim(Mid(zeile1, 11, 5))
-     .Fields("Max") = IIf(Trim(Mid(zeile1, 16, 5)) = "", 0, Trim(Mid(zeile1, 16, 5)))
-     .Fields("MinI") = IIf(Trim(Mid(zeile1, 22, 5)) = "", 0, Trim(Mid(zeile1, 22, 5)))
-     .Fields("Spektr") = Trim(Mid(zeile1, 28, 10))
+     If zeile1(UBound(zeile1) - 2) = "|" Then
+     .Fields("Typ") = ""
+     Else
+     .Fields("Typ") = zeile1(UBound(zeile1) - 2)
+     End If
+     
+     .Fields("for") = zeile1(UBound(zeile1))
+     
+     .Fields("D") = IIf(IsNumeric(zeile2(7)), zeile2(7), 0)
+     .Fields("kD") = zeile2(8)
+     .Fields("Epoche") = zeile2(10) - 2400000
+     .Fields("Periode") = zeile2(9)
+     .Fields("hh") = zeile2(0)
+     .Fields("mm") = zeile2(1)
+     .Fields("ss") = zeile2(2)
+     If Left(zeile2(3), 1) = "-" Then
+      .Fields("vz") = "-"
+      zeile2(3) = Right(zeile2(3), Len(zeile2(3)) - 1)
+      Else
+      .Fields("vz") = "+"
+     End If
+     .Fields("o") = zeile2(3)
+     .Fields("m") = Round(zeile2(4) + CDbl(zeile2(5)) / 60, 3)
+     
+     'If InStr(1, Right(Trim(Mid(zeile1, 49, 10)), 3), "sec", vbTextCompare) <> 0 Then
+     '   .Fields("Kürzel") = Trim(Left(zeile1, 6)) & "*"
+     'Else
+     '   .Fields("Kürzel") = Trim(Left(zeile1, 6))
+     'End If
+     
+     '.Fields("Stbld") = Trim(Mid(zeile1, 7, 3))
+     '.Fields("BP") = "KRE"
+     '.Fields("LBeob") = Trim(Mid(zeile1, 11, 5))
+     '.Fields("Max") = IIf(Trim(Mid(zeile1, 16, 5)) = "", 0, Trim(Mid(zeile1, 16, 5)))
+     '.Fields("MinI") = IIf(Trim(Mid(zeile1, 22, 5)) = "", 0, Trim(Mid(zeile1, 22, 5)))
+     '.Fields("Spektr") = Trim(Mid(zeile1, 28, 10))
      
 '23 11 10.1 +53 01 33 2000.0  0.06 0.0 0.6289286 2452500.3510 0.5
 '23 11 10.1 +53 01 33 2000.0   0.107 0.0 0.6289286 2452500.3510 0.5
-
-     .Fields("D") = Trim(Mid(zeile2, 31, 6))
-     .Fields("kD") = Trim(Mid(zeile2, 37, 4))
-     .Fields("Typ") = Trim(Mid(zeile1, 32, 12))
-     .Fields("Epoche") = Trim(Mid(zeile2, 53, 11))
-     .Fields("Periode") = Trim(Mid(zeile2, 41, 10))
-     .Fields("for") = Right(Trim(Mid(zeile1, 44, 10)), 3)
-     .Fields("hh") = Left(zeile2, 2)
-     .Fields("mm") = Mid(zeile2, 4, 2)
-     .Fields("ss") = Trim(Mid(zeile2, 7, 4))
-     .Fields("vz") = Mid(zeile2, 12, 1)
-     .Fields("o") = Mid(zeile2, 13, 2)
-     .Fields("m") = Round(Mid(zeile2, 16, 2) + CDbl(Mid(zeile2, 19, 2)) / 60, 3)
+'23 11 10  53  1 33 2000.0  0.06 0.0 0.6289286 2452500.3510 0.5 //ab 2012
+     '.Fields("D") = Trim(Mid(zeile2, 31, 6))
+     '.Fields("kD") = Trim(Mid(zeile2, 37, 4))
+     '.Fields("Typ") = Trim(Mid(zeile1, 32, 12))
+     '.Fields("Epoche") = Trim(Mid(zeile2, 53, 11))
+     '.Fields("Periode") = Trim(Mid(zeile2, 41, 10))
+     '.Fields("for") = Right(Trim(Mid(zeile1, 44, 10)), 3)
+     '.Fields("hh") = Left(zeile2, 2)
+     '.Fields("mm") = Mid(zeile2, 4, 2)
+     '.Fields("ss") = Trim(Mid(zeile2, 7, 4))
+     '.Fields("vz") = Mid(zeile2, 12, 1)
+     '.Fields("o") = Mid(zeile2, 13, 2)
+     '.Fields("m") = Round(Mid(zeile2, 16, 2) + CDbl(Mid(zeile2, 19, 2)) / 60, 3)
      .Update
      
   End With
  zähler = zähler + 1
+ Else: Debug.Print zeile3
  End If
  
 Wend

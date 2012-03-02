@@ -229,26 +229,28 @@ If fs.FileExists(App.Path & "\BAVBA_EA.dat") Then fs.DeleteFile (App.Path & "\BA
                 .Fields("Kürzel").Value = Trim(tempVal(0))
                 .Fields("Stbld").Value = Trim(tempVal(1))
                 .Fields("BP").Value = Trim(realval(1, x))
-                .Fields("Typ").Value = Trim(realval(2, x))
-                .Fields("Epoche").Value = Trim(realval(3, x))
-                .Fields("Periode").Value = Trim(realval(4, x))
-                .Fields("Max").Value = Trim(realval(5, x))
-                .Fields("MinI").Value = Trim(realval(6, x))
-                .Fields("MinII").Value = Trim(realval(7, x))
-                .Fields("D").Value = Trim(realval(9, x))
-                .Fields("kD").Value = Trim(realval(10, x))
+                .Fields("Typ").Value = Trim(realval(3, x))
+                .Fields("Epoche").Value = Trim(realval(4, x))
+                .Fields("Periode").Value = Trim(realval(5, x))
+                .Fields("Max").Value = Trim(realval(6, x))
+                .Fields("MinI").Value = Trim(realval(7, x))
+                .Fields("MinII").Value = Trim(realval(8, x))
+                .Fields("D").Value = Trim(realval(10, x))
+                .Fields("kD").Value = Trim(realval(11, x))
         
-                realval(11, x) = Replace(Replace(Replace(realval(11, x), "h", ""), "m", ""), "s", "")
-                tempVal = Split(realval(11, x), " ")
+                realval(12, x) = Replace(Replace(Replace(realval(12, x), "h", ""), "m", ""), "s", "")
+                tempVal = Split(realval(12, x), " ")
                 .Fields("hh").Value = Trim(tempVal(0))
                 .Fields("mm").Value = Trim(tempVal(1))
                 .Fields("ss").Value = Trim(tempVal(2))
                 
-                realval(12, x) = Replace(Replace(realval(12, x), "°", ""), "'", "")
-                tempVal = Split(realval(12, x), " ")
+                realval(13, x) = Replace(Replace(realval(13, x), "°", ""), "'", "")
+                tempVal = Split(realval(13, x), " ")
                 .Fields("vz").Value = Trim(tempVal(0))
                 .Fields("o").Value = Trim(tempVal(1))
                 .Fields("m").Value = Trim(tempVal(2)) + Trim(tempVal(3)) / 60
+                
+                .Fields("LBeob") = Trim(realval(15, x))
                 .Update
             End If
         Next x

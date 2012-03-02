@@ -2,22 +2,22 @@ VERSION 5.00
 Begin VB.Form frmAladin 
    BorderStyle     =   1  'Fest Einfach
    Caption         =   "Internet-Recherche"
-   ClientHeight    =   6420
+   ClientHeight    =   7230
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   7470
    Icon            =   "frmAladin.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   6420
+   ScaleHeight     =   7230
    ScaleWidth      =   7470
    StartUpPosition =   3  'Windows-Standard
    Begin VB.CheckBox chkAladDirekt 
-      Caption         =   "für Previewer übernehmen"
+      Caption         =   "für Aladin übernehmen"
       Height          =   255
       Left            =   5280
       TabIndex        =   34
-      Top             =   2880
+      Top             =   3480
       Value           =   1  'Aktiviert
       Width           =   2175
    End
@@ -27,7 +27,7 @@ Begin VB.Form frmAladin
       Left            =   6840
       TabIndex        =   33
       ToolTipText     =   "Fenster in den Hintergrund"
-      Top             =   6000
+      Top             =   6720
       Visible         =   0   'False
       Width           =   495
    End
@@ -46,7 +46,7 @@ Begin VB.Form frmAladin
       Height          =   285
       Left            =   5280
       TabIndex        =   32
-      Top             =   2520
+      Top             =   3120
       Width           =   1575
    End
    Begin VB.Frame fraInfo 
@@ -60,11 +60,31 @@ Begin VB.Form frmAladin
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   1935
+      Height          =   2655
       Left            =   5040
       TabIndex        =   27
       Top             =   120
       Width           =   2295
+      Begin VB.CommandButton cmdNSVS 
+         BackColor       =   &H00C0C0FF&
+         Caption         =   "NSVS"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   240
+         Style           =   1  'Grafisch
+         TabIndex        =   36
+         ToolTipText     =   "NSVS-Abfrage"
+         Top             =   1320
+         Width           =   1815
+      End
       Begin VB.CommandButton cmdGCVS 
          BackColor       =   &H00C0C0FF&
          Caption         =   "GCVS"
@@ -121,8 +141,8 @@ Begin VB.Form frmAladin
          Left            =   240
          Style           =   1  'Grafisch
          TabIndex        =   28
-         ToolTipText     =   "SIMBAD-Query"
-         Top             =   1320
+         ToolTipText     =   "General Search Gateway Abfrage"
+         Top             =   1920
          Width           =   1815
       End
    End
@@ -137,11 +157,31 @@ Begin VB.Form frmAladin
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   3255
+      Height          =   3615
       Left            =   2640
       TabIndex        =   20
       Top             =   120
       Width           =   2295
+      Begin VB.CommandButton cmdCRTS 
+         BackColor       =   &H0080C0FF&
+         Caption         =   "CRTS"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   240
+         Style           =   1  'Grafisch
+         TabIndex        =   35
+         ToolTipText     =   "CRTS-Datenbank"
+         Top             =   1080
+         Width           =   1815
+      End
       Begin VB.CommandButton cmdGEOS 
          BackColor       =   &H0080C0FF&
          Caption         =   "GEOS RR-Lyr"
@@ -179,7 +219,7 @@ Begin VB.Form frmAladin
          Style           =   1  'Grafisch
          TabIndex        =   23
          ToolTipText     =   "Kreiner DB"
-         Top             =   1320
+         Top             =   1800
          Width           =   1815
       End
       Begin VB.CommandButton cmdBAV 
@@ -198,7 +238,7 @@ Begin VB.Form frmAladin
          Left            =   240
          Style           =   1  'Grafisch
          TabIndex        =   22
-         Top             =   1800
+         Top             =   2280
          Width           =   1815
       End
       Begin VB.CommandButton cmdOCGate 
@@ -218,7 +258,7 @@ Begin VB.Form frmAladin
          Style           =   1  'Grafisch
          TabIndex        =   21
          ToolTipText     =   "O-C Diagramme"
-         Top             =   2520
+         Top             =   3000
          Width           =   1815
       End
       Begin VB.Label Label1 
@@ -234,12 +274,11 @@ Begin VB.Form frmAladin
          Height          =   255
          Left            =   240
          TabIndex        =   25
-         Top             =   1080
+         Top             =   1560
          Width           =   1575
       End
    End
    Begin VB.Frame fraKArten 
-      BackColor       =   &H8000000A&
       Caption         =   "Aufsuchkarten"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
@@ -351,7 +390,7 @@ Begin VB.Form frmAladin
    End
    Begin VB.CommandButton cmdOPen 
       BackColor       =   &H000080FF&
-      Caption         =   "Aladin Previewer"
+      Caption         =   "Aladin Sky Atlas"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -365,7 +404,7 @@ Begin VB.Form frmAladin
       Left            =   3960
       Style           =   1  'Grafisch
       TabIndex        =   12
-      Top             =   5760
+      Top             =   6480
       Width           =   1695
    End
    Begin VB.Frame fraCats 
@@ -382,7 +421,7 @@ Begin VB.Form frmAladin
       Height          =   1815
       Left            =   2400
       TabIndex        =   2
-      Top             =   3720
+      Top             =   4440
       Width           =   4935
       Begin VB.CheckBox chkESA 
          Caption         =   "Hipparcos + Tycho (ESA '97)"
@@ -501,7 +540,7 @@ Begin VB.Form frmAladin
       Height          =   1815
       Left            =   240
       TabIndex        =   1
-      Top             =   3720
+      Top             =   4440
       Width           =   2055
       Begin VB.CheckBox chkSIM 
          Caption         =   "SIMBAD"
@@ -569,7 +608,7 @@ Begin VB.Form frmAladin
       Height          =   420
       Left            =   480
       TabIndex        =   0
-      Top             =   5760
+      Top             =   6480
       Width           =   3135
    End
    Begin VB.Line Line1 
@@ -577,8 +616,8 @@ Begin VB.Form frmAladin
       BorderWidth     =   2
       X1              =   120
       X2              =   7440
-      Y1              =   3480
-      Y2              =   3480
+      Y1              =   4200
+      Y2              =   4200
    End
    Begin VB.Label Label5 
       Caption         =   "Stern:"
@@ -594,7 +633,7 @@ Begin VB.Form frmAladin
       Height          =   255
       Left            =   5400
       TabIndex        =   31
-      Top             =   2280
+      Top             =   2880
       Width           =   615
    End
 End
@@ -627,6 +666,10 @@ If cmdHinterVor.Caption = ">>" Then
  End If
  
 End Sub
+
+
+
+
 
 Public Sub Form_Load()
 result = CheckInetConnection(Me.hWnd)
@@ -819,7 +862,19 @@ End Sub
 Private Sub cmdGEOS_Click()
 
   If GetSearchStar <> "-" Then
-    Connstr = "http://dbrr.ast.obs-mip.fr/listostar.html#" & Trim(searchstar(1))
+    'Connstr = "http://dbrr.ast.obs-mip.fr/listostar.html#" & Trim(searchstar(1))
+    Connstr = "http://rr-lyr.ast.obs-mip.fr/dbrr/dbrr-V1.0_08.php?" & Trim(searchstar(0)) & " " & UCase(Left(searchstar(1), 1)) & LCase(Mid(searchstar(1), 2, 2))
+    URLGoTo Me.hWnd, Connstr
+  End If
+
+End Sub
+
+Private Sub cmdCRTS_Click()
+
+  If GetSearchStar <> "-" Then
+    Connstr = "http://nesssi.cacr.caltech.edu/cgi-bin/getcssconedbid_release.cgi?Name=" & Trim(searchstar(0)) & " " & Trim(searchstar(1)) & _
+    "&DB=photcat&OUT=csv&SHORT=short&PLOT=plot"
+
     URLGoTo Me.hWnd, Connstr
   End If
 
@@ -828,11 +883,12 @@ End Sub
 Private Sub cmdKreiner_Click()
 Dim kreistar As String
   If GetSearchStar <> "-" Then
-    'Connstr = "http://www.as.wsp.krakow.pl/o-c/data/getdata.php3?" & _
-    Trim(searchstar(0)) & " " & Trim(searchstar(1))
-    kreistar = Trim(searchstar(1))
-    kreistar = Left(kreistar, 1) & Chr(Asc(Mid(kreistar, 2, 1)) - 32) & Chr(Asc(Right(kreistar, 1)) - 32)
-    Connstr = "http://www.as.up.krakow.pl/minicalc/" & kreistar & Trim(searchstar(0)) & ".HTM"
+    Connstr = "http://www.as.up.krakow.pl/o-c/data/getdata.php3?" & Trim(searchstar(0)) & "%20" & Trim(searchstar(1))
+    'http://www.as.up.krakow.pl/o-c/diagram_html/and_rt_small.html
+    'kreistar = Trim(searchstar(1))
+    'StrToUpper....
+    'kreistar = Left(kreistar, 1) & Chr(Asc(Mid(kreistar, 2, 1)) - 32) & Chr(Asc(Right(kreistar, 1)) - 32)
+    'Connstr = "http://www.as.up.krakow.pl/minicalc/" & UCase(searchstar(1)) & Trim(searchstar(0)) & ".HTM"
     URLGoTo Me.hWnd, Connstr
   End If
 
@@ -869,8 +925,21 @@ Private Sub cmdSimbad_Click()
 
 End Sub
 
+Private Sub cmdNSVS_Click()
+'http://skydot.lanl.gov/nsvs/cone_search.php?&ra=23:11:32.1&dec=+36:53:35.0&rad=0.5&saturated=on&nocorr=on&lonpts=on&hiscat=on&hicorr=on&hisigcorr=on&radecflip=on
+Dim radec
+
+If IsNumeric(Left(txtObj.text, 2)) Then
+radec = Split(txtObj.text, " ")
+Connstr = "http://skydot.lanl.gov/nsvs/cone_search.php?&ra=" & radec(0) & "&dec=" & radec(1) & _
+"&rad=2&saturated=on&nocorr=on&lonpts=on&hiscat=on&hicorr=on&hisigcorr=on&radecflip=on"
+URLGoTo Me.hWnd, Connstr
+Else: cmdNSVS.Visible = False
+End If
+End Sub
+
 Private Function GetSearchStar() As String
- If frmSterninfo.Visible Then
+ If frmSterninfo.Visible And txtStern.text = "" Then
    searchstar = Split(frmSterninfo.lblStern.Caption, " ")
 Else
    searchstar = Split(txtStern.text, " ")
@@ -897,9 +966,11 @@ End Sub
 
 Private Sub txtObj_Change()
  If Not Len(txtObj.text) > 1 Then Exit Sub
-    cmdDSS.Visible = IIf(IsNumeric(Left(txtObj.text, 2)), True, False)
+    cmdDSS.Enabled = IIf(IsNumeric(Left(txtObj.text, 2)), True, False)
+    cmdNSVS.Enabled = IIf(IsNumeric(Left(txtObj.text, 2)), True, False)
 End Sub
 
 Private Sub txtStern_Change()
 If chkAladDirekt.Value = 1 Then txtObj.text = txtStern.text
+GetSearchStar
 End Sub
