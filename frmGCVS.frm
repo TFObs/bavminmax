@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Begin VB.Form frmGCVS 
    BorderStyle     =   4  'Festes Werkzeugfenster
@@ -385,7 +385,7 @@ Wend
  Next
 
     MsgBox "Die GCVS-Datenbank kann jetzt für" & vbCrLf & "Berechnungen verwendet werden..", vbInformation, "Implementierung erfolgreich"
-    frmHaupt.cmdListe.Enabled = True
+    frmHaupt.cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
     frmHaupt.cmbGrundlage.Enabled = True
     Unload Me
     Exit Sub
@@ -396,7 +396,7 @@ ErrorHandler:
      cmdDownload.Caption = "Start"
      Me.MousePointer = 1
      frmHaupt.Form_Load
-     frmHaupt.cmdListe.Enabled = True
+     frmHaupt.cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
      frmHaupt.cmbGrundlage.Enabled = True
      Unload Me
 End Sub
