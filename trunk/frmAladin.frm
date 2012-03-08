@@ -164,7 +164,7 @@ Begin VB.Form frmAladin
       Width           =   2295
       Begin VB.CommandButton cmdCRTS 
          BackColor       =   &H0080C0FF&
-         Caption         =   "CRTS"
+         Caption         =   "CSDR1"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -873,7 +873,7 @@ Private Sub cmdCRTS_Click()
 
   If GetSearchStar <> "-" Then
     Connstr = "http://nesssi.cacr.caltech.edu/cgi-bin/getcssconedbid_release.cgi?Name=" & Trim(searchstar(0)) & " " & Trim(searchstar(1)) & _
-    "&DB=photcat&OUT=csv&SHORT=short&PLOT=plot"
+    "&DB=photcat&Rad=0.5&OUT=csv&SHORT=short&PLOT=plot"
 
     URLGoTo Me.hWnd, Connstr
   End If

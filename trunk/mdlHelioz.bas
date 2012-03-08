@@ -9,7 +9,7 @@ Dim dl, dl2, dl4, dl5, dl6
 Dim dlM, wL
 Dim Ro, R2, R4, R5, R6, RM, r
 Dim TN, xi, z, theta
-Dim alpha, delta, vgl, se
+Dim alpha, Delta, vgl, se
 Dim be, la, erg
 Dim hjd, hcorr
 
@@ -170,7 +170,7 @@ theta = (2004.311 - 0.853 * TN) * T - 0.427 * T ^ 2 - 0.042 * T ^ 3
 
 'RA alt und Dek alt
 alpha = RA / 24 * 360
-delta = DEC
+Delta = DEC
 
 'Umrechnung
 theta = theta / 3600
@@ -178,11 +178,11 @@ xi = xi / 3600
 z = z / 3600
 
 'neue Koordinaten
-ndelt = arcsinz((Sin(theta * pi) * Cos(delta * pi) * Cos((alpha + xi) * pi) + Cos(theta * pi) * Sin(delta * pi)))
-nalph = arcsinz(Cos(delta * pi) * Sin((alpha + xi) * pi) / Cos(ndelt * pi))
+ndelt = arcsinz((Sin(theta * pi) * Cos(Delta * pi) * Cos((alpha + xi) * pi) + Cos(theta * pi) * Sin(Delta * pi)))
+nalph = arcsinz(Cos(Delta * pi) * Sin((alpha + xi) * pi) / Cos(ndelt * pi))
 nalph = range360(nalph)
 'Näherungswert für die neue RA
-vgl = (xi + z) + theta * Tan(delta * pi) * Sin(alpha * pi) + alpha
+vgl = (xi + z) + theta * Tan(Delta * pi) * Sin(alpha * pi) + alpha
 
 If Abs(nalph - vgl) > 0.5 Then
 nalph = 180 - (nalph - z)
@@ -209,7 +209,12 @@ frmHelioz.Label3.Caption = "RA       " & umwand(1) & ":" & umwand(2) & ":" & umw
 'einfache Formel aus Wischnewski
 hjd = (-499 * Cos(be * pi) * Cos((lnu - la) * pi)) / 3600 / 24
 
-'Formel
+'Formel aus http://adsabs.harvard.edu/full/1972PASP...84..784L
+'Title: The Calculation of Heliocentric Corrections
+'Authors: Landolt, A. U. & Blondeau, K. L.
+'Journal: Publications of the Astronomical Society of the Pacific, Vol. 84, No. 502, p.784
+'Bibliographic Code: 1972PASP...84..784L
+
 hcorr = (-499 * r * _
 ((Cos(wL * pi) * Cos(nalph * pi) * Cos(ndelt * pi)) _
 + (Sin(wL * pi) * (Sin(se * pi) * Sin(ndelt * pi) + _

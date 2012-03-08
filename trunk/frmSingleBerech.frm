@@ -666,7 +666,7 @@ Unload Me
 
 frmHaupt.Form_Load
 frmHaupt.cmbGrundlage.ListIndex = frmHaupt.cmbGrundlage.ListCount - 1
-frmHaupt.cmdListe.Enabled = True
+frmHaupt.cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
 frmHaupt.cmbGrundlage.Enabled = True
 Unload frmSterninfo
 Unload frmAladin
@@ -794,7 +794,7 @@ End If
 Unload Me
 
  frmHaupt.Form_Load
- frmHaupt.cmdListe.Enabled = True
+ frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True
  frmHaupt.cmbGrundlage.Enabled = True
  
  For x = 1 To frmHaupt.cmbGrundlage.ListCount
