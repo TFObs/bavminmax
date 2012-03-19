@@ -35,7 +35,7 @@ Public Declare Function URLDownloadToFile Lib "urlmon" _
     ByVal dwReserved As Long, ByVal lpfnCB As Long) As Long
 
 Public Declare Function ShellExecute Lib "shell32.dll" _
-  Alias "ShellExecuteA" (ByVal hwnd As Long, _
+  Alias "ShellExecuteA" (ByVal hWnd As Long, _
   ByVal lpOperation As String, _
   ByVal lpFile As String, _
   ByVal lpParameters As String, _
@@ -68,17 +68,17 @@ Public Const HWND_TOPMOST As Long = -1&
 Public Const HWND_NOTOPMOST As Long = -2&
 
 'Deklaration: Globale Form API-Funktionen
-Public Declare Function SetWindowPos Lib "user32" (ByVal hwnd As Long, _
+Public Declare Function SetWindowPos Lib "user32" (ByVal hWnd As Long, _
     ByVal hWndInsertAfter As Long, ByVal x As Long, ByVal y As Long, _
     ByVal cx As Long, _
     ByVal cy As Long, ByVal wFlags As Long) As Long
 
-Public Function floatwindow(hwnd)
-floatwindow = SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE + SWP_NOSIZE)
+Public Function floatwindow(hWnd)
+floatwindow = SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE + SWP_NOSIZE)
 End Function
 
-Public Function unfloatwindow(hwnd)
-unfloatwindow = SetWindowPos(hwnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE + SWP_NOSIZE)
+Public Function unfloatwindow(hWnd)
+unfloatwindow = SetWindowPos(hWnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE + SWP_NOSIZE)
 End Function
 Public Sub INISetValue(ByVal Path$, ByVal Sect$, ByVal Key$, _
                         ByVal Value$)
@@ -96,13 +96,13 @@ Public Function INIGetValue(ByVal Path$, ByVal Sect$, ByVal Key$) _
                                      Buffer, Len(Buffer), Path)
     INIGetValue = Left$(Buffer, result)
 End Function
-Public Function CheckInetConnection(ByVal hwnd As Long)
+Public Function CheckInetConnection(ByVal hWnd As Long)
 Dim result
 result = CBool(InternetGetConnectedState(0, 0))
     
     If result = False Then
     'Testen oder Herstellen der Internetverbindung
-    result = RASConnect(hwnd)
+    result = RASConnect(hWnd)
     End If
     
     If result = False Then
@@ -113,7 +113,7 @@ result = CBool(InternetGetConnectedState(0, 0))
 End Function
 
 ' Online-Verbindung starten
-Public Function RASConnect(ByVal hwnd As Long, _
+Public Function RASConnect(ByVal hWnd As Long, _
   Optional ByVal sDFÜName As String = "", _
   Optional ByVal bAutoStart As Boolean = False) As Boolean
 
@@ -121,7 +121,7 @@ Public Function RASConnect(ByVal hwnd As Long, _
   Dim nFlags As Long
 
   nFlags = IIf(bAutoStart, DIAL_FORCE_UNATTENDED, DIAL_FORCE_ONLINE)
-  InternetDial hwnd, sDFÜName, nFlags, conID, 0
+  InternetDial hWnd, sDFÜName, nFlags, conID, 0
 
   RASConnect = (conID <> 0)
 End Function

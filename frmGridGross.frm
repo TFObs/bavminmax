@@ -70,7 +70,7 @@ Private Sub Form_Load()
 End Sub
 
 Public Sub grossGrid_füllen()
-Dim Y, x As Integer
+Dim y, x As Integer
 Dim text As String
 
        'Spaltenanzahl ermitteln
@@ -78,13 +78,22 @@ Dim text As String
        grdGross.Rows = frmHaupt.grdergebnis.Rows
        
         'Füllen der Zellen
-        For Y = 0 To frmHaupt.grdergebnis.Rows - 1
-             For x = 0 To frmHaupt.grdergebnis.Cols - 1
-                text = frmHaupt.grdergebnis.TextMatrix(Y, x)
-                grdGross.TextMatrix(Y, x) = text
+        For y = 0 To frmHaupt.grdergebnis.Rows - 1
+             For x = 0 To frmHaupt.grdergebnis.Cols - 2
+                text = frmHaupt.grdergebnis.TextMatrix(y, x)
+                grdGross.TextMatrix(y, x) = text
             Next x
-        Next Y
+        Next y
         
+        For y = 1 To frmHaupt.grdergebnis.Rows - 1
+            frmHaupt.grdergebnis.Row = y: grdGross.Row = y
+            For x = 1 To 11
+            frmHaupt.grdergebnis.col = x: grdGross.col = x
+            grdGross.CellBackColor = frmHaupt.grdergebnis.CellBackColor
+            Next x
+        Next y
+        
+        frmHaupt.grdergebnis.Row = 1: frmHaupt.grdergebnis.col = 1
         'Spalte mit Sternname in fetter Schriftart
         For x = 1 To grdGross.Rows - 1
              grdGross.Row = x
@@ -98,6 +107,7 @@ Dim text As String
         For x = 0 To grdGross.Cols - 1
            If frmHaupt.grdergebnis.ColWidth(x) = 0 Then grdGross.ColWidth(x) = 0
         Next x
+         
          
          grdGross.ColAlignmentFixed = flexAlignCenterCenter
          grdGross.ColAlignment = flexAlignCenterCenter
@@ -146,7 +156,7 @@ End Function
 
 'Sortieren von Spalten bei Klick
 Private Sub grdGross_MouseUp(Button As Integer, _
-  Shift As Integer, x As Single, Y As Single)
+  Shift As Integer, x As Single, y As Single)
 ' Rechtsklick?
   If Button = vbRightButton Then
     Dim nRow As Long
@@ -172,7 +182,7 @@ Private Sub grdGross_MouseUp(Button As Integer, _
         .col = nCol
         
         If x >= .CellLeft And x <= .CellLeft + .CellWidth And _
-          Y >= .CellTop And Y <= .CellTop + .CellHeight Then
+          y >= .CellTop And y <= .CellTop + .CellHeight Then
         
           ' Beispiel: PopUp-Menü anzeigen
          

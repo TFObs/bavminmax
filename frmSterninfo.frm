@@ -564,6 +564,8 @@ End Sub
 
 
 
+
+
 'Andocken an Hauptfenster
 Private Sub Timer1_Timer()
   Dim WPM As WINDOWPLACEMENT

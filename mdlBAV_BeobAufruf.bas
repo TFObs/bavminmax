@@ -271,7 +271,7 @@ If fs.FileExists(App.Path & "\BAVBA_EA.dat") Then fs.DeleteFile (App.Path & "\BA
  MsgBox "Erzeugung der Datenbank erfolgreich." & vbCrLf & "Die Daten können nun für Berechnungen verwendet werden.", vbInformation, "Download erfolgreich"
 
  frmHaupt.Form_Load
- frmHaupt.cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
+ frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True
  frmHaupt.cmbGrundlage.Enabled = True
  
  For x = 1 To frmHaupt.cmbGrundlage.ListCount
@@ -415,7 +415,7 @@ If fs.FileExists(App.Path & "\BAVBA_RR.dat") Then fs.DeleteFile (App.Path & "\BA
  MsgBox "Erzeugung der Datenbank erfolgreich." & vbCrLf & "Die Daten können nun für Berechnungen verwendet werden.", vbInformation, "Download erfolgreich"
 
   frmHaupt.Form_Load
-  frmHaupt.cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
+  frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True
   frmHaupt.cmbGrundlage.Enabled = True
  For x = 1 To frmHaupt.cmbGrundlage.ListCount
    If frmHaupt.cmbGrundlage.List(x) = "BAV-BA_RR" Then

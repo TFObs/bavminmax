@@ -385,7 +385,7 @@ Wend
  Next
 
     MsgBox "Die GCVS-Datenbank kann jetzt für" & vbCrLf & "Berechnungen verwendet werden..", vbInformation, "Implementierung erfolgreich"
-    frmHaupt.cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
+    frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True
     frmHaupt.cmbGrundlage.Enabled = True
     Unload Me
     Exit Sub
@@ -396,7 +396,7 @@ ErrorHandler:
      cmdDownload.Caption = "Start"
      Me.MousePointer = 1
      frmHaupt.Form_Load
-     frmHaupt.cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
+     frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True
      frmHaupt.cmbGrundlage.Enabled = True
      Unload Me
 End Sub
@@ -420,4 +420,64 @@ Private Sub UpDown1_UpClick()
   End If
 End Sub
 
+Sub createasasas()
+Dim rsasas As ADODB.Recordset
+Dim fso As FileSystemObject
+Dim infile As TextStream
+Dim zeile
 
+Set rsasas = New ADODB.Recordset
+Set fso = New FileSystemObject
+    With rsasas
+     .Fields.Append ("ID"), adInteger
+     .Fields.Append ("Kürzel"), adVarChar, 6
+     .Fields.Append ("Stbld"), adChar, 3
+     .Fields.Append ("BP"), adChar, 4
+     .Fields.Append ("Max"), adDouble
+     .Fields.Append ("MinI"), adVarChar, 5
+     .Fields.Append ("Typ"), adVarChar, 12
+     .Fields.Append ("Epoche"), adDouble
+     .Fields.Append ("Periode"), adDouble
+     .Fields.Append ("hh"), adInteger, 2
+     .Fields.Append ("mm"), adInteger, 2
+     .Fields.Append ("ss"), adDouble, 4
+     .Fields.Append ("vz"), adChar, 1
+     .Fields.Append ("o"), adInteger, 2
+     .Fields.Append ("m"), adDouble, 5
+End With
+
+rsasas.Open
+
+    If fso.FileExists(App.Path & "\\acvs1.1.dat") Then fso.DeleteFile (App.Path & "\\acvs1.1.dat")
+    
+    Set infile = fso.OpenTextFile(App.Path & "\ACVS1.1.csv")
+    
+    While Not infile.AtEndOfStream
+     zeile = Split(infile.ReadLine, ";")
+     With rsasas
+        .AddNew
+        .Fields("ID") = Trim(zeile(0))
+        .Fields("Kürzel") = Trim(zeile(1))
+        .Fields("Stbld") = Trim(zeile(2))
+        .Fields("BP") = "ASAS"
+        .Fields("Max") = zeile(6)
+        .Fields("MinI") = zeile(7)
+        If Len(zeile(8)) - 1 > 11 Then
+         zeile(8) = Left(zeile(8), 9) & "~#"
+        End If
+        .Fields("Typ") = Trim(zeile(8))
+        .Fields("Epoche") = zeile(4)
+        .Fields("Periode") = zeile(5)
+        .Fields("hh") = zeile(9)
+        .Fields("mm") = zeile(10)
+        .Fields("ss") = zeile(11)
+        .Fields("vz") = zeile(12)
+        .Fields("o") = zeile(13)
+        .Fields("m") = zeile(14)
+        .Update
+     End With
+     
+    Wend
+    
+    rsasas.Save App.Path & "\acvs1.1.dat"
+End Sub

@@ -416,12 +416,12 @@ Option Explicit
  Dim feld As Field
  Dim fs As FileSystemObject
  Dim gewählt As Collection
- Dim x As Integer
+ 
  Dim result
 
 Sub FillList(ByRef StarName, ByVal pfad As String)
 Dim Listentext As String
-
+Dim x As Integer
  Set dbsbavsterne = New ADODB.Connection
  Set rssourcerecord = New ADODB.Recordset
  Set fs = New FileSystemObject
@@ -435,7 +435,7 @@ On Error GoTo errhandler
        .Save pfad & "\recordsets.dat"
    End With
  
-For x = 0 To 5
+For x = 0 To 6
 
 Set rssingleabfrage = New ADODB.Recordset
 
@@ -488,6 +488,11 @@ Set rssingleabfrage = New ADODB.Recordset
           .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
         End If
         
+        ElseIf x = 6 Then
+        If fs.FileExists(pfad & "\acvs1.1.dat") Then
+        .Open pfad & "\acvs1.1.dat"
+        .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
+        End If
         'Für Spätere Erweiterungen: Berechnungen aus eigener Datenbank
         'ElseIf x = 6 Then
         'If fs.FileExists(pfad & "\Einzel.dat") Then
@@ -590,7 +595,7 @@ MsgBox Err.Number & " " & Err.Description & vbCrLf & _
 
 End Sub
 Private Function IsInList(ByVal Listentext As String) As Boolean
-
+Dim x As Integer
 For x = 0 To ListRecherche.ListCount - 1
 If Listentext = ListRecherche.List(x) Then
     IsInList = True
@@ -666,7 +671,7 @@ Unload Me
 
 frmHaupt.Form_Load
 frmHaupt.cmbGrundlage.ListIndex = frmHaupt.cmbGrundlage.ListCount - 1
-frmHaupt.cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
+frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True
 frmHaupt.cmbGrundlage.Enabled = True
 Unload frmSterninfo
 Unload frmAladin
@@ -689,6 +694,7 @@ End If
 End Sub
 
 Private Sub Form_Load()
+Dim x As Integer
 Set fs = New FileSystemObject
     If fs.FileExists(App.Path & "\Einzel.dat") Then fs.DeleteFile (App.Path & "\Einzel.dat")
 
@@ -752,6 +758,7 @@ Set gewählt = New Collection
 Dim sSQL As String
 Dim Auswahl
 Set fs = New FileSystemObject
+Dim x As Integer
 
 sSQL = ""
 
@@ -791,7 +798,7 @@ Else
         "Bitte Abfrage erneut durchführen", vbCritical, "Fehler der Abfragedatei"
 End If
 
-Unload Me
+'Unload Me
 
  frmHaupt.Form_Load
  frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True

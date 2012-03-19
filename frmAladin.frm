@@ -932,7 +932,7 @@ Dim radec
 If IsNumeric(Left(txtObj.text, 2)) Then
 radec = Split(txtObj.text, " ")
 Connstr = "http://skydot.lanl.gov/nsvs/cone_search.php?&ra=" & radec(0) & "&dec=" & radec(1) & _
-"&rad=2&saturated=on&nocorr=on&lonpts=on&hiscat=on&hicorr=on&hisigcorr=on&radecflip=on"
+"&rad=1&saturated=on&nocorr=on&lonpts=on&hiscat=on&hicorr=on&hisigcorr=on&radecflip=on"
 URLGoTo Me.hWnd, Connstr
 Else: cmdNSVS.Visible = False
 End If
