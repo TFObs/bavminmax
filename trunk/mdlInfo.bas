@@ -69,7 +69,11 @@ With frmSterninfo
         .lblEpoche.Caption = Format(Abf.Fields("Epoche").Value, "#.0000")
         .lblPeriode.Caption = Format(Abf.Fields("Periode").Value, "#.000000")
         .lblQuelle.Caption = Abf.Fields("BP").Value
-        
+        If .lblQuelle.Caption = "ASAS" Then
+         .Label8.Caption = "Ampl.:"
+        Else
+         .Label8.Caption = "Min I:"
+        End If
         'If Database < 2 Then
             .lblLBeo.Caption = Abf.Fields("LBeob").Value
             'Else
@@ -78,6 +82,7 @@ With frmSterninfo
             
         .lblMax.Caption = Format(Abf.Fields("Max").Value, "#.00")
         .lblMinI.Caption = Format(Abf.Fields("MinI").Value, "#.00")
+        
         .lblMinII.Caption = Format(Abf.Fields("MinII").Value, "#.00")
         .lblD.Caption = Format(Abf.Fields("D").Value, "#.00")
         .lblkd.Caption = Abf.Fields("kd").Value
@@ -99,6 +104,7 @@ With frmSterninfo
          
         decsec = IIf(InStr(1, Abf.Fields("m").Value, "."), Format((Right(Abf.Fields("m").Value, InStrRev(Abf.Fields("m").Value, ".") - 2)) / 10 * 60, "00"), "00")
         infokoord = ausg(.lblStarRA.Caption * 24 / 360, .lblStarDec.Caption)
+        If umwand(1) = "24" Then umwand(1) = "00"
         .lblKoord.Caption = "RA       " & umwand(1) & ":" & umwand(2) & ":" & umwand(3) & vbCrLf & _
         "DEC   " & umwand(4) & ":" & umwand(5) & ":" & umwand(6)
 

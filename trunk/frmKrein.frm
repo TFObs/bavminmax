@@ -368,7 +368,7 @@ Wend
     Next
 
     MsgBox "Die Kreiner-Datenbank kann jetzt für" & vbCrLf & "Berechnungen verwendet werden..", vbInformation, "Implementierung erfolgreich"
-    frmHaupt.cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
+    frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True
     frmHaupt.cmbGrundlage.Enabled = True
     Unload Me
     Exit Sub
@@ -379,7 +379,7 @@ ErrorHandler:
      cmdDownload.Caption = "Start"
      Me.MousePointer = 1
      frmHaupt.Form_Load
-     frmHaupt.cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
+     frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True
      frmHaupt.cmbGrundlage.Enabled = True
      Unload Me
      

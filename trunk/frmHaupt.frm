@@ -3,6 +3,7 @@ Object = "{8E27C92E-1264-101C-8A2F-040224009C02}#7.0#0"; "MSCAL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MSHFLXGD.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "Tabctl32.ocx"
 Begin VB.Form frmHaupt 
    BorderStyle     =   1  'Fest Einfach
@@ -28,23 +29,98 @@ Begin VB.Form frmHaupt
       _ExtentX        =   11668
       _ExtentY        =   11668
       _Version        =   393216
+      Tabs            =   4
+      Tab             =   3
       TabHeight       =   520
       TabCaption(0)   =   "Beobachtungsort"
       TabPicture(0)   =   "frmHaupt.frx":08CA
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "frmOrt"
-      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Abfrage"
       TabPicture(1)   =   "frmHaupt.frx":08E6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Rahmen(1)"
+      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Berechnungsergebnisse"
       TabPicture(2)   =   "frmHaupt.frx":0902
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Rahmen(2)"
       Tab(2).ControlCount=   1
+      TabCaption(3)   =   "Einzelextrema"
+      TabPicture(3)   =   "frmHaupt.frx":091E
+      Tab(3).ControlEnabled=   -1  'True
+      Tab(3).Control(0)=   "Frame2"
+      Tab(3).Control(0).Enabled=   0   'False
+      Tab(3).ControlCount=   1
+      Begin VB.Frame Frame2 
+         Caption         =   "Suche in Datenbanken"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   6135
+         Left            =   120
+         TabIndex        =   37
+         Top             =   360
+         Width           =   6315
+         Begin VB.ListBox ListRecherche 
+            Height          =   1035
+            Left            =   240
+            MultiSelect     =   1  '1 -Einfach
+            TabIndex        =   41
+            Top             =   1320
+            Width           =   5055
+         End
+         Begin VB.CommandButton cmdSingleAusw 
+            Caption         =   "auswählen"
+            Enabled         =   0   'False
+            Height          =   615
+            Left            =   2040
+            TabIndex        =   40
+            Top             =   2520
+            Width           =   1455
+         End
+         Begin VB.CommandButton cmdSingleSuch 
+            Caption         =   "Suchen"
+            Height          =   615
+            Left            =   2280
+            TabIndex        =   39
+            Top             =   240
+            Width           =   2055
+         End
+         Begin VB.TextBox txtSingleStar 
+            Alignment       =   2  'Zentriert
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   405
+            Left            =   240
+            TabIndex        =   38
+            Top             =   360
+            Width           =   1695
+         End
+         Begin VB.Label Label5 
+            Caption         =   "Stern     Stbld        Datenbank       Epoche                   Periode"
+            Height          =   255
+            Left            =   240
+            TabIndex        =   42
+            Top             =   1080
+            Width           =   5055
+         End
+      End
       Begin VB.Frame Rahmen 
          Caption         =   "Berechnungszeitraum"
          Height          =   6135
@@ -52,8 +128,63 @@ Begin VB.Form frmHaupt
          Left            =   -74880
          TabIndex        =   26
          ToolTipText     =   "Internet-Recherche"
-         Top             =   360
+         Top             =   380
          Width           =   6315
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Rechts
+            Height          =   375
+            Left            =   2280
+            TabIndex        =   46
+            Text            =   "1"
+            Top             =   5160
+            Width           =   360
+         End
+         Begin MSComCtl2.UpDown UpDown1 
+            Height          =   375
+            Left            =   2641
+            TabIndex        =   45
+            Top             =   5160
+            Width           =   255
+            _ExtentX        =   450
+            _ExtentY        =   661
+            _Version        =   393216
+            Value           =   1
+            BuddyControl    =   "Text1"
+            BuddyDispid     =   196616
+            OrigLeft        =   2880
+            OrigTop         =   5160
+            OrigRight       =   3135
+            OrigBottom      =   5535
+            Max             =   365
+            Min             =   1
+            SyncBuddy       =   -1  'True
+            BuddyProperty   =   65547
+            Enabled         =   -1  'True
+         End
+         Begin MSComCtl2.DTPicker DTPicker2 
+            Height          =   375
+            Left            =   360
+            TabIndex        =   44
+            Top             =   5400
+            Width           =   1455
+            _ExtentX        =   2566
+            _ExtentY        =   661
+            _Version        =   393216
+            Format          =   51642371
+            CurrentDate     =   40979
+         End
+         Begin MSComCtl2.DTPicker DTPicker1 
+            Height          =   375
+            Left            =   360
+            TabIndex        =   43
+            Top             =   4800
+            Width           =   1455
+            _ExtentX        =   2566
+            _ExtentY        =   661
+            _Version        =   393216
+            Format          =   51642371
+            CurrentDate     =   40979
+         End
          Begin VB.ComboBox cmbDauer 
             Height          =   315
             Left            =   4920
@@ -290,7 +421,7 @@ Begin VB.Form frmHaupt
          Index           =   2
          Left            =   -74880
          TabIndex        =   21
-         Top             =   360
+         Top             =   380
          Width           =   6315
          Begin VB.CommandButton cmdFilter 
             BackColor       =   &H000080FF&
@@ -314,6 +445,7 @@ Begin VB.Form frmHaupt
             _ExtentX        =   10610
             _ExtentY        =   9128
             _Version        =   393216
+            BackColor       =   16777215
             _NumberOfBands  =   1
             _Band(0).Cols   =   2
          End
@@ -349,15 +481,15 @@ Begin VB.Form frmHaupt
       Begin VB.Frame frmOrt 
          Caption         =   "Beobachtungsort"
          Height          =   6135
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   12
-         Top             =   360
+         Top             =   380
          Visible         =   0   'False
          Width           =   6315
          Begin VB.CommandButton cmdOrtOK 
             Height          =   495
             Left            =   4320
-            Picture         =   "frmHaupt.frx":091E
+            Picture         =   "frmHaupt.frx":093A
             Style           =   1  'Grafisch
             TabIndex        =   16
             Top             =   3960
@@ -446,7 +578,7 @@ Begin VB.Form frmHaupt
       BackColor       =   &H00C0C000&
       Height          =   615
       Left            =   1080
-      Picture         =   "frmHaupt.frx":0C28
+      Picture         =   "frmHaupt.frx":0C44
       Style           =   1  'Grafisch
       TabIndex        =   10
       ToolTipText     =   "Berechnung starten"
@@ -456,7 +588,7 @@ Begin VB.Form frmHaupt
    Begin VB.CommandButton cmdInternet 
       Height          =   495
       Left            =   5400
-      Picture         =   "frmHaupt.frx":0F32
+      Picture         =   "frmHaupt.frx":0F4E
       Style           =   1  'Grafisch
       TabIndex        =   9
       ToolTipText     =   "Internet-Recherche"
@@ -466,7 +598,7 @@ Begin VB.Form frmHaupt
    Begin VB.CommandButton cmdÖffnen 
       Height          =   495
       Left            =   3360
-      Picture         =   "frmHaupt.frx":123C
+      Picture         =   "frmHaupt.frx":1258
       Style           =   1  'Grafisch
       TabIndex        =   8
       ToolTipText     =   "bestehende Abfrage öffnen"
@@ -485,7 +617,7 @@ Begin VB.Form frmHaupt
    Begin VB.CommandButton cmdGridgross 
       Height          =   495
       Left            =   4680
-      Picture         =   "frmHaupt.frx":1546
+      Picture         =   "frmHaupt.frx":1562
       Style           =   1  'Grafisch
       TabIndex        =   6
       ToolTipText     =   "Ergebnisliste in Extrafenster vergrößert darstellen"
@@ -495,7 +627,7 @@ Begin VB.Form frmHaupt
    Begin VB.CommandButton cmdListdrucken 
       Height          =   495
       Left            =   6120
-      Picture         =   "frmHaupt.frx":1E10
+      Picture         =   "frmHaupt.frx":1E2C
       Style           =   1  'Grafisch
       TabIndex        =   5
       ToolTipText     =   "Ausdruck der Tabelle (WYSIWYG)"
@@ -513,7 +645,7 @@ Begin VB.Form frmHaupt
       BackColor       =   &H000080FF&
       Height          =   615
       Left            =   2160
-      Picture         =   "frmHaupt.frx":211A
+      Picture         =   "frmHaupt.frx":2136
       Style           =   1  'Grafisch
       TabIndex        =   2
       ToolTipText     =   "Ereignisse ansehen"
@@ -524,7 +656,7 @@ Begin VB.Form frmHaupt
       BackColor       =   &H80000000&
       Height          =   615
       Left            =   120
-      Picture         =   "frmHaupt.frx":2424
+      Picture         =   "frmHaupt.frx":2440
       Style           =   1  'Grafisch
       TabIndex        =   1
       ToolTipText     =   "Abfragen"
@@ -535,7 +667,7 @@ Begin VB.Form frmHaupt
       Enabled         =   0   'False
       Height          =   495
       Left            =   5400
-      Picture         =   "frmHaupt.frx":272E
+      Picture         =   "frmHaupt.frx":274A
       Style           =   1  'Grafisch
       TabIndex        =   0
       ToolTipText     =   "Speichern in eine Textdatei"
@@ -545,7 +677,7 @@ Begin VB.Form frmHaupt
    Begin VB.Image Image2 
       Height          =   480
       Left            =   3960
-      Picture         =   "frmHaupt.frx":2A38
+      Picture         =   "frmHaupt.frx":2A54
       Top             =   720
       Visible         =   0   'False
       Width           =   480
@@ -553,7 +685,7 @@ Begin VB.Form frmHaupt
    Begin VB.Image Image1 
       Height          =   480
       Left            =   3360
-      Picture         =   "frmHaupt.frx":2D42
+      Picture         =   "frmHaupt.frx":2D5E
       Top             =   720
       Visible         =   0   'False
       Width           =   480
@@ -688,6 +820,12 @@ Dim result
 Dim TOPROW As Integer
 Dim lngResult As Long
 
+ Dim rssourcerecord  As ADODB.Recordset
+ Dim rssingleabfrage  As ADODB.Recordset
+ Dim feld As Field
+ Dim gewählt As Collection
+ 
+
 
 
 Private Sub Berechnungsfilter_Click()
@@ -697,6 +835,7 @@ End Sub
 Private Sub Beenden_Click()
  Call Form_Unload(0)
 End Sub
+
 
 
 
@@ -727,6 +866,9 @@ Private Sub cmbGrundlage_Click()
 
  If fs.FileExists(pfad & "\ergebnisse.dat") Then
     cmdErgebnis.Enabled = False: VTabs.TabEnabled(2) = False
+    If Not frmHaupt.cmbGrundlage.text = "Einzeln" Then
+        VTabs.TabVisible(3) = False
+    End If
     cmdListspeichern.Enabled = False
     cmdGridgross.Enabled = False
     cmdListdrucken.Enabled = False
@@ -777,6 +919,9 @@ Public Sub cmdAbfrag_Click()
   cmdInfo.ToolTipText = "Informationsfenster ausblenden"
   'cmdInternet.Enabled = False
   cmdListe.Enabled = True: VTabs.TabEnabled(1) = True: VTabs.Tab = 1
+  
+    VTabs.TabVisible(3) = False
+ 
 End Sub
 
 Private Sub cmdFilter_Click()
@@ -1055,6 +1200,10 @@ Call CreateBAV_Database_RR(App.Path & "\testbav_RR.txt", BAVUrl)
 
 End Sub
 
+Private Sub DBASAS_Click()
+Call frmGCVS.createasasas
+End Sub
+
 Private Sub DBGcvs_aktual_Click()
 
 result = CheckInetConnection(Me.hWnd)
@@ -1070,6 +1219,18 @@ result = CheckInetConnection(Me.hWnd)
 If result = False Then Exit Sub
 frmKrein.show
 End Sub
+
+Private Sub DTPicker1_Change()
+DTPicker2.Value = DTPicker1.Value + cmbDauer.List(cmbDauer.ListIndex)
+End Sub
+
+Private Sub DTPicker2_change()
+If DTPicker2.Value <= DTPicker1.Value Then DTPicker2.Value = DTPicker1.Value + 1
+If DTPicker2.Value - DTPicker1.Value > 365 Then DTPicker2.Value = DTPicker1.Value + 365
+Text1.text = DTPicker2.Value - DTPicker1.Value
+End Sub
+
+
 
 Public Sub Form_Load()
 If App.PrevInstance Then End
@@ -1128,9 +1289,12 @@ result = SetTrennzeichen(LOCALE_STHOUSAND, ",")
 result = SetTrennzeichen(LOCALE_SSHORTDATE, "dd.MM.yyyy")
 result = SetTrennzeichen(LOCALE_STIMEFORMAT, "HH:mm:ss")
 
-     
+DTPicker1.CustomFormat = "dd.MM.yyyy"
+DTPicker2.CustomFormat = "dd.MM.yyyy"
     ende.Visible = False
     Kalender.Value = Date
+    DTPicker1.Value = Date
+    
     ende.Value = Kalender.Value + 1
 
     'Füllen des Zeitraumsfeldes
@@ -1139,7 +1303,7 @@ result = SetTrennzeichen(LOCALE_STIMEFORMAT, "HH:mm:ss")
     Next x
     cmbDauer.ListIndex = 0  'Zeiger der combobox auf 1. Eintrag
     txtende = ende.Value - 1
-
+DTPicker2.Value = DTPicker1.Value + cmbDauer.List(cmbDauer.ListIndex)
     cmdListspeichern.Enabled = False
     cmdListdrucken.Enabled = False
     cmdGridgross.Enabled = False
@@ -1166,6 +1330,7 @@ result = SetTrennzeichen(LOCALE_STIMEFORMAT, "HH:mm:ss")
      .Fields.Append "Typ", adChar, 12                   'zunächst beide Felder erstellen
      .Fields.Append "Epochenzahl", adInteger, 255
      .Fields.Append "Monddist", adVarNumeric, 10
+     .Fields.Append "bc", adInteger, 1
     .Open
     .Save pfad & "\ergebnisse.dat"
     .Close
@@ -1181,6 +1346,9 @@ If fs.FileExists(App.Path & "\kreiner.dat") = True Then
 End If
 If fs.FileExists(App.Path & "\GCVS.dat") = True Then
 .AddItem ("GCVS")
+End If
+If fs.FileExists(App.Path & "\acvs1.1.dat") = True Then
+    .AddItem ("ASAS")
 End If
 If fs.FileExists(App.Path & "\Einzel.dat") = True Then
 .AddItem ("Einzeln")
@@ -1218,6 +1386,7 @@ cmdInfo.Picture = Image2
 cmdInfo.ToolTipText = "Informationsfenster ausblenden"
 cmdInfo.Enabled = False
 cmdErgebnis.Enabled = False: VTabs.TabEnabled(2) = False
+VTabs.TabVisible(3) = IIf(fs.FileExists(App.Path & "/recordsets.dat"), True, False)
 Set rsergebnis = Nothing
 cmdAbfrag.Enabled = False
 End Sub
@@ -1296,8 +1465,21 @@ Private Sub hKorrberech_Click()
 frmHelioz.show
 End Sub
 
+Private Sub ListRecherche_Click()
+If Not ListRecherche.ListCount = 0 Then cmdSingleAusw.Enabled = True
+End Sub
+
 Private Sub mnuEinzel_Click()
-frmSingleBerech.show
+'frmSingleBerech.show
+Dim x As Integer
+For x = 1 To frmHaupt.cmbGrundlage.ListCount
+ If frmHaupt.cmbGrundlage.List(x) = "Einzeln" Then
+    frmHaupt.cmbGrundlage.ListIndex = x
+    Exit For
+ End If
+ Next
+VTabs.TabVisible(3) = True
+VTabs.Tab = 3
 End Sub
 
 Private Sub naut_Click()
@@ -1482,9 +1664,9 @@ grdergebnis.Clear
     ElseIf cmbGrundlage.List(cmbGrundlage.ListIndex) = "BAV-BA_EA" Then
         Database = 5
         .Open pfad & "\BAVBA_EA.dat"
-    ElseIf cmbGrundlage.List(cmbGrundlage.ListIndex) = "BAV-BA_RR" Then
+    ElseIf cmbGrundlage.List(cmbGrundlage.ListIndex) = "ASAS" Then
         Database = 6
-        .Open pfad & "\BAVBA_RR.dat"
+        .Open pfad & "\acvs1.1.dat"
     End If
         
       'Öffnen der Ergebnisdatei und springen zu ersten Eintrag
@@ -1494,11 +1676,12 @@ grdergebnis.Clear
       DoEvents
       
     Balken.Value = 0
+    Balken.Max = rstAbfrage.RecordCount
     'Berechnungen für alle Sterne in BAV_Sterne.mdb
     Do While Not .EOF
     DoEvents
         lblfertig.Caption = "Berechnungen zu " & Format((Balken.Value / rstAbfrage.RecordCount) * 100, "#") & "% fertiggestellt"
-    Balken.Max = rstAbfrage.RecordCount
+    
         If Not .Fields("epoche").ActualSize = 0 And Not .Fields("periode").ActualSize = 0 Then
         'Berechnung der Ereignisse im gewählten Zeitraum
         BAnfang = JulDat(Left(Kalender.Value, 2), Mid(Kalender.Value, 4, 2), Mid(Kalender.Value, 7, 4))
@@ -1601,15 +1784,23 @@ grdergebnis.Clear
                         .Fields("Azimut") = Format(aktAzimut, "0") '"#.0")
                         .Fields("Epochenzahl") = x
                         
+                        
                         If Database = 0 Then
                           .Fields("BProg") = BPrg
                         ElseIf Database = 1 Then
                           .Fields("Typ") = BPrg
                          ElseIf Database >= 2 Then
                           .Fields("BProg") = BPrg
-                          .Fields("Typ") = Typ
+                         .Fields("Typ") = Typ
                         End If
-
+                        
+                        If BPrg = "KRE" Then
+                        .Fields("bc").Value = 2
+                        ElseIf BPrg = "GCVS" Then
+                        .Fields("bc").Value = 3
+                        ElseIf BPrg = "ASAS" Then
+                        .Fields("bc").Value = 4
+                        End If
                         .Update
                         
                         
@@ -1707,12 +1898,13 @@ End If
 
 If Abf.RecordCount > 0 Then
 Set grdergebnis.DataSource = Abf
+If Database = 4 Then Call zellfarbe
 Else:
 MsgBox "Für diese Filterkombination konnten keine Ereignisse" & vbCrLf & _
 "gefunden werden...", vbInformation, "Keine Ergebnisse für diesen Filter"
 Exit Sub
 End If
-
+grdergebnis.ColWidth(12) = 0
 
 grdergebnis.ColAlignment = 4
 
@@ -1740,12 +1932,12 @@ If Database = 1 Then
         grdergebnis.ColWidth(9) = 1300
         
         grdergebnis.ColWidth(8) = 0
-        
 End If
 
 If Database >= 2 Then
         grdergebnis.ColWidth(8) = 0
         grdergebnis.ColWidth(9) = 1300
+        
 End If
 
 
@@ -1764,6 +1956,8 @@ For zähler = 1 To 11
     End If
 Next
 
+        'frmHaupt.grdergebnis.ColWidth(12) = 0 'Zellenfarbe..
+        
       'Recordset schliessen, Speicher freigeben
       rsa.Close
       Set rsa = Nothing
@@ -1871,6 +2065,7 @@ Public Sub grdergebnis_sortieren(ByVal ColIndex As Integer)
             
     frmGridGross.grossGrid_füllen
     grdergebnis.MousePointer = 1
+    If Database = 4 Then Call zellfarbe
 End Sub
 
 
@@ -1943,6 +2138,7 @@ Private Sub grdergebnis_MouseUp(Button As Integer, _
  If grdergebnis.col = 1 Then
   Call Infofüllen(grdergebnis)
   End If
+  If Database = 4 Then Call zellfarbe
 End Sub
 
 Private Sub cmdListdrucken_Click()
@@ -1997,6 +2193,19 @@ End Sub
 
 
 
+Private Sub Text1_Change()
+If Text1.text = "" Then Text1.text = 1
+If CInt(Text1.text) > 365 Then Text1.text = 365
+
+DTPicker2.Value = DTPicker1.Value + CInt(Text1.text)
+End Sub
+
+Private Sub Text1_KeyPress(KeyAscii As Integer)
+If KeyAscii < 47 Or KeyAscii > 57 Then KeyAscii = 0
+End Sub
+
+
+
 Private Sub Ueber_Click()
 MsgBox "VarEphem, Version 1.0.9, Stand: 05.03.2012" & vbCrLf & vbCrLf & _
 "geschrieben von: Jörg Hanisch, Gescher" & vbCrLf & _
@@ -2007,5 +2216,308 @@ End Sub
 
 Private Sub VTabs_Click(PreviousTab As Integer)
 If VTabs.Tab = 1 And VTabs.TabEnabled(1) Then cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
+If VTabs.Tab = 3 Then
+Dim x As Integer
+For x = 1 To frmHaupt.cmbGrundlage.ListCount
+ If frmHaupt.cmbGrundlage.List(x) = "Einzeln" Then
+    frmHaupt.cmbGrundlage.ListIndex = x
+    Exit For
+ End If
+ Next
+End If
 End Sub
 
+
+Sub zellfarbe()
+Dim res, x, y, bcol
+For x = 1 To grdergebnis.Rows - 1
+    res = grdergebnis.TextMatrix(x, 12)
+    Select Case res
+        Case 0, 1
+        bcol = vbWhite
+        Case 2
+        bcol = &HC0FFC0
+        Case 3
+        bcol = &HC0FFFF
+        Case 4
+        bcol = &HFFFFC0
+        Case 5
+    End Select
+    grdergebnis.Row = x
+    For y = 1 To 11
+    grdergebnis.col = y
+    grdergebnis.CellBackColor = bcol
+    Next y
+Next x
+ grdergebnis.Row = 1: grdergebnis.col = 1
+End Sub
+ 
+Private Sub cmdSingleAusw_Click()
+Set gewählt = New Collection
+Dim sSQL As String
+Dim Auswahl
+Set fs = New FileSystemObject
+Dim x As Integer
+If rssourcerecord Is Nothing Then
+    If fs.FileExists(App.Path & "\recordsets.dat") Then
+     Set rssourcerecord = New ADODB.Recordset
+     rssourcerecord.Open App.Path & "\recordsets.dat"
+    End If
+End If
+
+sSQL = ""
+
+For x = 0 To ListRecherche.ListCount - 1
+
+   If ListRecherche.Selected(x) Then
+        Auswahl = Split(ListRecherche.List(x), vbTab)
+        gewählt.Add "(BP = '" & Auswahl(2) & "')"
+        'AND Epoche = '" & Auswahl (3) & "' AND Periode = '" & Auswahl(4) & "') "
+   End If
+
+Next x
+
+If gewählt.Count > 0 Then
+    For x = 1 To gewählt.Count - 1
+        sSQL = sSQL & gewählt.Item(x) & " OR "
+    Next x
+        sSQL = sSQL & gewählt.Item(gewählt.Count)
+        
+Else: result = MsgBox("Es ist kein Datensatz ausgewählt..." & vbCrLf _
+& "Alle angezeigten Elemente werde übernommen." & vbCrLf & vbCrLf & "Fortfahren ?", vbExclamation + vbYesNo, "keine Auswahl getroffen...")
+
+    If result = vbYes Then
+        cmdSingleAusw.Enabled = False
+        Else: Exit Sub
+    End If
+
+End If
+
+If Not rssourcerecord Is Nothing Then
+    rssourcerecord.Filter = sSQL
+    If fs.FileExists(App.Path & "\Einzel.dat") Then fs.DeleteFile (App.Path & "\Einzel.dat")
+    rssourcerecord.Save (App.Path & "\Einzel.dat")
+    rssourcerecord.Close
+Else
+    MsgBox "Abfragedatei nicht vorhanden oder beschädigt." & vbCrLf & _
+        "Bitte Abfrage erneut durchführen", vbCritical, "Fehler der Abfragedatei"
+End If
+
+
+
+ frmHaupt.Form_Load
+ frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True
+ frmHaupt.cmbGrundlage.Enabled = True
+ 
+ For x = 1 To frmHaupt.cmbGrundlage.ListCount
+ If frmHaupt.cmbGrundlage.List(x) = "Einzeln" Then
+    frmHaupt.cmbGrundlage.ListIndex = x
+    Exit For
+ End If
+ Next
+ 
+Unload frmSterninfo
+Unload frmAladin
+Unload frmBerechnungsfilter
+
+Set gewählt = Nothing
+Set rssourcerecord = Nothing
+Set fs = Nothing
+
+End Sub
+Private Sub cmdSingleSuch_Click()
+Dim searchstar
+If Not txtSingleStar.text = "" Then
+  cmdSingleAusw.Enabled = False
+  ListRecherche.Clear
+  searchstar = Split(txtSingleStar.text, " ")
+  FillList searchstar, App.Path
+End If
+End Sub
+
+Sub FillList(ByRef StarName, ByVal pfad As String)
+Dim Listentext As String
+Dim x As Integer
+ Set dbsbavsterne = New ADODB.Connection
+ Set rssourcerecord = New ADODB.Recordset
+ Set fs = New FileSystemObject
+On Error GoTo errhandler
+ If fs.FileExists(pfad & "\recordsets.dat") Then fs.DeleteFile (pfad & "\recordsets.dat")
+
+   'Neues Recordset zur Aufnahme der Rechercheergebnisse erzeugen
+   With rssourcerecord
+       .Fields.Append ("ID"), adInteger
+       .Open
+       .Save pfad & "\recordsets.dat"
+   End With
+ 
+For x = 0 To 6
+
+Set rssingleabfrage = New ADODB.Recordset
+
+ With rssingleabfrage
+
+        If x < 2 Then
+        
+            'Verbindung zur Datenbank herstellen
+            With dbsbavsterne
+                .Provider = "microsoft.Jet.oledb.4.0"
+                If x = 0 Then
+                    .ConnectionString = pfad & "\Bav_sterne.mdb"
+                ElseIf x = 1 Then
+                    .ConnectionString = pfad & "\BAV_sonstige.mdb"
+                End If
+                .Open
+             End With
+             
+            .ActiveConnection = dbsbavsterne
+            .LockType = adLockOptimistic
+            .CursorLocation = adUseClient
+            .CursorType = adOpenForwardOnly ' Kleinster Verwaltungsaufwand
+            .Open "SELECT * FROM BVundRR Where Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
+            
+        ElseIf x = 2 Then
+       
+        If fs.FileExists(pfad & "\Kreiner.dat") Then
+          .Open pfad & "\Kreiner.dat"
+          .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
+        End If
+
+        ElseIf x = 3 Then
+        
+        If fs.FileExists(pfad & "\GCVS.dat") Then
+          .Open pfad & "\GCVS.dat"
+          .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
+        End If
+
+        ElseIf x = 4 Then
+        
+        If fs.FileExists(pfad & "\BAVBA_EA.dat") Then
+          .Open pfad & "\BAVBA_EA.dat"
+          .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
+        End If
+        
+        ElseIf x = 5 Then
+        
+        If fs.FileExists(pfad & "\BAVBA_RR.dat") Then
+          .Open pfad & "\BAVBA_RR.dat"
+          .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
+        End If
+        
+        ElseIf x = 6 Then
+        If fs.FileExists(pfad & "\acvs1.1.dat") Then
+        .Open pfad & "\acvs1.1.dat"
+        .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
+        End If
+        'Für Spätere Erweiterungen: Berechnungen aus eigener Datenbank
+        'ElseIf x = 6 Then
+        'If fs.FileExists(pfad & "\Einzel.dat") Then
+         ' .Open pfad & "\Einzel.dat"
+         ' .Filter = "Kürzel = '" & StarName(0) & "' AND Stbld = '" & StarName(1) & "'"
+        'End If
+
+        End If
+        
+    If rssingleabfrage.State = adStateOpen Then
+    
+        If rssingleabfrage.RecordCount > 0 Then
+        
+           If rssourcerecord.State = adStateClosed Then rssourcerecord.Open pfad & "\recordsets.dat"
+        
+                With rssourcerecord
+                 ' Nur, wenn Daten vorhanden
+                    If .RecordCount > 0 Then
+                        If Not .BOF Then .MoveLast
+                         
+                        ' Neuer Datensatz erzeugen
+                        If Not rssingleabfrage.Fields.Count = 0 Then _
+                        .AddNew
+      
+                        ' Felder aus Clone-Recordset lesen und in
+                        ' Original-Recordset speichern
+
+                        On Error Resume Next
+                        For Each feld In rssingleabfrage.Fields
+                            .Fields(feld.Name).Value = feld.Value
+                        Next feld
+                              
+                        ' Datensatz speichern
+                        .Update
+                    .Save pfad & "\recordsets.dat"
+                    End If
+                 End With
+                
+            'Wenn noch keine Daten vorhanden sind, muss die
+        'rsSingleAbfrage "gecloned" werden. Allerdings muss der
+        'Filter erhalten bleiben...
+            If rssourcerecord.RecordCount = 0 Then
+                fs.DeleteFile (pfad & "\recordsets.dat")
+                rssingleabfrage.Save pfad & "\recordsets.dat"
+                rssourcerecord.Close
+                rssourcerecord.Open pfad & "\recordsets.dat"
+                fs.DeleteFile (pfad & "\recordsets.dat")
+                rssourcerecord.Save pfad & "\recordsets.dat"
+             End If
+             
+
+         End If
+                
+     End If
+
+    'Schliessen der Abfrage und Beenden der Verbindung zur Access-Datenbank
+    If rssingleabfrage.State = adStateOpen Then rssingleabfrage.Close
+    If dbsbavsterne.State = adStateOpen And x < 2 Then dbsbavsterne.Close
+
+    End With
+
+Next x
+ 
+
+  'Anzeigen der Ergebnisse in einer Liste
+  With rssourcerecord
+
+    If .RecordCount > 0 Then
+        cmdSingleAusw.Enabled = True
+        .MoveFirst
+        Do While Not .EOF
+            Listentext = .Fields("Kürzel").Value & vbTab & .Fields("Stbld").Value & vbTab & _
+          .Fields("BP").Value & vbTab & "   " & Format(.Fields("Epoche").Value, "#.0000") & vbTab & _
+          Format(.Fields("Periode").Value, "#.00000000")
+          
+          If Not IsInList(Listentext) Then ListRecherche.AddItem Listentext
+          .MoveNext
+        Loop
+     ElseIf .RecordCount = 0 Then
+        MsgBox "Es konnte kein Eintrag in den Datenbanken " & vbCrLf & "gefunden werden. Bitte " & _
+        "ändern Sie die Abfrage.", vbInformation, "Kein Eintrag vorhanden"
+        Exit Sub
+             
+    End If
+    
+  End With
+    
+'If fs.FileExists(pfad & "\recordsets.dat") Then fs.DeleteFile (pfad & "\recordsets.dat")
+
+Set fs = Nothing
+Set rssingleabfrage = Nothing
+Exit Sub
+
+errhandler:
+
+MsgBox Err.Number & " " & Err.Description & vbCrLf & _
+     "Form: Haupt, Sub: FillList" & vbCrLf & vbCrLf & _
+     "Bitte überprüfen Sie die Eingabe.", vbCritical, "Unzulässige Eingabe"
+
+
+End Sub
+Private Function IsInList(ByVal Listentext As String) As Boolean
+Dim x As Integer
+For x = 0 To ListRecherche.ListCount - 1
+If Listentext = ListRecherche.List(x) Then
+    IsInList = True
+    Exit Function
+End If
+Next x
+
+IsInList = False
+End Function
