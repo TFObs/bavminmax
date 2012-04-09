@@ -1,10 +1,9 @@
 VERSION 5.00
-Object = "{8E27C92E-1264-101C-8A2F-040224009C02}#7.0#0"; "MSCAL.OCX"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MSHFLXGD.OCX"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "Tabctl32.ocx"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "tabctl32.ocx"
 Begin VB.Form frmHaupt 
    BorderStyle     =   1  'Fest Einfach
    Caption         =   "VarEphem"
@@ -20,6 +19,18 @@ Begin VB.Form frmHaupt
    ScaleMode       =   0  'Benutzerdefiniert
    ScaleWidth      =   6907.036
    StartUpPosition =   3  'Windows-Standard
+   Begin VB.CommandButton cmdStarChart 
+      Caption         =   "Command1"
+      Height          =   495
+      Left            =   4200
+      Picture         =   "frmHaupt.frx":08CA
+      Style           =   1  'Grafisch
+      TabIndex        =   45
+      ToolTipText     =   "Horizont-Ansicht erstellen"
+      Top             =   720
+      Visible         =   0   'False
+      Width           =   1095
+   End
    Begin TabDlg.SSTab VTabs 
       Height          =   6615
       Left            =   120
@@ -31,25 +42,25 @@ Begin VB.Form frmHaupt
       _Version        =   393216
       Tabs            =   4
       Tab             =   3
+      TabsPerRow      =   4
       TabHeight       =   520
       TabCaption(0)   =   "Beobachtungsort"
-      TabPicture(0)   =   "frmHaupt.frx":08CA
+      TabPicture(0)   =   "frmHaupt.frx":397F
       Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "frmOrt"
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Abfrage"
-      TabPicture(1)   =   "frmHaupt.frx":08E6
+      TabPicture(1)   =   "frmHaupt.frx":399B
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Rahmen(1)"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
-      TabCaption(2)   =   "Berechnungsergebnisse"
-      TabPicture(2)   =   "frmHaupt.frx":0902
+      TabCaption(2)   =   "Ergebnisse"
+      TabPicture(2)   =   "frmHaupt.frx":39B7
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Rahmen(2)"
       Tab(2).ControlCount=   1
       TabCaption(3)   =   "Einzelextrema"
-      TabPicture(3)   =   "frmHaupt.frx":091E
+      TabPicture(3)   =   "frmHaupt.frx":39D3
       Tab(3).ControlEnabled=   -1  'True
       Tab(3).Control(0)=   "Frame2"
       Tab(3).Control(0).Enabled=   0   'False
@@ -67,32 +78,32 @@ Begin VB.Form frmHaupt
          EndProperty
          Height          =   6135
          Left            =   120
-         TabIndex        =   37
-         Top             =   360
+         TabIndex        =   35
+         Top             =   380
          Width           =   6315
          Begin VB.ListBox ListRecherche 
             Height          =   1035
-            Left            =   240
+            Left            =   480
             MultiSelect     =   1  '1 -Einfach
-            TabIndex        =   41
-            Top             =   1320
+            TabIndex        =   39
+            Top             =   2400
             Width           =   5055
          End
          Begin VB.CommandButton cmdSingleAusw 
             Caption         =   "auswählen"
             Enabled         =   0   'False
             Height          =   615
-            Left            =   2040
-            TabIndex        =   40
-            Top             =   2520
+            Left            =   2280
+            TabIndex        =   38
+            Top             =   3600
             Width           =   1455
          End
          Begin VB.CommandButton cmdSingleSuch 
             Caption         =   "Suchen"
             Height          =   615
-            Left            =   2280
-            TabIndex        =   39
-            Top             =   240
+            Left            =   2520
+            TabIndex        =   37
+            Top             =   1320
             Width           =   2055
          End
          Begin VB.TextBox txtSingleStar 
@@ -107,17 +118,17 @@ Begin VB.Form frmHaupt
                Strikethrough   =   0   'False
             EndProperty
             Height          =   405
-            Left            =   240
-            TabIndex        =   38
-            Top             =   360
+            Left            =   480
+            TabIndex        =   36
+            Top             =   1440
             Width           =   1695
          End
          Begin VB.Label Label5 
             Caption         =   "Stern     Stbld        Datenbank       Epoche                   Periode"
             Height          =   255
-            Left            =   240
-            TabIndex        =   42
-            Top             =   1080
+            Left            =   480
+            TabIndex        =   40
+            Top             =   2160
             Width           =   5055
          End
       End
@@ -131,26 +142,26 @@ Begin VB.Form frmHaupt
          Top             =   380
          Width           =   6315
          Begin VB.TextBox Text1 
-            Alignment       =   1  'Rechts
+            Alignment       =   2  'Zentriert
             Height          =   375
-            Left            =   2280
-            TabIndex        =   46
+            Left            =   4440
+            TabIndex        =   44
             Text            =   "1"
-            Top             =   5160
+            Top             =   1560
             Width           =   360
          End
          Begin MSComCtl2.UpDown UpDown1 
             Height          =   375
-            Left            =   2641
-            TabIndex        =   45
-            Top             =   5160
+            Left            =   4800
+            TabIndex        =   43
+            Top             =   1560
             Width           =   255
             _ExtentX        =   450
             _ExtentY        =   661
             _Version        =   393216
             Value           =   1
             BuddyControl    =   "Text1"
-            BuddyDispid     =   196616
+            BuddyDispid     =   196617
             OrigLeft        =   2880
             OrigTop         =   5160
             OrigRight       =   3135
@@ -163,34 +174,41 @@ Begin VB.Form frmHaupt
          End
          Begin MSComCtl2.DTPicker DTPicker2 
             Height          =   375
-            Left            =   360
-            TabIndex        =   44
-            Top             =   5400
+            Left            =   1680
+            TabIndex        =   42
+            Top             =   2160
             Width           =   1455
             _ExtentX        =   2566
             _ExtentY        =   661
             _Version        =   393216
-            Format          =   51642371
+            CalendarBackColor=   16777088
+            CalendarTitleBackColor=   8421504
+            CalendarTitleForeColor=   16777215
+            Format          =   16580611
             CurrentDate     =   40979
          End
          Begin MSComCtl2.DTPicker DTPicker1 
             Height          =   375
-            Left            =   360
-            TabIndex        =   43
-            Top             =   4800
+            Left            =   1680
+            TabIndex        =   41
+            Top             =   960
             Width           =   1455
             _ExtentX        =   2566
             _ExtentY        =   661
             _Version        =   393216
-            Format          =   51642371
+            CalendarBackColor=   12648447
+            CalendarTitleBackColor=   8421504
+            CalendarTitleForeColor=   16777215
+            Format          =   16580611
             CurrentDate     =   40979
          End
          Begin VB.ComboBox cmbDauer 
             Height          =   315
-            Left            =   4920
-            TabIndex        =   31
+            Left            =   4560
+            TabIndex        =   30
             ToolTipText     =   "Bitte Anzahl der zu berechnenden Tage auswählen"
-            Top             =   1200
+            Top             =   4680
+            Visible         =   0   'False
             Width           =   735
          End
          Begin VB.TextBox txtende 
@@ -206,11 +224,12 @@ Begin VB.Form frmHaupt
                Strikethrough   =   0   'False
             EndProperty
             Height          =   285
-            Left            =   4560
+            Left            =   4200
             Locked          =   -1  'True
-            TabIndex        =   30
+            TabIndex        =   29
             TabStop         =   0   'False
-            Top             =   2040
+            Top             =   5520
+            Visible         =   0   'False
             Width           =   1095
          End
          Begin VB.TextBox txtStartdat 
@@ -226,24 +245,25 @@ Begin VB.Form frmHaupt
                Strikethrough   =   0   'False
             EndProperty
             Height          =   285
-            Left            =   4560
+            Left            =   4200
             Locked          =   -1  'True
-            TabIndex        =   29
+            TabIndex        =   28
             TabStop         =   0   'False
-            Top             =   720
+            Top             =   4200
+            Visible         =   0   'False
             Width           =   1095
          End
          Begin VB.Timer Timer1 
             Interval        =   20
-            Left            =   2160
-            Top             =   3120
+            Left            =   4920
+            Top             =   360
          End
          Begin MSComctlLib.ProgressBar Balken 
             Height          =   375
-            Left            =   360
+            Left            =   1080
             TabIndex        =   27
             ToolTipText     =   "Fortschrittsanzeige"
-            Top             =   3720
+            Top             =   3600
             Width           =   3375
             _ExtentX        =   5953
             _ExtentY        =   661
@@ -251,123 +271,9 @@ Begin VB.Form frmHaupt
             Appearance      =   1
             Scrolling       =   1
          End
-         Begin MSACAL.Calendar ende 
-            Height          =   1455
-            Left            =   4200
-            TabIndex        =   28
-            Top             =   4440
-            Visible         =   0   'False
-            Width           =   1695
-            _Version        =   524288
-            _ExtentX        =   2990
-            _ExtentY        =   2566
-            _StockProps     =   1
-            BackColor       =   -2147483633
-            Year            =   2006
-            Month           =   2
-            Day             =   19
-            DayLength       =   1
-            MonthLength     =   1
-            DayFontColor    =   0
-            FirstDay        =   1
-            GridCellEffect  =   1
-            GridFontColor   =   10485760
-            GridLinesColor  =   -2147483632
-            ShowDateSelectors=   -1  'True
-            ShowDays        =   -1  'True
-            ShowHorizontalGrid=   -1  'True
-            ShowTitle       =   -1  'True
-            ShowVerticalGrid=   -1  'True
-            TitleFontColor  =   10485760
-            ValueIsNull     =   0   'False
-            BeginProperty DayFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "Arial"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            BeginProperty GridFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "Arial"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            BeginProperty TitleFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "Arial"
-               Size            =   12
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-         End
-         Begin MSACAL.Calendar Kalender 
-            Height          =   2535
-            Left            =   360
-            TabIndex        =   32
-            ToolTipText     =   "Mit einem Klick das Datum auswählen"
-            Top             =   360
-            Width           =   3735
-            _Version        =   524288
-            _ExtentX        =   6588
-            _ExtentY        =   4471
-            _StockProps     =   1
-            BackColor       =   -2147483633
-            Year            =   2005
-            Month           =   12
-            Day             =   20
-            DayLength       =   1
-            MonthLength     =   1
-            DayFontColor    =   0
-            FirstDay        =   1
-            GridCellEffect  =   1
-            GridFontColor   =   10485760
-            GridLinesColor  =   -2147483632
-            ShowDateSelectors=   -1  'True
-            ShowDays        =   -1  'True
-            ShowHorizontalGrid=   -1  'True
-            ShowTitle       =   -1  'True
-            ShowVerticalGrid=   -1  'True
-            TitleFontColor  =   10485760
-            ValueIsNull     =   -1  'True
-            BeginProperty DayFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "Arial"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            BeginProperty GridFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "Arial"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            BeginProperty TitleFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "Arial"
-               Size            =   12
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-         End
          Begin MSComDlg.CommonDialog cdlSpeichern 
-            Left            =   3600
-            Top             =   3000
+            Left            =   5520
+            Top             =   360
             _ExtentX        =   847
             _ExtentY        =   847
             _Version        =   393216
@@ -376,25 +282,25 @@ Begin VB.Form frmHaupt
          Begin VB.Label lblEnd 
             Caption         =   "Enddatum :"
             Height          =   255
-            Left            =   4560
-            TabIndex        =   36
-            Top             =   1800
+            Left            =   1680
+            TabIndex        =   34
+            Top             =   1920
             Width           =   855
          End
          Begin VB.Label lblStart 
             Caption         =   "Startdatum :"
             Height          =   255
-            Left            =   4560
-            TabIndex        =   35
-            Top             =   480
+            Left            =   1680
+            TabIndex        =   33
+            Top             =   720
             Width           =   975
          End
          Begin VB.Label lblZeitr 
             Caption         =   "Zeitraum [Tage] :"
             Height          =   495
-            Left            =   4200
-            TabIndex        =   34
-            Top             =   1080
+            Left            =   3720
+            TabIndex        =   32
+            Top             =   1440
             Width           =   735
          End
          Begin VB.Label lblfertig 
@@ -409,7 +315,7 @@ Begin VB.Form frmHaupt
             EndProperty
             Height          =   255
             Left            =   360
-            TabIndex        =   33
+            TabIndex        =   31
             Top             =   4200
             Width           =   3615
          End
@@ -448,6 +354,38 @@ Begin VB.Form frmHaupt
             BackColor       =   16777215
             _NumberOfBands  =   1
             _Band(0).Cols   =   2
+         End
+         Begin VB.Label lblDat 
+            Caption         =   "Datum"
+            Height          =   255
+            Left            =   3600
+            TabIndex        =   49
+            Top             =   3480
+            Width           =   1575
+         End
+         Begin VB.Label lblAzimut 
+            Caption         =   "Azimut"
+            Height          =   375
+            Left            =   3600
+            TabIndex        =   48
+            Top             =   3960
+            Width           =   1815
+         End
+         Begin VB.Label lblZeit 
+            Caption         =   "Uhrzeit"
+            Height          =   255
+            Left            =   3600
+            TabIndex        =   47
+            Top             =   3720
+            Width           =   1695
+         End
+         Begin VB.Label lblStern 
+            Caption         =   "Stern"
+            Height          =   375
+            Left            =   3600
+            TabIndex        =   46
+            Top             =   4200
+            Width           =   1455
          End
          Begin VB.Label Label6 
             Alignment       =   2  'Zentriert
@@ -489,7 +427,7 @@ Begin VB.Form frmHaupt
          Begin VB.CommandButton cmdOrtOK 
             Height          =   495
             Left            =   4320
-            Picture         =   "frmHaupt.frx":093A
+            Picture         =   "frmHaupt.frx":39EF
             Style           =   1  'Grafisch
             TabIndex        =   16
             Top             =   3960
@@ -578,7 +516,7 @@ Begin VB.Form frmHaupt
       BackColor       =   &H00C0C000&
       Height          =   615
       Left            =   1080
-      Picture         =   "frmHaupt.frx":0C44
+      Picture         =   "frmHaupt.frx":3CF9
       Style           =   1  'Grafisch
       TabIndex        =   10
       ToolTipText     =   "Berechnung starten"
@@ -588,7 +526,7 @@ Begin VB.Form frmHaupt
    Begin VB.CommandButton cmdInternet 
       Height          =   495
       Left            =   5400
-      Picture         =   "frmHaupt.frx":0F4E
+      Picture         =   "frmHaupt.frx":4003
       Style           =   1  'Grafisch
       TabIndex        =   9
       ToolTipText     =   "Internet-Recherche"
@@ -598,7 +536,7 @@ Begin VB.Form frmHaupt
    Begin VB.CommandButton cmdÖffnen 
       Height          =   495
       Left            =   3360
-      Picture         =   "frmHaupt.frx":1258
+      Picture         =   "frmHaupt.frx":430D
       Style           =   1  'Grafisch
       TabIndex        =   8
       ToolTipText     =   "bestehende Abfrage öffnen"
@@ -617,7 +555,7 @@ Begin VB.Form frmHaupt
    Begin VB.CommandButton cmdGridgross 
       Height          =   495
       Left            =   4680
-      Picture         =   "frmHaupt.frx":1562
+      Picture         =   "frmHaupt.frx":4617
       Style           =   1  'Grafisch
       TabIndex        =   6
       ToolTipText     =   "Ergebnisliste in Extrafenster vergrößert darstellen"
@@ -627,7 +565,7 @@ Begin VB.Form frmHaupt
    Begin VB.CommandButton cmdListdrucken 
       Height          =   495
       Left            =   6120
-      Picture         =   "frmHaupt.frx":1E2C
+      Picture         =   "frmHaupt.frx":4EE1
       Style           =   1  'Grafisch
       TabIndex        =   5
       ToolTipText     =   "Ausdruck der Tabelle (WYSIWYG)"
@@ -645,7 +583,7 @@ Begin VB.Form frmHaupt
       BackColor       =   &H000080FF&
       Height          =   615
       Left            =   2160
-      Picture         =   "frmHaupt.frx":2136
+      Picture         =   "frmHaupt.frx":51EB
       Style           =   1  'Grafisch
       TabIndex        =   2
       ToolTipText     =   "Ereignisse ansehen"
@@ -656,7 +594,7 @@ Begin VB.Form frmHaupt
       BackColor       =   &H80000000&
       Height          =   615
       Left            =   120
-      Picture         =   "frmHaupt.frx":2440
+      Picture         =   "frmHaupt.frx":54F5
       Style           =   1  'Grafisch
       TabIndex        =   1
       ToolTipText     =   "Abfragen"
@@ -667,7 +605,7 @@ Begin VB.Form frmHaupt
       Enabled         =   0   'False
       Height          =   495
       Left            =   5400
-      Picture         =   "frmHaupt.frx":274A
+      Picture         =   "frmHaupt.frx":57FF
       Style           =   1  'Grafisch
       TabIndex        =   0
       ToolTipText     =   "Speichern in eine Textdatei"
@@ -677,7 +615,7 @@ Begin VB.Form frmHaupt
    Begin VB.Image Image2 
       Height          =   480
       Left            =   3960
-      Picture         =   "frmHaupt.frx":2A54
+      Picture         =   "frmHaupt.frx":5B09
       Top             =   720
       Visible         =   0   'False
       Width           =   480
@@ -685,7 +623,7 @@ Begin VB.Form frmHaupt
    Begin VB.Image Image1 
       Height          =   480
       Left            =   3360
-      Picture         =   "frmHaupt.frx":2D5E
+      Picture         =   "frmHaupt.frx":5E13
       Top             =   720
       Visible         =   0   'False
       Width           =   480
@@ -848,13 +786,14 @@ Private Sub cmdinfo_Click()
         frmSterninfo.show
         cmdInfo.Picture = Image1
         cmdInfo.ToolTipText = "Informationsfenster ausblenden"
+        'frmHaupt.cmdStarChart.Visible = True
         'cmdInternet.Enabled = True
     Else
         cmdInfo.Picture = Image2
         'cmdInternet.Enabled = False
         cmdInfo.ToolTipText = "Informationsfenster öffnen"
         
-        Unload frmSterninfo
+        Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
     End If
     
     If grdergebnis.col = 1 Then Call Infofüllen(grdergebnis)
@@ -866,9 +805,9 @@ Private Sub cmbGrundlage_Click()
 
  If fs.FileExists(pfad & "\ergebnisse.dat") Then
     cmdErgebnis.Enabled = False: VTabs.TabEnabled(2) = False
-    If Not frmHaupt.cmbGrundlage.text = "Einzeln" Then
-        VTabs.TabVisible(3) = False
-    End If
+    'If Not frmHaupt.cmbGrundlage.text = "Einzeln" Then
+        'VTabs.TabVisible(3) = False
+    'End If
     cmdListspeichern.Enabled = False
     cmdGridgross.Enabled = False
     cmdListdrucken.Enabled = False
@@ -906,7 +845,7 @@ Public Sub cmdAbfrag_Click()
     
   Unload frmAladin
   Unload frmBerechnungsfilter
-  Unload frmSterninfo
+  Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
   
   lblfertig.Caption = ""
   
@@ -918,9 +857,9 @@ Public Sub cmdAbfrag_Click()
   cmdInfo.Picture = Image2
   cmdInfo.ToolTipText = "Informationsfenster ausblenden"
   'cmdInternet.Enabled = False
-  cmdListe.Enabled = True: VTabs.TabEnabled(1) = True: VTabs.Tab = 1
+  cmdListe.Enabled = True: VTabs.TabEnabled(1) = True: VTabs.Tab = 1: cmbGrundlage.Enabled = True
   
-    VTabs.TabVisible(3) = False
+   ' VTabs.TabVisible(3) = False
  
 End Sub
 
@@ -956,12 +895,6 @@ Set dbsbavsterne = New ADODB.Connection
 Set rstAbfrage = New ADODB.Recordset
 Dim vstrfile, y
 
-Me.VTabs.TabEnabled(2) = True
-'Me.Width = 11040
-Me.VTabs.TabEnabled(1) = False
-
-
-
  'Ermitteln des Dateinamens
         With cdlSpeichern
             .Filter = "Abfragen (*.abf)|*.abf"
@@ -996,7 +929,7 @@ grdergebnis.Visible = True
 
     'Einstellen der Spaltenbreiten
     With grdergebnis
- 
+        .ColWidth(12) = 0
         .ColWidth(0) = 200
         
     If Not .ColWidth(1) = 0 Then
@@ -1017,8 +950,8 @@ grdergebnis.Visible = True
     
     'BAV_Sterne oder BAv_sonstige?
     If .TextMatrix(1, 8) = "" Then
-        .ColWidth(8) = 0
-        .ColWidth(9) = 800
+        .ColWidth(8) = 600
+        .ColWidth(9) = 1300
         Database = 0
     ElseIf Trim(.TextMatrix(1, 8)) = "KRE" Then
         .ColWidth(8) = 0
@@ -1032,9 +965,9 @@ grdergebnis.Visible = True
         .ColWidth(8) = 0
         .ColWidth(9) = 1300
         Database = 4
-    Else: .ColWidth(9) = 0
-        .ColWidth(8) = 1300
-        Database = 1
+   Else: .ColWidth(9) = 1300
+        .ColWidth(8) = 600
+        Database = 0
     End If
     
     
@@ -1113,8 +1046,8 @@ Next y
                 .Provider = "microsoft.Jet.oledb.4.0"
                 If Database = 0 Then
                     .ConnectionString = pfad & "\Bav_sterne.mdb"
-                ElseIf Database = 1 Then
-                    .ConnectionString = pfad & "\BAV_sonstige.mdb"
+                'ElseIf Database = 1 Then
+                 '   .ConnectionString = pfad & "\BAV_sterne.mdb" 'onstige.mdb"
                 End If
                 .Open
              End With
@@ -1138,7 +1071,11 @@ Set rsergebnis = Nothing
 Set dbsbavsterne = Nothing
 Set fs = Nothing
 
-cmbGrundlage.Enabled = False
+Me.VTabs.TabEnabled(2) = True
+'Me.Width = 11040
+Me.VTabs.TabEnabled(1) = False: Me.VTabs.Tab = 2
+cmdErgebnis.Enabled = True
+cmbGrundlage.Enabled = False: cmdListe.Enabled = False
 
 End With
 
@@ -1170,8 +1107,83 @@ Private Sub cmdOrtOK_Click()
     cmdOrtCancel_Click  'um Register wieder einzublenden
     Me.Form_Load
     Me.cmbGrundlage.Enabled = True
-    Me.cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
+    Me.cmdListe.Enabled = True: VTabs.TabEnabled(1) = True: VTabs.TabEnabled(3) = True
     VTabs.TabVisible(0) = False
+End Sub
+
+
+
+Private Sub cmdStarChart_Click()
+
+Dim charturl As String
+Dim azim As String
+Dim plandat, planzeit As String
+Dim ew, no
+Dim Lat, lon
+
+On Error GoTo errhandler
+
+lon = INIGetValue(App.Path & "\Prog.ini", "Ort", "Länge")
+Lat = INIGetValue(App.Path & "\Prog.ini", "Ort", "Breite")
+no = IIf(Lat > 0, "North", "South"): ew = IIf(lon > 0, "East", "West")
+
+With grdergebnis
+
+ azim = Trim(IIf(.TextMatrix(.Row, 6) + 180 >= 360, .TextMatrix(.Row, 6) - 180, .TextMatrix(.Row, 6) + 180))
+ '"utc=1998%2F02%2F14+20%3A55%3A01&" &
+ planzeit = .TextMatrix(.Row, 4)
+ plandat = .TextMatrix(.Row, 3)
+ planzeit = "+" & Left(planzeit, 2) & "%3A" & Right(planzeit, 2) & "%3A00&"
+ plandat = "utc=" & Right(plandat, 4) & "%2F" & Mid(plandat, 4, 2) & "%2F" & Left(plandat, 2)
+ 
+End With
+
+charturl = "http://www.fourmilab.ch/cgi-bin/Yourhorizon?date=1&" & plandat + planzeit & _
+"&azimuth=" & azim & "&azideg=" & azim & "&fov=270%B0&lat=" & Lat & "%B0&ns=" & no & _
+"&lon=" & lon & "%B0&ew=" & ew & "&coords=on&moonp=on&deepm=3.0&consto=on&constn=on&consts=on&constb=on&limag=5&starn=on&" & _
+"starnm=1.5&starbm=3.5&showmb=-1.5&showmd=6.0&terrain=on&terrough=0.7&scenery=on&imgsize=480&" & _
+"dynimg=y&fontscale=1.0&scheme=0&elements="
+
+
+result = URLDownloadToFile(0, charturl, App.Path & "\skychart.gif", 0, 0)
+
+If result = 0 Then
+ picShowPicture frmPlanetarium.Picture1, App.Path & "\skychart.gif", True
+ With grdergebnis
+ frmPlanetarium.Caption = .TextMatrix(.Row, 2) & " am " & .TextMatrix(.Row, 3) & " " & _
+ .TextMatrix(.Row, 4) & "UT     Azimut: " & .TextMatrix(.Row, 6) & Chr(176) & ", Höhe: " & .TextMatrix(.Row, 7) & Chr(176)
+End With
+frmPlanetarium.show
+Else
+ MsgBox "Es ist ein Fehler beim Download des Charts aufgetreten" & vbCrLf & _
+     "Bitte versuchen Sie es erneut..", vbCritical, "Download nicht erfolgreich"
+End If
+Exit Sub
+errhandler:
+MsgBox "Es ist ein Fehler beim Erstellen des Charts aufgetreten" & vbCrLf & _
+     "Überprüfen Sie Ihre Internetverbindung und ggf. versuchen Sie es " & vbCrLf & _
+     "zu einem späteren Zeitpunkt noch einmal..", vbCritical, "Fehler beim Erstellen"
+     'Unload frmPlanetarium
+End Sub
+
+Public Sub picShowPicture(oPictureBox As Object, _
+  ByVal sFile As String, _
+  Optional ByVal bStretch As Boolean = True)
+ 
+  With oPictureBox
+    If bStretch Then
+      ' Bild an Größe der PictureBox anpassen
+      .AutoRedraw = True
+      Set .Picture = Nothing
+      .PaintPicture LoadPicture(sFile), 0, 0, .ScaleWidth, .ScaleHeight
+      .AutoRedraw = False
+    Else
+      ' PictureBox an Bildgröße anpassen
+      Set .Picture = Nothing
+      .Picture = LoadPicture(sFile)
+      .AutoSize = True
+    End If
+  End With
 End Sub
 
 
@@ -1221,7 +1233,9 @@ frmKrein.show
 End Sub
 
 Private Sub DTPicker1_Change()
-DTPicker2.Value = DTPicker1.Value + cmbDauer.List(cmbDauer.ListIndex)
+If DTPicker1.Value >= DTPicker2.Value Then DTPicker2.Value = DTPicker1.Value + 1
+Text1.text = DTPicker2.Value - DTPicker1.Value
+DTPicker2.Value = DTPicker1.Value + Text1.text 'cmbDauer.List(cmbDauer.ListIndex)
 End Sub
 
 Private Sub DTPicker2_change()
@@ -1231,6 +1245,10 @@ Text1.text = DTPicker2.Value - DTPicker1.Value
 End Sub
 
 
+
+Private Sub DTPicker2_KeyUp(KeyCode As Integer, Shift As Integer)
+Text1.text = DTPicker2.Value - DTPicker1.Value
+End Sub
 
 Public Sub Form_Load()
 If App.PrevInstance Then End
@@ -1259,7 +1277,7 @@ DoEvents
 Call DefaultWerte
 End If
 
-Unload frmSterninfo
+Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
 Unload frmBerechnungsfilter
 Unload frmAladin
 Unload frmSingleBerech
@@ -1291,19 +1309,19 @@ result = SetTrennzeichen(LOCALE_STIMEFORMAT, "HH:mm:ss")
 
 DTPicker1.CustomFormat = "dd.MM.yyyy"
 DTPicker2.CustomFormat = "dd.MM.yyyy"
-    ende.Visible = False
-    Kalender.Value = Date
+    'ende.Visible = False
+    'Kalender.Value = Date
     DTPicker1.Value = Date
     
-    ende.Value = Kalender.Value + 1
+    'ende.Value = Kalender.Value + 1
 
     'Füllen des Zeitraumsfeldes
     For x = 1 To 30
         cmbDauer.AddItem x
     Next x
-    cmbDauer.ListIndex = 0  'Zeiger der combobox auf 1. Eintrag
-    txtende = ende.Value - 1
-DTPicker2.Value = DTPicker1.Value + cmbDauer.List(cmbDauer.ListIndex)
+    'cmbDauer.ListIndex = 0  'Zeiger der combobox auf 1. Eintrag
+    'txtende = ende.Value - 1
+DTPicker2.Value = DTPicker1.Value + Text1.text
     cmdListspeichern.Enabled = False
     cmdListdrucken.Enabled = False
     cmdGridgross.Enabled = False
@@ -1340,7 +1358,7 @@ Set fs = Nothing
 With cmbGrundlage
 .Clear
 .AddItem ("BAV-Programmsterne")
-.AddItem ("sonstige BAV-Sterne")
+'.AddItem ("sonstige BAV-Sterne")
 If fs.FileExists(App.Path & "\kreiner.dat") = True Then
 .AddItem ("Kreiner")
 End If
@@ -1386,7 +1404,7 @@ cmdInfo.Picture = Image2
 cmdInfo.ToolTipText = "Informationsfenster ausblenden"
 cmdInfo.Enabled = False
 cmdErgebnis.Enabled = False: VTabs.TabEnabled(2) = False
-VTabs.TabVisible(3) = IIf(fs.FileExists(App.Path & "/recordsets.dat"), True, False)
+'VTabs.TabVisible(3) = IIf(fs.FileExists(App.Path & "/recordsets.dat"), True, False)
 Set rsergebnis = Nothing
 cmdAbfrag.Enabled = False
 End Sub
@@ -1421,7 +1439,7 @@ Mende
     Set fs = Nothing
     Unload frmBerechnungsfilter
     Unload frmAladin
-    Unload frmSterninfo
+    Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
     Unload frmGridGross
     Unload frmHelioz
     Unload frmGrafik
@@ -1429,7 +1447,7 @@ Mende
     Unload frmKrein
     Unload frmGridGross
     Unload frmGCVS
-  
+    Unload frmPlanetarium
     Call HtmlHelp(frmHaupt.hWnd, "", HH_CLOSE_ALL, 0)
     Unload Me
 
@@ -1513,13 +1531,14 @@ Private Sub ort_Click()
     'frmSpalten.Visible = False
     If cmdErgebnis.Enabled = True Then
         Unload frmBerechnungsfilter
-        Unload frmSterninfo
+        Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
         Unload frmAladin
     End If
     
     'Register ausblenden
     VTabs.TabEnabled(1) = False
     VTabs.TabEnabled(2) = False
+    VTabs.TabEnabled(3) = False
     Me.Width = 7050
     'Ermitteln der Werte aus Registry
     gBreite.text = INIGetValue(App.Path & "\Prog.ini", "Ort", "Breite")
@@ -1548,14 +1567,14 @@ End Sub
 
 'Übernahme der Kalenderwerte
 Private Sub kalender_click()
-    ende.Value = Kalender.Value + CInt(cmbDauer.text)
-    txtende = ende.Value - 1
-    txtStartdat = Kalender.Value
-    cmdListspeichern.Enabled = False
-    cmdInfo.Enabled = False
-    cmdGridgross.Enabled = False
-    cmdListdrucken.Enabled = False
-        cmdErgebnis.Enabled = False: VTabs.TabEnabled(2) = False
+    'ende.Value = Kalender.Value + CInt(cmbDauer.text)
+    'txtende = ende.Value - 1
+    'txtStartdat = Kalender.Value
+    'cmdListspeichern.Enabled = False
+    'cmdInfo.Enabled = False
+    'cmdGridgross.Enabled = False
+    'cmdListdrucken.Enabled = False
+       ' cmdErgebnis.Enabled = False: VTabs.TabEnabled(2) = False
 End Sub
 
 
@@ -1583,6 +1602,7 @@ Dim aktHoehe As Double, aktAzimut As Double
 Dim überw
 Dim ephem, monddist
 Dim sPeriode
+Dim SonneAU
 'lblfertig.Caption = ""
 lblfertig.Visible = True
 
@@ -1633,20 +1653,21 @@ grdergebnis.Clear
         If cmbGrundlage.ListIndex = 0 Then
         .ConnectionString = pfad & "\Bav_sterne.mdb"
         .Open
-        ElseIf cmbGrundlage.ListIndex = 1 Then
-        .ConnectionString = pfad & "\BAV_sonstige.mdb"
-        .Open
+        'ElseIf cmbGrundlage.ListIndex = 1 Then
+        '.ConnectionString = pfad & "\BAV_sonstige.mdb"
+        '.Open
         End If
         
     End With
-   Database = cmbGrundlage.ListIndex
+    
+   Database = IIf(cmbGrundlage.ListIndex > 0, cmbGrundlage.ListIndex + 1, cmbGrundlage.ListIndex)
         
     'Öffnen der Tabelle "BVundRR" aus der BAV_Sterne.mdb
     'als temporäres Recordset oder verbinden mit Recordset
     'aus der Kreiner DB
     
     With rstAbfrage
-      If cmbGrundlage.ListIndex < 2 Then
+      If cmbGrundlage.ListIndex = 0 Then
         .ActiveConnection = dbsbavsterne
         .LockType = adLockOptimistic
         .CursorLocation = adUseClient
@@ -1684,8 +1705,10 @@ grdergebnis.Clear
     
         If Not .Fields("epoche").ActualSize = 0 And Not .Fields("periode").ActualSize = 0 Then
         'Berechnung der Ereignisse im gewählten Zeitraum
-        BAnfang = JulDat(Left(Kalender.Value, 2), Mid(Kalender.Value, 4, 2), Mid(Kalender.Value, 7, 4))
-        bende = JulDat(ende.Day, ende.Month, ende.year)
+        'BAnfang = JulDat(Left(Kalender.Value, 2), Mid(Kalender.Value, 4, 2), Mid(Kalender.Value, 7, 4))
+        'bende = JulDat(ende.Day, ende.Month, ende.year)
+        BAnfang = JulDat(Left(DTPicker1.Value, 2), Mid(DTPicker1.Value, 4, 2), Mid(DTPicker1.Value, 7, 4))
+        bende = JulDat(Left(DTPicker2.Value, 2), Mid(DTPicker2.Value, 4, 2), Mid(DTPicker2.Value, 7, 4))
         
         sPeriode = Split(!periode, " ")
         
@@ -1694,13 +1717,13 @@ grdergebnis.Clear
         
         
         For x = APeriode To EPeriode
-             If UBound(sPeriode) = 1 Then
-             ereignis = (!epoche + 2400000) + x * sPeriode(0) + x ^ 2 * sPeriode(1)
+             If UBound(sPeriode) = 2 Then
+             ereignis = (!epoche + 2400000) + x * sPeriode(0) + (x ^ 2 * (sPeriode(1) * 10 ^ sPeriode(2)))
              Else
              ereignis = (!epoche + 2400000) + x * sPeriode(0)
              End If
    
-            If ereignis > BAnfang And ereignis < bende Then
+            If ereignis >= BAnfang And ereignis <= bende Then
             
                 If Not .Fields("hh").ActualSize = 0 Then
                         RA = !hh + !mm / 60 + !ss / 3600
@@ -1714,7 +1737,9 @@ grdergebnis.Clear
                 JDEreignis = JulinDat(ereignis)
                 Tag = CDate(Fix(JDEreignis))
                 Jahr = Format(JDEreignis, "yyyy")
-                Sauf = AufUnter(Tag, Jahr, 0) * 24
+                SonneAU = AufUnter(Tag, Jahr)
+                Sauf = SonneAU(0) * 24
+                'Sauf = AufUnter(Tag, Jahr, 0) * 24
                 If Sauf = "600" Then
                 
             MsgBox "Für den gewählten Filter für den" & vbCrLf & _
@@ -1725,7 +1750,8 @@ grdergebnis.Clear
             Exit Sub
             End If
             
-                Sunter = AufUnter(Tag, Jahr, 1) * 24
+                'Sunter = AufUnter(Tag, Jahr, 1) * 24
+                Sunter = SonneAU(1) * 24
                 Uhrzeit = 24 * ((JDEreignis) - Fix(JDEreignis))
     
                 If Sunter < Uhrzeit And Uhrzeit <= 24 Or _
@@ -1733,7 +1759,7 @@ grdergebnis.Clear
         
                     
                      BPrg = !BP
-                     If Database >= 2 Then Typ = !Typ
+                     If Database <> 1 Then Typ = Trim(!Typ)
                      
                      
                     Sternzeit = STZT(CByte(Format(JDEreignis, "dd")), _
@@ -1787,6 +1813,7 @@ grdergebnis.Clear
                         
                         If Database = 0 Then
                           .Fields("BProg") = BPrg
+                          .Fields("Typ") = Typ
                         ElseIf Database = 1 Then
                           .Fields("Typ") = BPrg
                          ElseIf Database >= 2 Then
@@ -1837,6 +1864,7 @@ lblfertig.Caption = "Berechnungen beendet!"
     Else
     MsgBox "Es konnte kein Ereignis berechnet werden." & vbCrLf & "Bitte versuchen sie ein anderes " & vbCrLf & _
     "Berechnungsintervall.", vbInformation, "Kein Ereignis gefunden"
+    cmdAbfrag.Enabled = True: cmdErgebnis.Enabled = False: VTabs.TabEnabled(1) = True
     End If
 
 End With
@@ -1898,7 +1926,7 @@ End If
 
 If Abf.RecordCount > 0 Then
 Set grdergebnis.DataSource = Abf
-If Database = 4 Then Call zellfarbe
+If Database = 4 Then Call zellfarbe(grdergebnis.Row)
 Else:
 MsgBox "Für diese Filterkombination konnten keine Ereignisse" & vbCrLf & _
 "gefunden werden...", vbInformation, "Keine Ergebnisse für diesen Filter"
@@ -1922,19 +1950,19 @@ If Not grdergebnis.ColWidth(7) = 0 Then
 grdergebnis.ColWidth(7) = 600
 End If
 
-If Database = 0 Then
+If Database = 0 Or Database = 5 Then
         grdergebnis.ColWidth(8) = 600
-        grdergebnis.ColWidth(9) = 0
-End If
+        'grdergebnis.ColWidth(9) = 0
+'End If
 
-If Database = 1 Then
+'If Database = 1 Then
 
         grdergebnis.ColWidth(9) = 1300
         
-        grdergebnis.ColWidth(8) = 0
+        'grdergebnis.ColWidth(8) = 0
 End If
 
-If Database >= 2 Then
+If Database >= 2 And Database <> 5 Then
         grdergebnis.ColWidth(8) = 0
         grdergebnis.ColWidth(9) = 1300
         
@@ -2065,7 +2093,7 @@ Public Sub grdergebnis_sortieren(ByVal ColIndex As Integer)
             
     frmGridGross.grossGrid_füllen
     grdergebnis.MousePointer = 1
-    If Database = 4 Then Call zellfarbe
+    If Database = 4 Then Call zellfarbe(grdergebnis.Row)
 End Sub
 
 
@@ -2138,11 +2166,11 @@ Private Sub grdergebnis_MouseUp(Button As Integer, _
  If grdergebnis.col = 1 Then
   Call Infofüllen(grdergebnis)
   End If
-  If Database = 4 Then Call zellfarbe
+  If Database = 4 Then Call zellfarbe(grdergebnis.Row)
 End Sub
 
 Private Sub cmdListdrucken_Click()
-  Call PrintGrid(grdergebnis, 20, 25, 20, 20, _
+  Call PrintGrid(grdergebnis, 15, 25, 10, 20, _
                  "VarEphem - aktuelle Abfrage" & _
                  "", "")
                  MsgBox "Druckauftrag wurde an den" & Chr(13) & "Standarddrucker gesendet!", vbInformation, "Druckauftrag gesendet"
@@ -2152,7 +2180,7 @@ Private Sub UnloadAll()
   Unload frmAladin
   'cmdInternet.Enabled = False
   Unload frmBerechnungsfilter
-  Unload frmSterninfo
+  Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
   Unload frmSternauswahl
   
   
@@ -2207,7 +2235,7 @@ End Sub
 
 
 Private Sub Ueber_Click()
-MsgBox "VarEphem, Version 1.0.9, Stand: 05.03.2012" & vbCrLf & vbCrLf & _
+MsgBox "VarEphem, Version 1.1.0, Stand: 07.04.2012" & vbCrLf & vbCrLf & _
 "geschrieben von: Jörg Hanisch, Gescher" & vbCrLf & _
 "Alle Rechte vorbehalen" & vbCrLf & vbCrLf & _
 "Fragen, Anregungen, (Spenden ;)) bitte per E-Mail an: " & vbCrLf & _
@@ -2217,6 +2245,7 @@ End Sub
 Private Sub VTabs_Click(PreviousTab As Integer)
 If VTabs.Tab = 1 And VTabs.TabEnabled(1) Then cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
 If VTabs.Tab = 3 Then
+cmdAbfrag.Enabled = True
 Dim x As Integer
 For x = 1 To frmHaupt.cmbGrundlage.ListCount
  If frmHaupt.cmbGrundlage.List(x) = "Einzeln" Then
@@ -2224,11 +2253,12 @@ For x = 1 To frmHaupt.cmbGrundlage.ListCount
     Exit For
  End If
  Next
+ VTabs.TabEnabled(1) = IIf(cmdAbfrag.Enabled, True, False)
 End If
 End Sub
 
 
-Sub zellfarbe()
+Sub zellfarbe(ByVal reihe)
 Dim res, x, y, bcol
 For x = 1 To grdergebnis.Rows - 1
     res = grdergebnis.TextMatrix(x, 12)
@@ -2249,7 +2279,7 @@ For x = 1 To grdergebnis.Rows - 1
     grdergebnis.CellBackColor = bcol
     Next y
 Next x
- grdergebnis.Row = 1: grdergebnis.col = 1
+ grdergebnis.Row = reihe: grdergebnis.col = 1
 End Sub
  
 Private Sub cmdSingleAusw_Click()
@@ -2316,7 +2346,7 @@ End If
  End If
  Next
  
-Unload frmSterninfo
+Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
 Unload frmAladin
 Unload frmBerechnungsfilter
 
@@ -2356,7 +2386,7 @@ For x = 0 To 6
 Set rssingleabfrage = New ADODB.Recordset
 
  With rssingleabfrage
-
+ If x = 1 Then x = 2
         If x < 2 Then
         
             'Verbindung zur Datenbank herstellen
@@ -2364,8 +2394,8 @@ Set rssingleabfrage = New ADODB.Recordset
                 .Provider = "microsoft.Jet.oledb.4.0"
                 If x = 0 Then
                     .ConnectionString = pfad & "\Bav_sterne.mdb"
-                ElseIf x = 1 Then
-                    .ConnectionString = pfad & "\BAV_sonstige.mdb"
+                'ElseIf x = 1 Then
+                 '   .ConnectionString = pfad & "\BAV_sterne.mdb" 'onstige.mdb"
                 End If
                 .Open
              End With

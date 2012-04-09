@@ -1,4 +1,4 @@
-frmHaupt = 45, 126, 712, 660, Z, 95, 5, 739, 648, C
+frmHaupt = 45, 126, 712, 660, , 95, 5, 739, 648, C
 frmBerechnungsfilter = 120, 58, 764, 514, , 0, 0, 827, 773, C
 mdlDefault = 66, 66, 733, 600, 
 frmHelioz = 78, 67, 722, 523, , 22, 22, 666, 478, C
@@ -17,3 +17,4 @@ frmAladin = 0, 0, 591, 453, , 42, 10, 633, 463, C
 frmSingleBerech = 0, 0, 547, 460, , 80, 103, 627, 563, C
 MouseScroll = 110, 110, 599, 570, 
 mdlBAV_BeobAufruf = 44, 44, 739, 487, 
+frmPlanetarium = 132, 174, 893, 697, , 110, 145, 871, 668, C

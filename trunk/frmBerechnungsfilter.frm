@@ -252,11 +252,20 @@ Begin VB.Form frmBerechnungsfilter
       Width           =   1455
    End
    Begin VB.Frame frmFilter 
-      Height          =   2655
+      Height          =   2895
       Left            =   120
       TabIndex        =   2
       Top             =   960
       Width           =   2655
+      Begin VB.ComboBox cmbBpro 
+         BackColor       =   &H00C0FFFF&
+         Height          =   315
+         Left            =   1200
+         TabIndex        =   37
+         ToolTipText     =   "BAV-Beobachtungsprogramm bzw. Typfilter auswählen"
+         Top             =   2040
+         Width           =   1215
+      End
       Begin VB.ComboBox cmbStbld 
          BackColor       =   &H00C0FFFF&
          Height          =   315
@@ -272,10 +281,10 @@ Begin VB.Form frmBerechnungsfilter
          Height          =   285
          Left            =   1320
          TabIndex        =   11
-         Top             =   2160
+         Top             =   2520
          Width           =   615
       End
-      Begin VB.ComboBox cmbBpro 
+      Begin VB.ComboBox cmbTyp 
          BackColor       =   &H00C0FFFF&
          Height          =   315
          Left            =   1200
@@ -311,6 +320,14 @@ Begin VB.Form frmBerechnungsfilter
          Top             =   720
          Width           =   495
       End
+      Begin VB.Label Label6 
+         Caption         =   "Beob Prog. :"
+         Height          =   375
+         Left            =   120
+         TabIndex        =   38
+         Top             =   2040
+         Width           =   975
+      End
       Begin VB.Label Label5 
          Caption         =   "Sternbild :"
          Height          =   375
@@ -321,14 +338,14 @@ Begin VB.Form frmBerechnungsfilter
       End
       Begin VB.Label Label1 
          Caption         =   "Monddistanz : >"
-         Height          =   375
+         Height          =   350
          Left            =   120
          TabIndex        =   12
-         Top             =   2160
+         Top             =   2520
          Width           =   1215
       End
       Begin VB.Label Label4 
-         Caption         =   "Beob Prog. :"
+         Caption         =   "      Typ. :"
          Height          =   375
          Left            =   120
          TabIndex        =   8
@@ -367,12 +384,12 @@ Begin VB.Form frmBerechnungsfilter
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   600
+      Left            =   480
       MaskColor       =   &H8000000F&
       Style           =   1  'Grafisch
       TabIndex        =   1
       ToolTipText     =   "Filter anwenden"
-      Top             =   3720
+      Top             =   3960
       Width           =   1695
    End
    Begin VB.CommandButton cmdClose 
@@ -448,7 +465,7 @@ ElseIf chkSpalte(Index).Value = 1 Then
     Case Is = 6: frmHaupt.grdergebnis.ColWidth(6) = 600
     Case Is = 7: frmHaupt.grdergebnis.ColWidth(7) = 600
     Case Is = 8: frmHaupt.grdergebnis.ColWidth(8) = 600
-    Case Is = 9: frmHaupt.grdergebnis.ColWidth(9) = 800
+    Case Is = 9: frmHaupt.grdergebnis.ColWidth(9) = 1300
     Case Is = 10: frmHaupt.grdergebnis.ColWidth(10) = 1200
     Case Else: frmHaupt.grdergebnis.ColWidth(Index) = 945
 End Select
@@ -470,12 +487,13 @@ If IsNumeric(txthoe.text) And IsNumeric(txtAzi_u.text) And _
     Call INISetValue(datei, "filter", "Azimut_o", txtAzi_o.text)
     Call INISetValue(datei, "filter", "Monddist", txtMonddist.text)
     Call INISetValue(datei, "filter", "Sternbild", cmbStbld.text)
+    
     'BAV_Sterne oder BAV_sonstige?
-    If Database = 0 Then
+    If Database = 0 Or Database = 5 Then _
         Call INISetValue(datei, "filter", "BProg", cmbBpro.text)
-    Else
-        Call INISetValue(datei, "filter", "Typ", cmbBpro.text)
-    End If
+    'Else
+        Call INISetValue(datei, "filter", "Typ", cmbTyp.text)
+    'End If
 
     Else: MsgBox "Bitte überprüfen Sie die Eingabe," & vbCrLf _
     & "es sind nur numerische Werte erlaubt.", vbExclamation, "Fehleingabe!"
@@ -503,33 +521,46 @@ If Not cmbStbld.text = "alle" Then
 '" AND Azimut <= " & txtAzi_o.text & " AND Monddist >= " & txtMonddist.text
 'End If
 
-If Database = 0 Or Database = 1 Then
+If Database = 0 Or Database = 1 Or Database = 5 Then
     'Filter für Typ oder Bprog
-    If Not cmbBpro.text = "alle" Then
-        If cmbBpro.text = "alle E" Then
+    If Not cmbTyp.text = "alle" Then
+        If cmbTyp.text = "alle E" Then
             sSQL(3) = "Typ  Like 'E%' "
-        ElseIf cmbBpro.text = "alle RR" Then
+        ElseIf cmbTyp.text = "alle RR" Then
             sSQL(3) = "Typ  Like 'RR%' "
-        ElseIf Database = 0 Then
-            sSQL(3) = "BProg = '" & cmbBpro.text & "'"
-        ElseIf Database = 1 Then
-            sSQL(3) = "Typ = '" & cmbBpro.text & "'"
+        ElseIf cmbTyp.text = "RR" Then
+            sSQL(3) = "Typ = 'RR'"
+        Else
+            sSQL(3) = "Typ Like '" & cmbTyp.text & "%'"
         End If
     End If
+    
+    
+    
+    If cmbBpro.text <> "alle" Then
+         If sSQL(3) = "" Then
+            sSQL(3) = "BProg = '" & cmbBpro.text & "'"
+         Else
+            sSQL(3) = sSQL(3) & " AND BProg = '" & cmbBpro.text & "'"
+         End If
+   End If
+
+    
+    'sSQL(3) = sSQL(3) & " AND BProg = '" & cmbBpro.text & "'"
 End If
 
-If Database > 1 Then
-If Not cmbBpro.text = "alle" Then
-    If cmbBpro.text = "alle E" Then
+If Database > 1 And Not Database = 5 Then
+If Not cmbTyp.text = "alle" Then
+    If cmbTyp.text = "alle E" Then
         sSQL(3) = "Typ  Like 'E%' "
-    ElseIf cmbBpro.text = "alle RR" Then
+    ElseIf cmbTyp.text = "alle RR" Then
         sSQL(3) = "Typ  Like 'RR%' "
-    ElseIf cmbBpro.text = "alle CEP" Then
+    ElseIf cmbTyp.text = "alle CEP" Then
         sSQL(3) = "(Typ  Like '%CEP%' OR Typ LIKE 'BLBOO%')"
-    ElseIf cmbBpro.text = "alle DScuti" Then
+    ElseIf cmbTyp.text = "alle DScuti" Then
        sSQL(3) = "(Typ  Like 'DSC%'OR Typ LIKE 'SXPHE%')"
     Else
-       sSQL(3) = "Typ LIKE '" & cmbBpro.text & "%'"
+       sSQL(3) = "Typ LIKE '" & cmbTyp.text & "%'"
     End If
 End If
 End If
@@ -558,11 +589,11 @@ Private Sub cmdStandard_Click()
  txtMonddist.text = INIGetValue(datei, "Standard", "Monddist")
  
  'BAV_Sterne oder BAV_sonstige?
- If Database = 0 Then
+ If Database = 0 Or Database = 5 Then _
     cmbBpro.text = INIGetValue(datei, "Standard", "BProg")
-  Else
-    cmbBpro.text = INIGetValue(datei, "Standard", "Typ")
- End If
+  'Else
+    cmbTyp.text = INIGetValue(datei, "Standard", "Typ")
+ 'End If
 
 
 End Sub
@@ -580,7 +611,7 @@ End If
 
  frmHaupt.show
  cmbBpro.Clear
- 
+ cmbTyp.Clear
  'BAV_Sterne oder BAV_sonstige?
  'Füllen der Combobox
  If Database = "" Then
@@ -597,22 +628,29 @@ cmbStbld.AddItem "alle"
  Next x
  cmbStbld.ListIndex = 0
    
-If Database = 0 Then
+If Database = 0 Or Database = 5 Then
  With cmbBpro
+ .AddItem "S10"
+ .AddItem "L10"
+ .AddItem "E10"
   .AddItem "20"
+  .AddItem "82"
   .AddItem "90"
   .AddItem "RR"
   .AddItem "ST"
   .AddItem "DS"
+  .AddItem "CF"
+  .AddItem "CT"
+  .AddItem "BAV"
   .AddItem "alle"
   .ListIndex = 0
   End With
-  Label4.Caption = "Beob Prog. :"
-  lblSpalte(8) = frmHaupt.grdergebnis.ColHeaderCaption(0, 8)
-  chkSpalte(9).Visible = False
+  'Label4.Caption = "Beob Prog. :"
+  'lblSpalte(8) = frmHaupt.grdergebnis.ColHeaderCaption(0, 8)
+  'chkSpalte(9).Visible = False
   
-ElseIf Database = 1 Then
-  With cmbBpro
+'ElseIf Database <= 1 Then
+  With cmbTyp
   .AddItem "E"
   .AddItem "EA"
   .AddItem "EB"
@@ -621,18 +659,18 @@ ElseIf Database = 1 Then
   .AddItem "RR"
   .AddItem "RRAB"
   .AddItem "RRC"
-  .AddItem "Son"
+  '.AddItem "Son"
   .AddItem "alle E"
   .AddItem "alle RR"
   .AddItem "alle"
   .ListIndex = 0
   End With
-  Label4.Caption = "      Typ. :"
+  'Label4.Caption = "      Typ. :"
   lblSpalte(8) = frmHaupt.grdergebnis.ColHeaderCaption(0, 9)
   chkSpalte(8).Visible = False
   
   ElseIf Database >= 2 Then
-  With cmbBpro
+  With cmbTyp
   .AddItem "EA"
   .AddItem "EB"
   .AddItem "EW"
@@ -671,11 +709,11 @@ End If
  cmbStbld.text = INIGetValue(datei, "filter", "Sternbild")
  
  'BAV_Sterne oder BAV_sonstige?
- If Database = 0 Then
+ If Database = 0 Or Database = 5 Then _
     cmbBpro.text = INIGetValue(datei, "filter", "BProg")
-  Else 'If Database = 1 Then
-    cmbBpro.text = INIGetValue(datei, "filter", "Typ")
- End If
+  'Else 'If Database = 1 Then
+    cmbTyp.text = INIGetValue(datei, "filter", "Typ")
+ 'End If
  
  
  cmdStandard.Enabled = True
@@ -698,7 +736,11 @@ End If
 'Füllen der Combobox erledigt
 lblSpalte(10) = frmHaupt.grdergebnis.ColHeaderCaption(0, 10)
 lblSpalte(11) = frmHaupt.grdergebnis.ColHeaderCaption(0, 11)
-
+If Database <> 0 And Database <> 5 Then
+ Label6.Enabled = False: cmbBpro.Enabled = False
+ Else
+ Label5.Visible = True: cmbBpro.Visible = True
+End If
 End Sub
 
 
