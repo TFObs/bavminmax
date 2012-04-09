@@ -448,8 +448,8 @@ Set rssingleabfrage = New ADODB.Recordset
                 .Provider = "microsoft.Jet.oledb.4.0"
                 If x = 0 Then
                     .ConnectionString = pfad & "\Bav_sterne.mdb"
-                ElseIf x = 1 Then
-                    .ConnectionString = pfad & "\BAV_sonstige.mdb"
+                'ElseIf x = 1 Then
+                  '  .ConnectionString = pfad & "\BAV_sterne.mdb" 'sonstige.mdb"
                 End If
                 .Open
              End With
@@ -673,7 +673,7 @@ frmHaupt.Form_Load
 frmHaupt.cmbGrundlage.ListIndex = frmHaupt.cmbGrundlage.ListCount - 1
 frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True
 frmHaupt.cmbGrundlage.Enabled = True
-Unload frmSterninfo
+Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
 Unload frmAladin
 Unload frmBerechnungsfilter
 
@@ -811,7 +811,7 @@ End If
  End If
  Next
  
-Unload frmSterninfo
+Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
 Unload frmAladin
 Unload frmBerechnungsfilter
 

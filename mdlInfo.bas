@@ -48,6 +48,8 @@ With frmSterninfo
  
 
 infostern = grid.TextMatrix(grid.Row, 2)
+
+
 infostbld = Right(infostern, 3)
 infostern = Trim(Left(infostern, Len(infostern) - 3))
 sSQLi = "Kürzel = '" & infostern & "' AND Stbld = '" & infostbld & "'"
@@ -56,6 +58,7 @@ If Not grid.TextMatrix(grid.Row, 8) = "" Then _
 sSQLi = sSQLi & " AND BP = '" & grid.TextMatrix(grid.Row, 8) & "'"
 
 Set Abf = rsa
+DoEvents
 Abf.Filter = sSQLi
 
 On Error Resume Next
@@ -68,6 +71,7 @@ With frmSterninfo
         .lblTyp.Caption = Abf.Fields("Typ").Value
         .lblEpoche.Caption = Format(Abf.Fields("Epoche").Value, "#.0000")
         .lblPeriode.Caption = Format(Abf.Fields("Periode").Value, "#.000000")
+        .lblPeriode.ToolTipText = Abf.Fields("Periode").Value
         .lblQuelle.Caption = Abf.Fields("BP").Value
         If .lblQuelle.Caption = "ASAS" Then
          .Label8.Caption = "Ampl.:"
@@ -76,6 +80,7 @@ With frmSterninfo
         End If
         'If Database < 2 Then
             .lblLBeo.Caption = Abf.Fields("LBeob").Value
+            .lblLBeo.ToolTipText = Format(JulinDat(.lblLBeo.Caption + 2400000), "dd.mm.yyyy hh:mm:ss")
             'Else
             '.lblLBeo.Caption = "k.A."
         'End If
@@ -107,7 +112,8 @@ With frmSterninfo
         If umwand(1) = "24" Then umwand(1) = "00"
         .lblKoord.Caption = "RA       " & umwand(1) & ":" & umwand(2) & ":" & umwand(3) & vbCrLf & _
         "DEC   " & umwand(4) & ":" & umwand(5) & ":" & umwand(6)
-
+        If frmHaupt.cmdInfo.Enabled And frmSterninfo.Visible Then frmHaupt.cmdStarChart.Visible = True
+       
  End With
  
         If frmAladin.Visible Then

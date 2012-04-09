@@ -300,13 +300,13 @@ End Function
 
 'Berechnung des Sonnenauf- und -untergangs
 'Formeln gem‰ﬂ Dr.R. Brodbeck, siehe http://lexikon.astronomie.info/zeitgleichung/
-Public Function AufUnter(daten, Jahr, zeiger)
+Public Function AufUnter(daten, Jahr) ', zeiger)
 Dim breite As Double, l‰nge As Double
 Dim b, T, jetzt, ds
 Dim sonnenaufgang As Double, sonnenuntergang As Double
 Dim zeitdifferenz As Double, zeitgleichung As Double
 Dim aufgangUT As Double, untgangUT As Double
-
+Dim AU(2)
 'Ermitteln der geogr. Koordinaten aus Registry
 l‰nge = INIGetValue(App.Path & "\Prog.ini", "Ort", "L‰nge") 'Berlin =13.366666
 breite = INIGetValue(App.Path & "\Prog.ini", "Ort", "Breite") 'Berlin =52.55
@@ -355,10 +355,13 @@ aufgangUT = sonnenaufgang - zeitgleichung - l‰nge / 15
 untgangUT = sonnenuntergang - zeitgleichung - l‰nge / 15
 
 ' Ausgabe der Ergebnisse
-Select Case zeiger
-Case 0: AufUnter = aufgangUT / 24
-Case 1: AufUnter = untgangUT / 24
-End Select
+'Select Case zeiger
+'Case 0: AufUnter = aufgangUT / 24
+'Case 1: AufUnter = untgangUT / 24
+'End Select
+AU(0) = aufgangUT / 24
+AU(1) = untgangUT / 24
+AufUnter = AU
 End Function
 
 '==============================================================================================================

@@ -2,7 +2,7 @@ Attribute VB_Name = "mdlDrucken"
 Option Explicit
 
 Private Declare Function SendMessage Lib "user32" Alias _
-        "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As _
+        "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As _
         Long, ByVal wParam As Long, ByVal lParam As Long) _
         As Long
         
@@ -61,7 +61,7 @@ Sub PrintGrid(grid As MSHFlexGrid, ByVal LeftMargin As Single, _
     'mit wParam <> 0 kann überprüft werden
     'ob das Control OPP unterstützt, wenn ja wird
     '456654 (VP_YESIDO) zurückgeliefert
-    lReturn = SendMessage(grid.hwnd, VP_FORMATRANGE, 1, 0)
+    lReturn = SendMessage(grid.hWnd, VP_FORMATRANGE, 1, 0)
     
     If lReturn = VP_YESIDO Then
       
@@ -104,7 +104,7 @@ Sub PrintGrid(grid As MSHFlexGrid, ByVal LeftMargin As Single, _
         Else
           Printer.Print Format(Date, "DD.MM.YYYY")
         End If
-        lReturn = SendMessage(grid.hwnd, VP_FORMATRANGE, 0, _
+        lReturn = SendMessage(grid.hWnd, VP_FORMATRANGE, 0, _
                               VarPtr(tRange))
         
         If lReturn < 0 Then
@@ -117,7 +117,7 @@ Sub PrintGrid(grid As MSHFlexGrid, ByVal LeftMargin As Single, _
       Printer.EndDoc
   
       'Reset
-      lReturn = SendMessage(grid.hwnd, VP_FORMATRANGE, 0, 0)
+      lReturn = SendMessage(grid.hWnd, VP_FORMATRANGE, 0, 0)
     End If
     
     If GRef Then
