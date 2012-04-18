@@ -66,7 +66,9 @@ On Error Resume Next
 'Füllen der Labels aus dem Recordset
 With frmSterninfo
         .lblStern.Caption = infostern & " " & infostbld
+        .lblStern.ToolTipText = .lblStern.Caption
         frmAladin.txtStern.text = .lblStern.Caption
+        frmHaupt.txtSingleStar.text = .lblStern.Caption: frmHaupt.ListRecherche.Clear
          If frmAladin.chkAladDirekt.Value = 1 Then frmaladain.txtObj.text = frmAladin.txtStern.text
         .lblTyp.Caption = Abf.Fields("Typ").Value
         .lblEpoche.Caption = Format(Abf.Fields("Epoche").Value, "#.0000")
@@ -79,7 +81,7 @@ With frmSterninfo
          .Label8.Caption = "Min I:"
         End If
         'If Database < 2 Then
-            .lblLBeo.Caption = Abf.Fields("LBeob").Value
+            .lblLBeo.Caption = Format(Abf.Fields("LBeob").Value, "#.00")
             .lblLBeo.ToolTipText = Format(JulinDat(.lblLBeo.Caption + 2400000), "dd.mm.yyyy hh:mm:ss")
             'Else
             '.lblLBeo.Caption = "k.A."
@@ -123,6 +125,7 @@ With frmSterninfo
           End If
         
         frmAladin.txtStern.text = frmSterninfo.lblStern.Caption
+        frmHaupt.txtSingleStar.text = frmSterninfo.lblStern.Caption: frmHaupt.ListRecherche.Clear
         If frmAladin.chkAladDirekt.Value = 1 Then frmaladain.txtObj.text = frmAladin.txtStern.text
        frmAladin.cmdDSS.Visible = True
         End If

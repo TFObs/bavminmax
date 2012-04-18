@@ -59,7 +59,8 @@ Public dicStbld As Dictionary
     Public x
     Public sSQL
     Public Database
-    Public sorter As Byte
+    Public sorter As Boolean
+    Public SternName As String, maxSternLen As Byte
 
 'Deklaration: Globale Form API-Konstanten
 Public Const SWP_NOMOVE As Long = &H2

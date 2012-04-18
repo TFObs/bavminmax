@@ -79,7 +79,7 @@ Dim text As String
        
         'Füllen der Zellen
         For y = 0 To frmHaupt.grdergebnis.Rows - 1
-             For x = 0 To frmHaupt.grdergebnis.Cols - 2
+             For x = 0 To frmHaupt.grdergebnis.Cols - 1
                 text = frmHaupt.grdergebnis.TextMatrix(y, x)
                 grdGross.TextMatrix(y, x) = text
             Next x
@@ -87,7 +87,7 @@ Dim text As String
         
         For y = 1 To frmHaupt.grdergebnis.Rows - 1
             frmHaupt.grdergebnis.Row = y: grdGross.Row = y
-            For x = 1 To 11
+            For x = 1 To 13
             frmHaupt.grdergebnis.col = x: grdGross.col = x
             grdGross.CellBackColor = frmHaupt.grdergebnis.CellBackColor
             Next x
@@ -145,7 +145,7 @@ End Sub
       For nRow = 0 To .Rows - 1
         oLabel.Caption = .TextMatrix(nRow, nCol)
         nWidth = oLabel.Width
-        If nWidth + 100 > nMaxWidth Then nMaxWidth = nWidth + 250
+        If nWidth + 100 > nMaxWidth Then nMaxWidth = nWidth + 500
       Next nRow
       
       .ColWidth(nCol) = nMaxWidth
@@ -164,6 +164,7 @@ Private Sub grdGross_MouseUp(Button As Integer, _
     Dim nRowCur As Long
     Dim nColCur As Long
     Dim data As String
+    Dim ColCounter As Integer, c2s, i As Integer
     
     With grdGross
       ' aktuelle Zelle "merken"
@@ -202,38 +203,98 @@ Private Sub grdGross_MouseUp(Button As Integer, _
   If Button = vbLeftButton Then
   
   If grdGross.MouseRow = 0 Then
-    grdgross_sortieren (grdGross.col)
-      End If
+        ColCounter = Abs(grdGross.col - grdGross.ColSel) + 1
+        ReDim c2s(ColCounter)
+        For i = 1 To ColCounter
+            If i + grdGross.col - 1 = 3 Or i + grdGross.col - 1 = 4 Then
+                c2s(i - 1) = "JDEreignis"
+            Else
+                c2s(i - 1) = grdGross.TextMatrix(0, i + grdGross.col - 1)
+            End If
+        Next i
+            Call gridGrossSortieren(c2s)
+        'If grdGross.col = 3 Or grdGross.col = 4 Then grdGross.col = 13
+         '   grdgross_sortieren (grdGross.col)
+        'End If
   End If
- If grdGross.col = 1 Then
-  Call Infofüllen(grdGross)
-  End If
+ End If
+ If grdGross.col = 1 Then Call Infofüllen(grdGross)
+  
+End Sub
+
+Public Sub gridGrossSortieren(cols2sort)
+Dim Abf As ADODB.Recordset
+Dim i As Integer
+Dim abfsource As String, sortstring As String
+Dim fs As New FileSystemObject
+  Set Abf = New ADODB.Recordset
+  
+    If Not fs.FileExists(pfad & "\ergebnisse.dat") Then Exit Sub
+    
+    abfsource = IIf(fs.FileExists(pfad & "\filter.dat"), pfad & "\filter.dat", pfad & "\ergebnisse.dat")
+    
+    If Abf.State = adStateOpen Then Abf.Close
+    
+    'Recordset laden
+    With Abf
+        .CursorType = adOpenKeyset
+        .LockType = adLockReadOnly
+        .Open abfsource, , , adLockOptimistic
+    End With
+    
+    If Abf.RecordCount = 0 Then Exit Sub
+    
+    sortstring = ""
+    If UBound(cols2sort) = 1 Then
+        sortstring = IIf(sorter = True, cols2sort(0) & " ASC", cols2sort(0) & " DESC")
+    Else
+        For i = 0 To UBound(cols2sort) - 2
+            sortstring = IIf(sorter = True, sortstring & cols2sort(i) & " ASC,", sortstring & cols2sort(i) & " DESC,")
+        Next i
+    
+        sortstring = IIf(sorter = True, sortstring & cols2sort(i) & " ASC", sortstring & cols2sort(i) & " DESC")
+        
+    End If
+    
+    sorter = IIf(sorter = True, False, True)
+    
+    Abf.Sort = sortstring
+    
+    Set grdGross.DataSource = Abf
+    grdGross.ColAlignmentFixed = flexAlignCenterCenter
+    grdGross.ColAlignment = 4
+    Abf.Close
+    Set Abf = Nothing
+    Set fs = Nothing
+    
+    If Database = 4 Then Call frmHaupt.zellfarbe(grdGross.Row)
 End Sub
 
 'Sortieren des Grid unabhängig vom Hauptfenster
 Public Sub grdgross_sortieren(ByVal ColIndex As Integer)
     'Sortieren Datagrid
     frmGridGross.grdGross.col = ColIndex
-    If ColIndex < 6 Or ColIndex = 9 Then
-    If sorter = 7 Then
-         grdGross.Sort = 8
-         sorter = 8
+    If ColIndex < 6 Or ColIndex = 9 Or ColIndex = 13 Then
+        If sorter = 7 Then
+            grdGross.Sort = 8
+            sorter = 8
         Else
-        grdGross.Sort = 7
-        sorter = 7
+            grdGross.Sort = 7
+            sorter = 7
         End If
     End If
     
-    If ColIndex >= 6 And Not ColIndex = 9 Then
-    If sorter = 7 Then
-        grdGross.Sort = 4
-        sorter = 8
-     Else
-     grdGross.Sort = 3
-     sorter = 7
-     End If
-     End If
-            
+    If ColIndex >= 6 And Not ColIndex = 9 And Not ColIndex = 13 Then
+        If sorter = 7 Then
+            grdGross.Sort = 4
+            sorter = 8
+        Else
+            grdGross.Sort = 3
+            sorter = 7
+        End If
+    End If
+     
+ 
    
 End Sub
 

@@ -672,8 +672,8 @@ End Sub
 
 
 Public Sub Form_Load()
-result = CheckInetConnection(Me.hWnd)
-If result = False Then Exit Sub
+'result = CheckInetConnection(Me.hWnd)
+'If result = False Then Exit Sub
 
 cmdDSS.Visible = False
 
