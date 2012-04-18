@@ -15,18 +15,18 @@ Begin VB.Form frmBerechnungsfilter
    ShowInTaskbar   =   0   'False
    Begin VB.Frame fraSpalten 
       Caption         =   "Spalten ein- und ausblenden"
-      Height          =   3735
+      Height          =   3855
       Left            =   120
       TabIndex        =   13
-      Top             =   4320
-      Width           =   2535
+      Top             =   4200
+      Width           =   2655
       Begin VB.CheckBox chkSpalte 
          Caption         =   "Check1"
          Height          =   255
          Index           =   11
          Left            =   1680
          TabIndex        =   34
-         Top             =   3360
+         Top             =   3480
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -36,7 +36,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   10
          Left            =   1680
          TabIndex        =   33
-         Top             =   3015
+         Top             =   3135
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -46,7 +46,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   9
          Left            =   1680
          TabIndex        =   32
-         Top             =   2670
+         Top             =   2790
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -56,7 +56,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   8
          Left            =   1680
          TabIndex        =   31
-         Top             =   2670
+         Top             =   2790
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -66,7 +66,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   7
          Left            =   1680
          TabIndex        =   30
-         Top             =   2325
+         Top             =   2445
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -76,7 +76,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   6
          Left            =   1680
          TabIndex        =   29
-         Top             =   1980
+         Top             =   2100
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -86,7 +86,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   5
          Left            =   1680
          TabIndex        =   28
-         Top             =   1620
+         Top             =   1740
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -96,7 +96,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   4
          Left            =   1680
          TabIndex        =   27
-         Top             =   1275
+         Top             =   1395
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -106,7 +106,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   3
          Left            =   1680
          TabIndex        =   26
-         Top             =   930
+         Top             =   1050
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -116,7 +116,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   2
          Left            =   1680
          TabIndex        =   25
-         Top             =   585
+         Top             =   705
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -126,7 +126,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   1
          Left            =   1680
          TabIndex        =   24
-         Top             =   240
+         Top             =   360
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -137,7 +137,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   11
          Left            =   360
          TabIndex        =   23
-         Top             =   3360
+         Top             =   3480
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -147,7 +147,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   10
          Left            =   360
          TabIndex        =   22
-         Top             =   3015
+         Top             =   3135
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -157,7 +157,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   8
          Left            =   360
          TabIndex        =   21
-         Top             =   2670
+         Top             =   2790
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -167,7 +167,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   7
          Left            =   360
          TabIndex        =   20
-         Top             =   2325
+         Top             =   2445
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -177,7 +177,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   6
          Left            =   360
          TabIndex        =   19
-         Top             =   1980
+         Top             =   2100
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -187,7 +187,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   5
          Left            =   360
          TabIndex        =   18
-         Top             =   1620
+         Top             =   1740
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -197,7 +197,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   4
          Left            =   360
          TabIndex        =   17
-         Top             =   1275
+         Top             =   1395
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -207,7 +207,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   3
          Left            =   360
          TabIndex        =   16
-         Top             =   930
+         Top             =   1050
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -217,7 +217,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   2
          Left            =   360
          TabIndex        =   15
-         Top             =   585
+         Top             =   705
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -227,7 +227,7 @@ Begin VB.Form frmBerechnungsfilter
          Index           =   1
          Left            =   360
          TabIndex        =   14
-         Top             =   240
+         Top             =   360
          Width           =   1110
       End
    End
@@ -244,19 +244,29 @@ Begin VB.Form frmBerechnungsfilter
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   720
+      Left            =   1200
       Style           =   1  'Grafisch
       TabIndex        =   10
       ToolTipText     =   "Standardwerte laden"
-      Top             =   600
+      Top             =   120
       Width           =   1455
    End
    Begin VB.Frame frmFilter 
-      Height          =   2895
+      Height          =   3015
       Left            =   120
       TabIndex        =   2
-      Top             =   960
+      Top             =   600
       Width           =   2655
+      Begin VB.TextBox txtMag 
+         Alignment       =   2  'Zentriert
+         BackColor       =   &H00C0FFFF&
+         Height          =   285
+         Left            =   1560
+         TabIndex        =   40
+         Top             =   120
+         Visible         =   0   'False
+         Width           =   495
+      End
       Begin VB.ComboBox cmbBpro 
          BackColor       =   &H00C0FFFF&
          Height          =   315
@@ -319,6 +329,16 @@ Begin VB.Form frmBerechnungsfilter
          TabIndex        =   4
          Top             =   720
          Width           =   495
+      End
+      Begin VB.Label Label7 
+         Alignment       =   2  'Zentriert
+         Caption         =   "Helligkeit :  >                 "
+         Height          =   255
+         Left            =   480
+         TabIndex        =   39
+         Top             =   120
+         Visible         =   0   'False
+         Width           =   1815
       End
       Begin VB.Label Label6 
          Caption         =   "Beob Prog. :"
@@ -389,17 +409,17 @@ Begin VB.Form frmBerechnungsfilter
       Style           =   1  'Grafisch
       TabIndex        =   1
       ToolTipText     =   "Filter anwenden"
-      Top             =   3960
+      Top             =   3720
       Width           =   1695
    End
    Begin VB.CommandButton cmdClose 
       Caption         =   "<<"
-      Height          =   495
-      Left            =   840
+      Height          =   375
+      Left            =   120
       TabIndex        =   0
       ToolTipText     =   "Fenster schließen, Filter aufheben"
-      Top             =   0
-      Width           =   1215
+      Top             =   120
+      Width           =   855
    End
    Begin VB.Timer Timer1 
       Interval        =   10
@@ -461,6 +481,7 @@ If chkSpalte(Index).Value = 0 Then
 ElseIf chkSpalte(Index).Value = 1 Then
     Select Case Index
     Case Is = 1: frmHaupt.grdergebnis.ColWidth(1) = 800
+    Case Is = 2: frmHaupt.grdergebnis.ColWidth(2) = maxSternLen * 105
     Case Is = 5: frmHaupt.grdergebnis.ColWidth(5) = 1200
     Case Is = 6: frmHaupt.grdergebnis.ColWidth(6) = 600
     Case Is = 7: frmHaupt.grdergebnis.ColWidth(7) = 600
@@ -499,7 +520,7 @@ If IsNumeric(txthoe.text) And IsNumeric(txtAzi_u.text) And _
     & "es sind nur numerische Werte erlaubt.", vbExclamation, "Fehleingabe!"
         Exit Sub
 End If
-ReDim sSQL(4)
+ReDim sSQL(5)
 'Aufstellen des Abfragefilters
 If Not cmbStbld.text = "alle" Then
      sSQL(0) = "Stbld = '" & cmbStbld.text & "'"
@@ -565,6 +586,7 @@ If Not cmbTyp.text = "alle" Then
 End If
 End If
  
+'sSQL(4) = "Max <= " & CDbl(txtMag.text) & " OR MinI <= " & CDbl(txtMag.text)
 
 frmHaupt.gridfüllen (sSQL)
 frmGridGross.grossGrid_füllen
@@ -750,7 +772,7 @@ If frmAladin.Visible = False Then
 sSQL = ""
 frmHaupt.gridfüllen
 End If
-
+Timer1.Enabled = False
 End Sub
 
 

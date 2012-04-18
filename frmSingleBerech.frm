@@ -801,7 +801,13 @@ End If
 'Unload Me
 
  frmHaupt.Form_Load
+ If fs.FileExists(App.Path & "\Einzel.dat") = True Then
+ If Not IsInList("Einzeln") Then _
+    frmHaupt.cmbGrundlage.AddItem ("Einzeln")
+ End If
+ 
  frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True
+ frmHaupt.cmdErgebnis.Enabled = False: frmHaupt.VTabs.TabEnabled(2) = False
  frmHaupt.cmbGrundlage.Enabled = True
  
  For x = 1 To frmHaupt.cmbGrundlage.ListCount

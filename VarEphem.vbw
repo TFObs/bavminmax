@@ -18,3 +18,4 @@ frmSingleBerech = 0, 0, 547, 460, , 80, 103, 627, 563, C
 MouseScroll = 110, 110, 599, 570, 
 mdlBAV_BeobAufruf = 44, 44, 739, 487, 
 frmPlanetarium = 132, 174, 893, 697, , 110, 145, 871, 668, C
+frmEigene = 88, 116, 849, 639, , 66, 87, 827, 610, C

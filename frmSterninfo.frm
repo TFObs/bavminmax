@@ -560,6 +560,14 @@ End Sub
 
 
 
+
+
+
+
+Private Sub Form_Unload(Cancel As Integer)
+Timer1.Enabled = False
+End Sub
+
 'Andocken an Hauptfenster
 Private Sub Timer1_Timer()
   Dim WPM As WINDOWPLACEMENT
