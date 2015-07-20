@@ -1,0 +1,1 @@
+Berechnet Extremwerte von Variablen Sternen auf Grundlage von externen Datenbanken
