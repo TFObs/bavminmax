@@ -33,7 +33,9 @@ End Function
 Function SunPosition(TDT)
     Dim D, eg, wg, e, a
     Dim diameter0, MSun, nu
-    Dim SonnenCoord
+    Dim SonnenCoord(8)
+    Dim SonneEqu
+    
    D = TDT - 2447891.5
   
   eg = 279.403303 * Mdeg
@@ -54,11 +56,14 @@ Function SunPosition(TDT)
   suncoor.distance = suncoor.distance * a         ' distance in km
   suncoor.parallax = 6378.137 / suncoor.distance  ' horizonal parallax
 
-  SonnenCoord = Ecl2Equ(suncoor.lon, suncoor.Lat, TDT)
+  'SonnenCoord = Ecl2Equ(suncoor.lon, suncoor.Lat, TDT)
+  SonneEqu = Ecl2Equ(suncoor.lon, suncoor.Lat, TDT)
   
   suncoor.Sign = Sign(suncoor.lon)
   
-  ReDim Preserve SonnenCoord(8)
+  'ReDim Preserve SonnenCoord(8)
+  SonnenCoord(0) = SonneEqu(0)
+  SonnenCoord(1) = SonneEqu(1)
   SonnenCoord(2) = suncoor.lon
   SonnenCoord(3) = suncoor.AnomalyMean
   SonnenCoord(4) = suncoor.Sign
@@ -76,7 +81,7 @@ Dim phases, mainPhase, p
 Dim MMoon, N, c, Ev, Ae, A3
 Dim MMoon2, Ec, A4, l2, v, l3, N2
 Dim orbitlon, moonAge, phase, moonPhase
-Dim MondCoord
+Dim MondCoord(8), MondEqu
    D = TDT - 2447891.5
   
   'Mean Moon orbit elements as of 1990.0
@@ -110,7 +115,9 @@ Dim MondCoord
   MoonCoor.Lat = arcsin(Sin(l3 - N2) * Sin(i))
   orbitlon = l3
   
-  MondCoord = Ecl2Equ(MoonCoor.lon, MoonCoor.Lat, TDT)
+  'MondCoord = Ecl2Equ(MoonCoor.lon, MoonCoor.Lat, TDT)
+  MondEqu = Ecl2Equ(MoonCoor.lon, MoonCoor.Lat, TDT)
+  
   'relative distance to semi mayor axis of lunar oribt
   MoonCoor.distance = (1 - (e ^ 2)) / (1 + e * Cos(MMoon2 + Ec))
   MoonCoor.diameter = diameter0 / MoonCoor.distance ' angular diameter in radians
@@ -134,7 +141,9 @@ Dim MondCoord
   moonPhase = phases(p)
   
   MoonCoor.Sign = Sign(MoonCoor.lon)
-  ReDim Preserve MondCoord(8)
+  'ReDim Preserve MondCoord(8)
+  MondCoord(0) = MondEqu(0)
+  MondCoord(1) = MondEqu(1)
   MondCoord(2) = moonPhase
   MondCoord(3) = phase
   MondCoord(4) = moonAge * Mrad / 360 * 29.530588853
@@ -316,7 +325,7 @@ End Function
 ' JD is the Julian Date of 0h UTC time (midnight)
 Function RiseSet(jd0UT, coor1, coor2, lon, Lat, timeinterval)
 Dim rise(3), rise1, rise2
-Dim T0, T02, decMean, psi, alt, Y, dt
+Dim T0, T02, decMean, psi, alt, y, dt
    rise1 = GMSTRiseSet(coor1, lon, Lat)
    rise2 = GMSTRiseSet(coor2, lon, Lat)
   
@@ -357,8 +366,8 @@ Dim T0, T02, decMean, psi, alt, Y, dt
    psi = arccos(Sin(Lat) / Cos(decMean))
   ' altitude of sun center: semi-diameter, horizontal parallax and (standard) refraction of 34'
    alt = 0.5 * coor1(7) - coor1(8) + 34# / 60 * Mdeg
-   Y = arcsin(Sin(alt) / Sin(psi))
-   dt = 240 * Mrad * Y / Cos(decMean) / 3600 ' time correction due to refraction, parallax
+   y = arcsin(Sin(alt) / Sin(psi))
+   dt = 240 * Mrad * y / Cos(decMean) / 3600 ' time correction due to refraction, parallax
 
   rise(1) = GMST2UT(jd0UT, InterpolateGMST(T0, rise1(1), rise2(1), timeinterval))
   rise(0) = GMST2UT(jd0UT, InterpolateGMST(T0, rise1(0), rise2(0), timeinterval) - dt)
@@ -484,17 +493,17 @@ End Function
 
 
 
-Public Function Atan2(ByVal Y As Double, ByVal x As Double) As Double
+Public Function Atan2(ByVal y As Double, ByVal x As Double) As Double
    Dim signy As Integer
-   signy = Sgn(Y)
+   signy = Sgn(y)
    If signy = 0 Then signy = 1 ' removes the problem when Y=0
    If Abs(x) < 0.0000001 Then
         ' (direct comparison with zero doesn't always work)
-        Atan2 = Sgn(Y) * 1.5707963267949
+        Atan2 = Sgn(y) * 1.5707963267949
     ElseIf x < 0 Then
-        Atan2 = Atn(Y / x) + signy * Mpi
+        Atan2 = Atn(y / x) + signy * Mpi
     Else
-        Atan2 = Atn(Y / x)
+        Atan2 = Atn(y / x)
     End If
 End Function
 

@@ -250,7 +250,9 @@ PBox1.Circle (40 * Cos(xkoord), 40 * Sin(xkoord)), 3, QBColor(15)
 End With
 With frmHelioz
 zeit = CDbl(.txtstunde.text + .txtminute.text / 60 + .txtsekunde.text / 3600)
-stez = STZT(.txtTag.text, .txtmonat.text, .txtjahr.text, zeit, 10)
+gLänge = INIGetValue(App.Path & "\Prog.ini", "Ort", "Länge")
+
+stez = STZT(.txtTag.text, .txtmonat.text, .txtjahr.text, zeit, gLänge)
 lblstz.Caption = "lokale Sternzeit : " & Format(stez, "hh:mm:ss") _
 & " [UT]"
 End With

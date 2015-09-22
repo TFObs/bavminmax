@@ -1,0 +1,37 @@
+Copyright Jörg Hanisch (c) 2006-2012
+
+Dieses Programm ist die Vollversion des Programmes VarEphem.
+Es ist nicht in irgendeinem kommerziellen Interesse geschrieben worden
+Daher gebe ich dieses Programm als "Freeware" weiter.
+
+Ungeachtet dessen behalte ich mir alle Rechte vor.
+VarEphem ist Copyright© by Jörg Hanisch.
+
+Dieses Programm ist Freeware.
+Es darf in keiner Weise verändert, dekompiliert oder gepatched werden.
+Eine kommerzielle Nutzung ist ausdrücklich nicht gestattet!
+
+Es darf nur komplett und in ungeänderter Form weitergegeben oder der
+Öffentlichkeit zugänglich gemacht werden. Dieses bedeutet konkret
+die unveränderte Installationsroutine VarEphem_installer.exe,
+(optional mit der Hilfedatei VarEphem.chm, die zusätzlich in der 
+Installationsdatei enthalten ist und diese Datei.)
+
+Ich sichere keine Eigenschaften zu, noch wird irgendwelche
+Haftung bei der Benutzung dieses Programmes übernommen.
+Die Benutzung geschieht auf eigene Gefahr und Verantwortung!!
+
+Für etwaige Schäden, die durch die Benutzung dieses Programmes entstehen
+kann keine Haftung übernommen werden.
+
+Sie sind im Begriff die Version 1.1.0 Rev.5 des Programmes zu installieren.
+
+Mit der Nutzung des Programms werden meine Copyrights anerkannt!
+
+Gescher, 01.05.2012
+				Jörg Hanisch
+
+
+
+
+

@@ -32,7 +32,7 @@ Private Declare Function InternetOpenUrl Lib "wininet" Alias "InternetOpenUrlA" 
     ort As String
  End Type
 
-Dim fehler As fehlerloc
+Public fehler As fehlerloc
 
 Function GetBAVStardata(ByVal Temppath As String, ByVal sURL As String)
     Dim hOpen As Long, hFile As Long, sBuffer As String * 4096, ByteSize As Long

@@ -7,7 +7,7 @@ Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "tabctl32.ocx"
 Begin VB.Form frmHaupt 
    BorderStyle     =   1  'Fest Einfach
    Caption         =   "VarEphem"
-   ClientHeight    =   8145
+   ClientHeight    =   8130
    ClientLeft      =   150
    ClientTop       =   840
    ClientWidth     =   6855
@@ -15,7 +15,7 @@ Begin VB.Form frmHaupt
    LinkTopic       =   "Form3"
    MaxButton       =   0   'False
    PaletteMode     =   1  'ZReihenfolge
-   ScaleHeight     =   8145
+   ScaleHeight     =   8130
    ScaleMode       =   0  'Benutzerdefiniert
    ScaleWidth      =   6907.036
    StartUpPosition =   3  'Windows-Standard
@@ -25,7 +25,7 @@ Begin VB.Form frmHaupt
       Left            =   4200
       Picture         =   "frmHaupt.frx":08CA
       Style           =   1  'Grafisch
-      TabIndex        =   45
+      TabIndex        =   42
       ToolTipText     =   "Horizont-Ansicht erstellen"
       Top             =   720
       Visible         =   0   'False
@@ -41,19 +41,18 @@ Begin VB.Form frmHaupt
       _ExtentY        =   11668
       _Version        =   393216
       Tabs            =   4
-      Tab             =   1
       TabsPerRow      =   4
       TabHeight       =   520
       TabCaption(0)   =   "Beobachtungsort"
       TabPicture(0)   =   "frmHaupt.frx":397F
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "frmOrt"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Abfrage"
       TabPicture(1)   =   "frmHaupt.frx":399B
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Rahmen(1)"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Ergebnisse"
       TabPicture(2)   =   "frmHaupt.frx":39B7
@@ -78,14 +77,14 @@ Begin VB.Form frmHaupt
          EndProperty
          Height          =   6135
          Left            =   -74880
-         TabIndex        =   35
+         TabIndex        =   32
          Top             =   380
          Width           =   6315
          Begin VB.ListBox ListRecherche 
             Height          =   1035
             Left            =   480
             MultiSelect     =   1  '1 -Einfach
-            TabIndex        =   39
+            TabIndex        =   36
             Top             =   2400
             Width           =   5055
          End
@@ -94,7 +93,7 @@ Begin VB.Form frmHaupt
             Enabled         =   0   'False
             Height          =   615
             Left            =   2280
-            TabIndex        =   38
+            TabIndex        =   35
             Top             =   3600
             Width           =   1455
          End
@@ -102,7 +101,7 @@ Begin VB.Form frmHaupt
             Caption         =   "Suchen"
             Height          =   615
             Left            =   3960
-            TabIndex        =   37
+            TabIndex        =   34
             Top             =   1320
             Width           =   2055
          End
@@ -119,7 +118,7 @@ Begin VB.Form frmHaupt
             EndProperty
             Height          =   405
             Left            =   480
-            TabIndex        =   36
+            TabIndex        =   33
             Top             =   1440
             Width           =   3375
          End
@@ -127,7 +126,7 @@ Begin VB.Form frmHaupt
             Caption         =   "Stern     Stbld        Datenbank       Epoche                   Periode"
             Height          =   255
             Left            =   480
-            TabIndex        =   40
+            TabIndex        =   37
             Top             =   2160
             Width           =   5055
          End
@@ -136,16 +135,15 @@ Begin VB.Form frmHaupt
          Caption         =   "Berechnungszeitraum"
          Height          =   6135
          Index           =   1
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   26
-         ToolTipText     =   "Internet-Recherche"
          Top             =   380
          Width           =   6315
          Begin VB.TextBox Text1 
             Alignment       =   2  'Zentriert
             Height          =   375
             Left            =   4440
-            TabIndex        =   44
+            TabIndex        =   41
             Text            =   "1"
             Top             =   1560
             Width           =   360
@@ -153,7 +151,7 @@ Begin VB.Form frmHaupt
          Begin MSComCtl2.UpDown UpDown1 
             Height          =   375
             Left            =   4800
-            TabIndex        =   43
+            TabIndex        =   40
             Top             =   1560
             Width           =   255
             _ExtentX        =   450
@@ -175,7 +173,7 @@ Begin VB.Form frmHaupt
          Begin MSComCtl2.DTPicker DTPicker2 
             Height          =   375
             Left            =   1680
-            TabIndex        =   42
+            TabIndex        =   39
             Top             =   2160
             Width           =   1455
             _ExtentX        =   2566
@@ -190,7 +188,7 @@ Begin VB.Form frmHaupt
          Begin MSComCtl2.DTPicker DTPicker1 
             Height          =   375
             Left            =   1680
-            TabIndex        =   41
+            TabIndex        =   38
             Top             =   960
             Width           =   1455
             _ExtentX        =   2566
@@ -201,44 +199,6 @@ Begin VB.Form frmHaupt
             CalendarTitleForeColor=   16777215
             Format          =   16515075
             CurrentDate     =   2
-         End
-         Begin VB.ComboBox cmbDauer 
-            Height          =   315
-            Left            =   4560
-            TabIndex        =   30
-            ToolTipText     =   "Bitte Anzahl der zu berechnenden Tage auswählen"
-            Top             =   4680
-            Visible         =   0   'False
-            Width           =   735
-         End
-         Begin VB.TextBox txtende 
-            Alignment       =   2  'Zentriert
-            BackColor       =   &H00FFFF00&
-            Height          =   285
-            Left            =   4200
-            Locked          =   -1  'True
-            TabIndex        =   29
-            TabStop         =   0   'False
-            Top             =   5520
-            Visible         =   0   'False
-            Width           =   1095
-         End
-         Begin VB.TextBox txtStartdat 
-            Alignment       =   2  'Zentriert
-            BackColor       =   &H0080FFFF&
-            Height          =   285
-            Left            =   4200
-            Locked          =   -1  'True
-            TabIndex        =   28
-            TabStop         =   0   'False
-            Top             =   4200
-            Visible         =   0   'False
-            Width           =   1095
-         End
-         Begin VB.Timer Timer1 
-            Interval        =   20
-            Left            =   4920
-            Top             =   360
          End
          Begin MSComctlLib.ProgressBar Balken 
             Height          =   375
@@ -265,7 +225,7 @@ Begin VB.Form frmHaupt
             Caption         =   "Enddatum :"
             Height          =   255
             Left            =   1680
-            TabIndex        =   34
+            TabIndex        =   31
             Top             =   1920
             Width           =   855
          End
@@ -273,7 +233,7 @@ Begin VB.Form frmHaupt
             Caption         =   "Startdatum :"
             Height          =   255
             Left            =   1680
-            TabIndex        =   33
+            TabIndex        =   30
             Top             =   720
             Width           =   975
          End
@@ -281,7 +241,7 @@ Begin VB.Form frmHaupt
             Caption         =   "Zeitraum [Tage] :"
             Height          =   495
             Left            =   3720
-            TabIndex        =   32
+            TabIndex        =   29
             Top             =   1440
             Width           =   735
          End
@@ -295,11 +255,11 @@ Begin VB.Form frmHaupt
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   255
+            Height          =   855
             Left            =   360
-            TabIndex        =   31
+            TabIndex        =   28
             Top             =   4200
-            Width           =   3615
+            Width           =   5415
          End
       End
       Begin VB.Frame Rahmen 
@@ -341,7 +301,7 @@ Begin VB.Form frmHaupt
             Caption         =   "Datum"
             Height          =   255
             Left            =   3600
-            TabIndex        =   49
+            TabIndex        =   46
             Top             =   3480
             Width           =   1575
          End
@@ -349,7 +309,7 @@ Begin VB.Form frmHaupt
             Caption         =   "Azimut"
             Height          =   375
             Left            =   3600
-            TabIndex        =   48
+            TabIndex        =   45
             Top             =   3960
             Width           =   1815
          End
@@ -357,7 +317,7 @@ Begin VB.Form frmHaupt
             Caption         =   "Uhrzeit"
             Height          =   255
             Left            =   3600
-            TabIndex        =   47
+            TabIndex        =   44
             Top             =   3720
             Width           =   1695
          End
@@ -365,7 +325,7 @@ Begin VB.Form frmHaupt
             Caption         =   "Stern"
             Height          =   375
             Left            =   3600
-            TabIndex        =   46
+            TabIndex        =   43
             Top             =   4200
             Width           =   1455
          End
@@ -401,7 +361,7 @@ Begin VB.Form frmHaupt
       Begin VB.Frame frmOrt 
          Caption         =   "Beobachtungsort"
          Height          =   6135
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   12
          Top             =   380
          Visible         =   0   'False
@@ -646,6 +606,9 @@ Begin VB.Form frmHaupt
             Caption         =   "Sonne am Horizont"
          End
       End
+      Begin VB.Menu mnuMag 
+         Caption         =   "Filter für Helligkeit"
+      End
    End
    Begin VB.Menu Berech 
       Caption         =   "Berechnungen"
@@ -744,6 +707,7 @@ Dim TOPROW As Integer
 Dim lngResult As Long
 Dim settings_changed As Boolean
 
+
  Dim rssourcerecord  As ADODB.Recordset
  Dim rssingleabfrage  As ADODB.Recordset
  Dim feld As Field
@@ -759,10 +723,6 @@ End Sub
 Private Sub Beenden_Click()
  Call Form_Unload(0)
 End Sub
-
-
-
-
 
 
 Private Sub cmdinfo_Click()
@@ -782,8 +742,10 @@ Private Sub cmdinfo_Click()
         Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
     End If
     
-    If grdergebnis.col = 1 Then Call Infofüllen(grdergebnis)
-    
+    If grdergebnis.col = 1 Then
+        Call Infofüllen(grdergebnis)
+        Call Mondinfo(grdergebnis)
+    End If
     
 End Sub
 
@@ -821,7 +783,8 @@ Private Sub cmdErgebnis_Click()
 End Sub
 
 Public Sub cmdAbfrag_Click()
-
+VTabs.Tab = 1
+cmbGrundlage.Enabled = True
  If cmdListe.Enabled Then Exit Sub
  
     VTabs.TabEnabled(1) = True
@@ -854,22 +817,22 @@ Private Sub cmdFilter_Click()
 End Sub
 
 Private Sub cmdGridgross_Click()
-
-If frmGridGross.Visible Then Unload frmGridGross
- frmGridGross.show
- 
+    If frmGridGross.Visible Then Unload frmGridGross
+    frmGridGross.show
 End Sub
 
 Private Sub cmdInternet_Click()
-result = CheckInetConnection(Me.hWnd)
-If result = False Then
-Unload frmAladin
-Exit Sub
+    result = CheckInetConnection(Me.hWnd)
+    If result = False Then
+        MsgBox "Internetverbindung konnte nicht aufgebaut werden," & _
+      vbCrLf & "dieses Feature steht daher nicht zur Vefügung", vbCritical, "Keine Verbindung..."
+        Unload frmAladin
+    Exit Sub
 End If
 
 If frmSterninfo.lblKoord.Caption <> "" Then
-result = Split(frmSterninfo.lblKoord.Caption, vbCrLf)
-frmAladin.txtObj.text = Trim(Mid(CStr(result(0)), 3, Len(CStr(result(0))) - 2)) & " " & Trim(Mid(CStr(result(1)), 4, Len(CStr(result(1))) - 2))
+    result = Split(frmSterninfo.lblKoord.Caption, vbCrLf)
+    frmAladin.txtObj.text = Trim(Mid(CStr(result(0)), 3, Len(CStr(result(0))) - 2)) & " " & Trim(Mid(CStr(result(1)), 4, Len(CStr(result(1))) - 2))
 End If
 
 frmAladin.show
@@ -1109,6 +1072,13 @@ Dim plandat, planzeit As String
 Dim ew, no
 Dim Lat, lon
 
+result = CheckInetConnection(Me.hWnd)
+    If result = False Then
+        MsgBox "Internetverbindung konnte nicht aufgebaut werden," & _
+        vbCrLf & "dieses Feature steht daher nicht zur Vefügung", vbCritical, "Keine Verbindung..."
+        Exit Sub
+    End If
+    
 On Error GoTo errhandler
 
 lon = INIGetValue(App.Path & "\Prog.ini", "Ort", "Länge")
@@ -1227,7 +1197,7 @@ End Sub
 Private Sub DTPicker1_Change()
 If DTPicker1.Value >= DTPicker2.Value Then DTPicker2.Value = DTPicker1.Value + 1
 Text1.text = DTPicker2.Value - DTPicker1.Value
-DTPicker2.Value = DTPicker1.Value + Text1.text 'cmbDauer.List(cmbDauer.ListIndex)
+DTPicker2.Value = DTPicker1.Value + Text1.text
 End Sub
 
 Private Sub DTPicker2_change()
@@ -1249,7 +1219,7 @@ Dim result
 Dim daemmfil As String
 Dim dezimal$, Tausend$
 Dim DatumsFormat$, ZeitFormat$
-
+Err.Clear
 
 pi = 4 * Atn(1)
 pi = pi / 180
@@ -1269,6 +1239,14 @@ DoEvents
 Call DefaultWerte
 End If
 
+'Für den Fall, dass ältere Ini-Version vorhanden ist, Standardwerte ergänzen
+ If INIGetValue(datei, "Standard", "minMag_Max") = "" Then
+    Call INISetValue(datei, "Standard", "minMag_Max", 18)
+    Call INISetValue(datei, "Standard", "minMag_Min", 18)
+    Call INISetValue(datei, "filter", "minMag_Max", 18)
+    Call INISetValue(datei, "filter", "minMag_Min", 18)
+ End If
+ 
 Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
 Unload frmBerechnungsfilter
 Unload frmAladin
@@ -1303,19 +1281,12 @@ End If
 
 DTPicker1.CustomFormat = "dd.MM.yyyy"
 DTPicker2.CustomFormat = "dd.MM.yyyy"
-    'ende.Visible = False
-    'Kalender.Value = Date
+    
    If DTPicker1.Value = "01.01.1900" Then
     DTPicker1.Value = Date
-    'ende.Value = Kalender.Value + 1
-
-    'Füllen des Zeitraumsfeldes
-    For x = 1 To 30
-        cmbDauer.AddItem x
-    Next x
-    'cmbDauer.ListIndex = 0  'Zeiger der combobox auf 1. Eintrag
-    'txtende = ende.Value - 1
     DTPicker2.Value = DTPicker1.Value + Text1.text
+    ReDim coltrigger(1 To 11)
+    coltrigger = Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
   End If
   
     cmdListspeichern.Enabled = False
@@ -1456,6 +1427,7 @@ End If
     Unload Me
 
 End Sub
+
 Private Sub astro_Click()
 Call INISetValue(datei, "Auf- Untergang", "Dämmerung", "astronomisch")
 naut.Checked = False
@@ -1478,7 +1450,6 @@ End Sub
 
 
 
-
 Private Sub hilfe_Click()
 Dim HDatei As String
     HDatei = App.Path & "\VarEphem.chm"
@@ -1494,7 +1465,7 @@ If Not ListRecherche.ListCount = 0 Then cmdSingleAusw.Enabled = True
 End Sub
 
 Private Sub mnuEinzel_Click()
-'frmSingleBerech.show
+
 Dim x As Integer
 For x = 1 To frmHaupt.cmbGrundlage.ListCount
  If frmHaupt.cmbGrundlage.List(x) = "Einzeln" Then
@@ -1504,6 +1475,25 @@ For x = 1 To frmHaupt.cmbGrundlage.ListCount
  Next
 VTabs.TabVisible(3) = True
 VTabs.Tab = 3
+End Sub
+
+Private Sub mnuMag_Click()
+  
+ If cmdErgebnis.Enabled = True Then
+        Unload frmBerechnungsfilter
+        Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
+        Unload frmAladin
+    End If
+    
+    'Register ausblenden
+    VTabs.TabEnabled(1) = True
+    VTabs.TabEnabled(2) = False
+    VTabs.TabEnabled(3) = False
+    Me.Width = 7050
+    VTabs.Tab = 1
+    frmHaupt.Enabled = False
+    frmHelligkeit.show
+    
 End Sub
 
 Private Sub naut_Click()
@@ -1567,28 +1557,7 @@ Private Sub Form_Resize()
         Me.Rahmen(i).Left = Me.Rahmen(1).Left
         Me.Rahmen(i).Height = Me.Rahmen(1).Height
        Next i
-    'Me.Rahmen(2).Width = Me.Rahmen(1).Width + (10540 - 6302)
-    
-End Sub
-
-'Übernahme der Kalenderwerte
-Private Sub kalender_click()
-    'ende.Value = Kalender.Value + CInt(cmbDauer.text)
-    'txtende = ende.Value - 1
-    'txtStartdat = Kalender.Value
-    'cmdListspeichern.Enabled = False
-    'cmdInfo.Enabled = False
-    'cmdGridgross.Enabled = False
-    'cmdListdrucken.Enabled = False
-       ' cmdErgebnis.Enabled = False: VTabs.TabEnabled(2) = False
-End Sub
-
-
-'Zeitraum wählen
-Private Sub cmbDauer_Click()
-    kalender_click
-    grdergebnis.Clear
-    lblfertig.Caption = ""
+        
 End Sub
 
 
@@ -1610,6 +1579,9 @@ Dim ephem, monddist
 Dim sPeriode
 Dim SonneAU
 Dim numereignis
+
+On Error GoTo errhandler
+
 'lblfertig.Caption = ""
 lblfertig.Visible = True
 
@@ -1621,16 +1593,21 @@ End If
 
 'Wenn INI Datei nicht da oder beschädigt
 If Not fs.FileExists(App.Path & "\prog.ini") Or Err.Number = 13 Then
-DoEvents
-Form_Load
-Exit Sub
+    DoEvents
+    Form_Load
+    Exit Sub
 End If
+
 Me.MousePointer = 11
 
 gLänge = INIGetValue(App.Path & "\Prog.ini", "Ort", "Länge")
 gBreite = INIGetValue(App.Path & "\Prog.ini", "Ort", "Breite")
+minMag_max = INIGetValue(App.Path & "\Prog.ini", "filter", "MinMag_max")
+minMag_min = INIGetValue(App.Path & "\Prog.ini", "filter", "MinMag_min")
+
 grdergebnis.Clear
  
+ fehler.ort = "with rsergebnis"
          
      'Öffnen der Tabelle "Grundlage" und löschen einer evtl. alten Abfrage
     With rsergebnis
@@ -1651,6 +1628,7 @@ grdergebnis.Clear
          
     End With
    
+   fehler.ort = "With dbsbavsterne"
     
     'Verbindung zur Datenbank herstellen
     With dbsbavsterne
@@ -1672,6 +1650,8 @@ grdergebnis.Clear
     'Öffnen der Tabelle "BVundRR" aus der BAV_Sterne.mdb
     'als temporäres Recordset oder verbinden mit Recordset
     'aus der Kreiner DB
+    
+    fehler.ort = "With rstAbfrage"
     
     With rstAbfrage
       If cmbGrundlage.ListIndex = 0 Then
@@ -1711,77 +1691,85 @@ grdergebnis.Clear
     maxSternLen = 0
     'Berechnungen für alle Sterne in BAV_Sterne.mdb
     numereignis = 0
+    
+    fehler.ort = "Do While"
     Do While Not .EOF
-    DoEvents
+        fehler.ort = "BeginLoop"
+        DoEvents
         lblfertig.Caption = "Berechnungen zu " & Format((Balken.Value / rstAbfrage.RecordCount) * 100, "#") & "% fertiggestellt"
     
-        If Not .Fields("epoche").ActualSize = 0 And Not .Fields("periode").ActualSize = 0 Then
-        'Berechnung der Ereignisse im gewählten Zeitraum
-        'BAnfang = JulDat(Left(Kalender.Value, 2), Mid(Kalender.Value, 4, 2), Mid(Kalender.Value, 7, 4))
-        'bende = JulDat(ende.Day, ende.Month, ende.year)
-        BAnfang = JulDat(Left(DTPicker1.Value, 2), Mid(DTPicker1.Value, 4, 2), Mid(DTPicker1.Value, 7, 4))
-        bende = JulDat(Left(DTPicker2.Value, 2), Mid(DTPicker2.Value, 4, 2), Mid(DTPicker2.Value, 7, 4))
+        If Not .Fields("epoche").ActualSize = 0 And Not .Fields("periode").ActualSize = 0 _
+        And CDbl(aussortieren(!Max)) < minMag_max And CDbl(aussortieren(!mini)) < minMag_min Then
+            'Berechnung der Ereignisse im gewählten Zeitraum
+            BAnfang = JulDat(Left(DTPicker1.Value, 2), Mid(DTPicker1.Value, 4, 2), Mid(DTPicker1.Value, 7, 4))
+            bende = JulDat(Left(DTPicker2.Value, 2), Mid(DTPicker2.Value, 4, 2), Mid(DTPicker2.Value, 7, 4))
         
-        sPeriode = Split(!periode, " ")
+            sPeriode = Split(!periode, " ")
         
-        EPeriode = Fix((bende - (!Epoche + 2400000)) / sPeriode(0))
+            EPeriode = Fix((bende - (!Epoche + 2400000)) / sPeriode(0))
             APeriode = Fix((BAnfang - (!Epoche + 2400000)) / sPeriode(0))
         
-        
-        For x = APeriode To EPeriode
+            fehler.ort = "For..Next Epochenzahl"
+            
+            For x = APeriode To EPeriode
+            
              If UBound(sPeriode) = 2 Then
-             ereignis = (!Epoche + 2400000) + x * sPeriode(0) + (x ^ 2 * (sPeriode(1) * 10 ^ sPeriode(2)))
+                ereignis = (!Epoche + 2400000) + x * sPeriode(0) + (x ^ 2 * (sPeriode(1) * 10 ^ sPeriode(2)))
              ElseIf UBound(sPeriode) = 4 Then
-             ereignis = (!Epoche + 2400000) + x * sPeriode(0) + (x ^ 2 * (sPeriode(1) * 10 ^ sPeriode(2))) + (x ^ 3 * (sPeriode(3) * 10 ^ sPeriode(4)))
+                ereignis = (!Epoche + 2400000) + x * sPeriode(0) + (x ^ 2 * (sPeriode(1) * 10 ^ sPeriode(2))) + (x ^ 3 * (sPeriode(3) * 10 ^ sPeriode(4)))
              Else
-             ereignis = (!Epoche + 2400000) + x * sPeriode(0)
+                ereignis = (!Epoche + 2400000) + x * sPeriode(0)
              End If
    
-            If ereignis >= BAnfang And ereignis <= bende Then
+             If ereignis >= BAnfang And ereignis <= bende Then
             
                 If Not .Fields("hh").ActualSize = 0 Then
                         RA = !hh + !mm / 60 + !ss / 3600
                         DEC = CDbl(!vz & !o + !m / 60)
                     Else: RA = 0
-                 End If
+                End If
                  
+                 fehler.ort = "HKorr"
                  'Heliozentrische Korrektur der HJD Zeitpunkte!!!
-                 ereignis = Hkorr(ereignis, RA, DEC, False)
+                ereignis = Hkorr(ereignis, RA, DEC, False)
                  
                 JDEreignis = JulinDat(ereignis)
                 Tag = CDate(Fix(JDEreignis))
                 Jahr = Format(JDEreignis, "yyyy")
                 SonneAU = AufUnter(Tag, Jahr)
-                Sauf = SonneAU(0) * 24
-                'Sauf = AufUnter(Tag, Jahr, 0) * 24
-                If Sauf = "600" Then
                 
-            MsgBox "Für den gewählten Filter für den" & vbCrLf & _
-            "Sonnenauf- und -untergang können keine Werte berechnet werden!" & vbCrLf & vbCrLf _
-            & "    Es ist die Zeit der weißen oder schwarzen Nächte...!" & Chr(13) & Chr(13) & _
-            "Bitte den Filter für die Dämmerung auf 'Sonne am Horizont' stellen.", vbInformation, "Berechnung nicht möglich"
-            Me.MousePointer = 1
-            Exit Sub
-            End If
-            
+                fehler.ort = "AufUnter"
+                
+                'Sauf = AufUnter(Tag, Jahr, 0) * 24
+                If SonneAU(0) = 25 Then
+                
+                    MsgBox "Für den gewählten Filter für den" & vbCrLf & _
+                    "Sonnenauf- und -untergang können keine Werte berechnet werden!" & vbCrLf & vbCrLf _
+                    & "    Es ist die Zeit der weißen oder schwarzen Nächte...!" & Chr(13) & Chr(13) & _
+                    "Bitte den Filter für die Dämmerung auf 'Sonne am Horizont' stellen.", vbInformation, "Berechnung nicht möglich"
+                    Me.MousePointer = 1
+                Exit Sub
+                End If
+                
+                fehler.ort = "Sunter"
+                
+                Sauf = SonneAU(0) * 24
                 'Sunter = AufUnter(Tag, Jahr, 1) * 24
                 Sunter = SonneAU(1) * 24
                 Uhrzeit = 24 * ((JDEreignis) - Fix(JDEreignis))
     
-                If Sunter < Uhrzeit And Uhrzeit <= 24 Or _
-                    Sauf > Uhrzeit And Uhrzeit >= 0 Then
-        
-                    
-                     BPrg = !BP
-                     If Database <> 1 Then Typ = Trim(!Typ)
-                     
-                     
+                If Sunter < Uhrzeit And Uhrzeit <= 24 Or Sauf > Uhrzeit And Uhrzeit >= 0 Then
+                    BPrg = !BP
+                    If Database <> 1 Then Typ = Trim(!Typ)
+                                   
                     Sternzeit = STZT(CByte(Format(JDEreignis, "dd")), _
                     CByte(Format(JDEreignis, "mm")), CInt(Format(JDEreignis, "yyyy")), Uhrzeit, CDbl(gLänge))
                     
                     Stundenwinkel = CDbl(stdw(RA, Sternzeit))
                     aktHoehe = Hoehe(Stundenwinkel, CDbl(gBreite), DEC)
                     aktAzimut = Azimut(aktHoehe, Stundenwinkel, CDbl(gBreite), DEC)
+                    
+                    fehler.ort = "Monddist"
                     
                     'Berechnung der Monddistanz
                     Mpi = 4 * Atn(1)
@@ -1798,6 +1786,8 @@ grdergebnis.Clear
                     
                     monddist = Moondistance(RA * 360 / 24, DEC, (mond(0) * Mrad / 15) / 24 * 360, mond(1) * Mrad)
 
+                    fehler.ort = "Hoehe"
+                    
                     If aktHoehe > 0 Then 'Filter der Höhe über Horizont
                         numereignis = numereignis + 1
                        With rsergebnis
@@ -1816,6 +1806,7 @@ grdergebnis.Clear
                         .Fields("Monddist") = (Format(Round(monddist), "0"))
                                                  
                          If Stundenwinkel > 0.5 Then
+                         
                          .Fields("stundenwinkel") = "E " & Format(1 - Stundenwinkel, "hh:mm")
                           aktAzimut = 360 - aktAzimut
                           
@@ -1824,7 +1815,7 @@ grdergebnis.Clear
                                
                             Else: .Fields("Stundenwinkel") = Format(Stundenwinkel, "hh:mm")
                          
-                        End If
+                         End If
                         
                         .Fields("Höhe") = Format(aktHoehe, "0") '"#.00")
                         .Fields("Azimut") = Format(aktAzimut, "0") '"#.0")
@@ -1842,38 +1833,41 @@ grdergebnis.Clear
                         End If
                         
                         If BPrg = "KRE" Then
-                        .Fields("bc").Value = 2
+                            .Fields("bc").Value = 2
                         ElseIf BPrg = "GCVS" Then
-                        .Fields("bc").Value = 3
+                            .Fields("bc").Value = 3
                         ElseIf BPrg = "ASAS" Then
-                        .Fields("bc").Value = 4
+                            .Fields("bc").Value = 4
                         ElseIf BPrg = "EIG" Then
-                        .Fields("bc").Value = 7
+                            .Fields("bc").Value = 7
                         End If
-                        .Fields("JDEreignis").Value = CDbl(JDEreignis)
+                            .Fields("JDEreignis").Value = CDbl(JDEreignis)
                         .Update
-                        
-                        
      
                         End With
-                    End If
+                        
+                    End If 'Hoehe
                 
-                End If
+                End If 'Auf/Untergang
                 
-            End If
+            End If 'Innerhalb Zeitraum
         Next x
 
-        End If
+        End If ' Helligkeit & Test ob Periode 0
 
     .MoveNext
     
+    fehler.ort = "EndLoop"
 
     Balken.Value = Balken.Value + 1
     
     Loop
-    Debug.Print numereignis
+    
 Balken.Value = 0
-lblfertig.Caption = "Berechnungen beendet!"
+lblfertig.Caption = "Berechnungen beendet!" & vbCrLf & numereignis & " Ereignisse ermittelt"
+
+fehler.ort = "EndeErgebnis"
+
   If rsergebnis.RecordCount > 0 Then
     'Übernahme der Spalten in Recordset
     rsergebnis.Save pfad & "\ergebnisse.dat"
@@ -1885,11 +1879,11 @@ lblfertig.Caption = "Berechnungen beendet!"
     rstAbfrage.Save pfad & "\info.dat"
     rstAbfrage.Close
     If Database < 2 Then dbsbavsterne.Close
-    Else
+  Else
     MsgBox "Es konnte kein Ereignis berechnet werden." & vbCrLf & "Bitte versuchen sie ein anderes " & vbCrLf & _
     "Berechnungsintervall.", vbInformation, "Kein Ereignis gefunden"
     cmdAbfrag.Enabled = True: cmdErgebnis.Enabled = False: VTabs.TabEnabled(1) = True
-    End If
+  End If
 
 End With
 Me.MousePointer = 1
@@ -1901,6 +1895,12 @@ Set rsergebnis = Nothing
 Set dbsbavsterne = Nothing
 Set fs = Nothing
 'cmbGrundlage.Enabled = False
+fehler.ort = ""
+
+Exit Sub
+
+errhandler:
+MsgBox "Fehler in cmdListe_click() :" & vbCrLf & fehler.ort & vbCrLf & Err.Number & vbCrLf & Err.Description
 
 End Sub
 Public Sub gridsortieren(cols2sort)
@@ -2004,6 +2004,7 @@ End If
     Else:
         MsgBox "Für diese Filterkombination konnten keine Ereignisse" & vbCrLf & _
         "gefunden werden...", vbInformation, "Keine Ergebnisse für diesen Filter"
+        Me.MousePointer = 1
         Exit Sub
     End If
     
@@ -2014,33 +2015,26 @@ End If
 
     grdergebnis.ColWidth(0) = 200
     
-    If Not grdergebnis.ColWidth(1) = 0 Then grdergebnis.ColWidth(1) = 800
-    If Not grdergebnis.ColWidth(5) = 0 Then grdergebnis.ColWidth(5) = 1200
-    If Not grdergebnis.ColWidth(6) = 0 Then grdergebnis.ColWidth(6) = 600
-    If Not grdergebnis.ColWidth(7) = 0 Then grdergebnis.ColWidth(7) = 600
+    If coltrigger(0) = 1 Then grdergebnis.ColWidth(1) = 800
+    If coltrigger(4) = 1 Then grdergebnis.ColWidth(5) = 1200
+    If coltrigger(5) = 1 Then grdergebnis.ColWidth(6) = 600
+    If coltrigger(6) = 1 Then grdergebnis.ColWidth(7) = 600
 
     If Database = 0 Or Database = 5 Then
-        grdergebnis.ColWidth(8) = 600
-        'grdergebnis.ColWidth(9) = 0
-    'End If
-
-    'If Database = 1 Then
-
-        grdergebnis.ColWidth(9) = 1300
+        If coltrigger(7) = 1 Then grdergebnis.ColWidth(8) = 600
         
-        'grdergebnis.ColWidth(8) = 0
+        If coltrigger(8) = 1 Then grdergebnis.ColWidth(9) = 1300
+                
     End If
 
     If Database >= 2 And Database <> 5 Then
-        grdergebnis.ColWidth(8) = 0
-        grdergebnis.ColWidth(9) = 1300
+        grdergebnis.ColWidth(8) = IIf(coltrigger(7) = 0, 0, 600)
+        grdergebnis.ColWidth(9) = IIf(coltrigger(8) = 0, 0, 1300)
         
     End If
 
-
-    If Not grdergebnis.ColWidth(10) = 0 Then
-        grdergebnis.ColWidth(10) = 1200
-    End If
+    If coltrigger(9) = 1 Then grdergebnis.ColWidth(10) = 1500
+    If coltrigger(9) = 0 Then grdergebnis.ColWidth(10) = 0
 
     grdergebnis.ColAlignmentFixed = flexAlignCenterCenter
 
@@ -2050,10 +2044,10 @@ End If
 
     'Form Berechnungsfilter anpassen
 
-    For zähler = 1 To 11
-        If frmHaupt.grdergebnis.ColWidth(zähler) = 0 Then _
-          frmBerechnungsfilter.chkSpalte(zähler).Value = 0
-    Next
+    'For zähler = 1 To 11
+        
+     '     frmHaupt.grdergebnis.ColWidth(zähler) = coltrigger(zähler - 1)
+    'Next
 
         'frmHaupt.grdergebnis.ColWidth(12) = 0 'Zellenfarbe..
         
@@ -2141,40 +2135,6 @@ Dim lcid&
       
 End Function
 
-Public Sub grdergebnis_sortieren(ByVal ColIndex As Integer)
-Debug.Print Time
-'If ColIndex = 4 Then Exit Sub
-    'Sortieren Datagrid
-    grdergebnis.MousePointer = 11
-    frmGridGross.grdGross.col = ColIndex
-    If ColIndex < 6 Or ColIndex = 9 Or ColIndex = 13 Then
-    
-        If sorter = 7 Then
-            grdergebnis.Sort = 8
-            sorter = 8
-        Else
-            grdergebnis.Sort = 7
-            sorter = 7
-        End If
-    End If
-    
-    If ColIndex >= 6 And Not ColIndex = 13 And Not ColIndex = 9 Then
-        If sorter = 7 Then
-            grdergebnis.Sort = 4
-            sorter = 8
-        Else
-            grdergebnis.Sort = 3
-            sorter = 7
-        End If
-     End If
-     
- 
-    'frmGridGross.grossGrid_füllen
-    grdergebnis.MousePointer = 1
-    If Database = 4 Then Call zellfarbe(grdergebnis.Row)
-    Debug.Print Time
-End Sub
-
 
 Private Sub grdergebnis_DblClick()
 
@@ -2182,12 +2142,12 @@ Private Sub grdergebnis_DblClick()
 If Database = 1 Then
  frmBerechnungsfilter.chkSpalte(8).Visible = False
  ElseIf Database = 0 Or Database >= 2 Then
- frmBerechnungsfilter.chkSpalte(9).Visible = False
+ 'frmBerechnungsfilter.chkSpalte(9).Visible = False
 End If
  
        grdergebnis.ColWidth(grdergebnis.col) = 0
        frmBerechnungsfilter.chkSpalte(grdergebnis.col) = 0
-       frmBerechnungsfilter.chkSpalte(grdergebnis.col).Value = 0
+       coltrigger(grdergebnis.col - 1) = 0
          
 End Sub
 
@@ -2249,13 +2209,12 @@ Private Sub grdergebnis_MouseUp(Button As Integer, _
             End If
         Next i
             Call gridsortieren(c2s)
-            'If grdergebnis.col = 3 Then grdergebnis.col = 13
-            
-         'Call grdergebnis_sortieren(grdergebnis.col)
     End If
   
-    If grdergebnis.col = 1 Then Call Infofüllen(grdergebnis)
-  
+    If grdergebnis.col = 1 Then
+        Call Infofüllen(grdergebnis)
+        Call Mondinfo(grdergebnis)
+    End If
   End If
   
   If Database = 4 Then Call zellfarbe(grdergebnis.Row)
@@ -2270,7 +2229,6 @@ End Sub
 
 Private Sub UnloadAll()
   Unload frmAladin
-  'cmdInternet.Enabled = False
   Unload frmBerechnungsfilter
   Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
   Unload frmSternauswahl
@@ -2326,8 +2284,10 @@ End Sub
 
 
 
+
+
 Private Sub Ueber_Click()
-MsgBox "VarEphem, Version 1.1.0.3, Stand: 17.04.2012" & vbCrLf & vbCrLf & _
+MsgBox "VarEphem, Version 1.1.0.5, Stand: 01.05.2012" & vbCrLf & vbCrLf & _
 "geschrieben von: Jörg Hanisch, Gescher" & vbCrLf & _
 "Alle Rechte vorbehalen" & vbCrLf & vbCrLf & _
 "Fragen, Anregungen, (Spenden ;)) bitte per E-Mail an: " & vbCrLf & _
@@ -2337,18 +2297,22 @@ End Sub
 Private Sub VTabs_Click(PreviousTab As Integer)
 If VTabs.Tab = 1 And VTabs.TabEnabled(1) Then cmdListe.Enabled = True: VTabs.TabEnabled(1) = True
 If VTabs.Tab = 2 Then
+    VTabs.TabEnabled(3) = True
     gridfüllen
     'cmdErgebnis_Click
     cmdinfo_Click
 End If
 If VTabs.Tab = 3 Then
-    cmdAbfrag.Enabled = True
+    cmdAbfrag.Enabled = True: cmbGrundlage.Enabled = IIf(ListRecherche.ListCount > 0, True, False)
     Dim x As Integer
     For x = 1 To frmHaupt.cmbGrundlage.ListCount
         If frmHaupt.cmbGrundlage.List(x) = "Einzeln" Then
             frmHaupt.cmbGrundlage.ListIndex = x
             Exit For
         End If
+        Unload frmBerechnungsfilter
+        Unload frmSterninfo: frmHaupt.cmdStarChart.Visible = False
+        Unload frmAladin
     Next
  'VTabs.TabEnabled(1) = IIf(cmdAbfrag.Enabled, True, False)
 End If
@@ -2643,15 +2607,7 @@ MsgBox Err.Number & " " & Err.Description & vbCrLf & _
 
 End Sub
 
-Public Function FieldExists(rs As Recordset, sFieldName As String) As Boolean
-    Dim fld As Field
-    For Each fld In rs.Fields
-        If UCase(fld.Name) = UCase(sFieldName) Then
-            FieldExists = True
-            Exit Function
-        End If
-    Next fld
-End Function
+
 
 Private Function IsInList(ByVal Listentext As String) As Boolean
 Dim x As Integer
@@ -2663,4 +2619,14 @@ End If
 Next x
 
 IsInList = False
+End Function
+
+Private Function aussortieren(feld)
+    Dim arra
+    arra = Array(":", " ", "(")
+    For x = 0 To UBound(arra)
+       feld = Replace(feld, arra(x), "")
+    Next x
+    If feld = "" Then feld = 0
+    aussortieren = feld
 End Function

@@ -1,0 +1,285 @@
+[Root]
+Most Recent Package=Standardmäßiges Setup-Paket 1
+
+
+[Package|DEP-Datei 1|Root]
+SubWizProgID=PDWizard.DepPkgSubWiz
+BuildFolder=C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem
+
+[Package|DEP-Datei 1|Configure DAO ISAMs]
+Applicable=No
+
+[Package|DEP-Datei 1|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|DEP-Datei 1|Files Found]
+BAVMinMax.chm=C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax_Daten\Hilfedatei\BAVMinMax.chm
+
+[Package|DEP-Datei 1|Files Released]
+BAVMinMax.CHI=
+
+[Package|DEP-Datei 1|Missing Dependency Information]
+
+[Package|DEP-Datei 1|Out-of-Date Dependency Information]
+C:\WINDOWS\system32\mscomctl.ocx=
+C:\WINDOWS\system32\scrrun.dll=
+
+[Package|DEP-Datei 1|Files Added]
+
+[Package|DEP-Datei 1|Files Removed]
+
+[Package|DEP-Datei 1|Files In Project]
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\VarEphem.exe=Yes
+C:\WINDOWS\system32\msvbvm60.dll=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\system32\VB6DE.DLL=Yes
+C:\WINDOWS\system32\hhctrl.ocx=Yes
+C:\WINDOWS\system32\itss.dll=Yes
+C:\WINDOWS\system32\itircl.dll=Yes
+C:\WINDOWS\hh.exe=Yes
+C:\WINDOWS\system32\wininet.dll=Yes
+C:\WINDOWS\system32\urlmon.dll=Yes
+C:\WINDOWS\system32\scrrun.dll=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT.DLL=Yes
+C:\WINDOWS\system32\scrrnde.dll=Yes
+C:\Programme\Gemeinsame Dateien\System\ado\msado15.dll=Yes
+C:\WINDOWS\system32\MSBIND.DLL=Yes
+C:\WINDOWS\system32\MSSTDFMT.DLL=Yes
+C:\WINDOWS\system32\STDFTDE.DLL=Yes
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax\MSCAL.OCX=Yes
+C:\WINDOWS\system32\comdlg32.ocx=Yes
+C:\WINDOWS\system32\CMDLGDE.DLL=Yes
+C:\WINDOWS\system32\mscomctl.ocx=Yes
+C:\WINDOWS\system32\MSCMCDE.DLL=Yes
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax\MSHFLXGD.OCX=Yes
+C:\WINDOWS\system32\MSCOMCT2.OCX=Yes
+C:\WINDOWS\system32\MSCC2DE.DLL=Yes
+C:\WINDOWS\system32\MSINET.OCX=Yes
+C:\WINDOWS\system32\INETDE.DLL=Yes
+C:\WINDOWS\system32\tabctl32.ocx=Yes
+C:\WINDOWS\system32\TABCTDE.DLL=Yes
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax_Daten\Hilfedatei\BAVMinMax.chm=Yes
+
+[Package|DEP-Datei 1|Configure Registry Files]
+Applicable=
+
+[Package|DEP-Datei 1|Configure Remote Servers]
+Applicable=
+
+[Package|DEP-Datei 1|Install Locations]
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\VarEphem.exe=$(AppPath)
+C:\WINDOWS\system32\msvbvm60.dll=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\system32\VB6DE.DLL=$(WinSysPath)
+C:\WINDOWS\system32\hhctrl.ocx=$(WinSysPath)
+C:\WINDOWS\system32\itss.dll=$(WinSysPath)
+C:\WINDOWS\system32\itircl.dll=$(WinSysPath)
+C:\WINDOWS\hh.exe=$(WinSysPath)
+C:\WINDOWS\system32\wininet.dll=$(WinSysPath)
+C:\WINDOWS\system32\urlmon.dll=$(WinSysPath)
+C:\WINDOWS\system32\scrrun.dll=$(WinSysPath)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\system32\scrrnde.dll=$(WinSysPath)
+C:\Programme\Gemeinsame Dateien\System\ado\msado15.dll=$(CommonFilesSys)\ADO
+C:\WINDOWS\system32\MSBIND.DLL=$(WinSysPath)
+C:\WINDOWS\system32\MSSTDFMT.DLL=$(WinSysPath)
+C:\WINDOWS\system32\STDFTDE.DLL=$(WinSysPath)
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax\MSCAL.OCX=$(WinSysPath)
+C:\WINDOWS\system32\comdlg32.ocx=$(WinSysPath)
+C:\WINDOWS\system32\CMDLGDE.DLL=$(WinSysPath)
+C:\WINDOWS\system32\mscomctl.ocx=$(WinSysPath)
+C:\WINDOWS\system32\MSCMCDE.DLL=$(WinSysPath)
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax\MSHFLXGD.OCX=$(WinSysPath)
+C:\WINDOWS\system32\MSCOMCT2.OCX=$(WinSysPath)
+C:\WINDOWS\system32\MSCC2DE.DLL=$(WinSysPath)
+C:\WINDOWS\system32\MSINET.OCX=$(WinSysPath)
+C:\WINDOWS\system32\INETDE.DLL=$(WinSysPath)
+C:\WINDOWS\system32\tabctl32.ocx=$(WinSysPath)
+C:\WINDOWS\system32\TABCTDE.DLL=$(WinSysPath)
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax_Daten\Hilfedatei\BAVMinMax.chm=$(AppPath)
+
+[Package|DEP-Datei 1|Configure Shared Files]
+Applicable=
+
+[Package|DEP-Datei 1|DepFile]
+DepCabFile=VarEphem.CAB
+DepCabRun=VarEphem.INF
+
+[Package|DEP-Datei 1|Package]
+PackageFolder=C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem
+ProjectFolder=C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem
+ServerSideCab=
+File1=C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\VarEphem.DEP
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
+
+
+[Package|Standardmäßiges Setup-Paket 1|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\weitergabe
+
+[Package|Standardmäßiges Setup-Paket 1|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Standardmäßiges Setup-Paket 1|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Standardmäßiges Setup-Paket 1|Files Found]
+BAVMinMax.chm=C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax_Daten\Hilfedatei\BAVMinMax.chm
+
+[Package|Standardmäßiges Setup-Paket 1|Files Released]
+BAVMinMax.CHI=
+VarEphem.CHI=
+
+[Package|Standardmäßiges Setup-Paket 1|Missing Dependency Information]
+
+[Package|Standardmäßiges Setup-Paket 1|Out-of-Date Dependency Information]
+C:\WINDOWS\system32\mscomctl.ocx=
+C:\WINDOWS\system32\scrrun.dll=
+
+[Package|Standardmäßiges Setup-Paket 1|Files Added]
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\VarEphem.chm=
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\acvs1.1.dat=
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\BAV_Sterne.mdb=
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\sternkoord.txt=
+
+[Package|Standardmäßiges Setup-Paket 1|Files Removed]
+
+[Package|Standardmäßiges Setup-Paket 1|Files In Project]
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\VarEphem.exe=Yes
+C:\WINDOWS\system32\msvbvm60.dll=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\system32\VB6DE.DLL=Yes
+C:\WINDOWS\system32\hhctrl.ocx=Yes
+C:\WINDOWS\system32\itss.dll=Yes
+C:\WINDOWS\system32\itircl.dll=Yes
+C:\WINDOWS\hh.exe=Yes
+C:\WINDOWS\system32\wininet.dll=Yes
+C:\WINDOWS\system32\urlmon.dll=Yes
+C:\WINDOWS\system32\scrrun.dll=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT.DLL=Yes
+C:\WINDOWS\system32\scrrnde.dll=Yes
+C:\WINDOWS\system32\comdlg32.ocx=Yes
+C:\WINDOWS\system32\CMDLGDE.DLL=Yes
+C:\WINDOWS\system32\mscomctl.ocx=Yes
+C:\WINDOWS\system32\MSCMCDE.DLL=Yes
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax\MSHFLXGD.OCX=Yes
+C:\WINDOWS\system32\MSCOMCT2.OCX=Yes
+C:\WINDOWS\system32\MSCC2DE.DLL=Yes
+C:\WINDOWS\system32\tabctl32.ocx=Yes
+C:\WINDOWS\system32\TABCTDE.DLL=Yes
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax_Daten\Hilfedatei\BAVMinMax.chm=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MDAC_TYP.EXE=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\WINDOWS\system32\VB6STKIT.DLL=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\VarEphem.chm=Yes
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\acvs1.1.dat=Yes
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\BAV_Sterne.mdb=Yes
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\sternkoord.txt=Yes
+
+[Package|Standardmäßiges Setup-Paket 1|Configure Registry Files]
+Applicable=No
+
+[Package|Standardmäßiges Setup-Paket 1|Configure Remote Servers]
+Applicable=No
+
+[Package|Standardmäßiges Setup-Paket 1|Install Locations]
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\VarEphem.exe=$(AppPath)
+C:\WINDOWS\system32\msvbvm60.dll=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\system32\VB6DE.DLL=$(WinSysPath)
+C:\WINDOWS\system32\hhctrl.ocx=$(WinSysPath)
+C:\WINDOWS\system32\itss.dll=$(WinSysPath)
+C:\WINDOWS\system32\itircl.dll=$(WinSysPath)
+C:\WINDOWS\hh.exe=$(WinSysPath)
+C:\WINDOWS\system32\wininet.dll=$(WinSysPath)
+C:\WINDOWS\system32\urlmon.dll=$(WinSysPath)
+C:\WINDOWS\system32\scrrun.dll=$(WinSysPath)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\system32\scrrnde.dll=$(WinSysPath)
+C:\Programme\Gemeinsame Dateien\System\ado\msado15.dll=$(CommonFilesSys)\ADO
+C:\WINDOWS\system32\MSBIND.DLL=$(WinSysPath)
+C:\WINDOWS\system32\MSSTDFMT.DLL=$(WinSysPath)
+C:\WINDOWS\system32\STDFTDE.DLL=$(WinSysPath)
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax\MSCAL.OCX=$(WinSysPath)
+C:\WINDOWS\system32\comdlg32.ocx=$(WinSysPath)
+C:\WINDOWS\system32\CMDLGDE.DLL=$(WinSysPath)
+C:\WINDOWS\system32\mscomctl.ocx=$(WinSysPath)
+C:\WINDOWS\system32\MSCMCDE.DLL=$(WinSysPath)
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax\MSHFLXGD.OCX=$(WinSysPath)
+C:\WINDOWS\system32\MSCOMCT2.OCX=$(WinSysPath)
+C:\WINDOWS\system32\MSCC2DE.DLL=$(WinSysPath)
+C:\WINDOWS\system32\MSINET.OCX=$(WinSysPath)
+C:\WINDOWS\system32\INETDE.DLL=$(WinSysPath)
+C:\WINDOWS\system32\tabctl32.ocx=$(WinSysPath)
+C:\WINDOWS\system32\TABCTDE.DLL=$(WinSysPath)
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax_Daten\Hilfedatei\BAVMinMax.chm=$(AppPath)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MDAC_TYP.EXE=$(AppPath)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\system32\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\VarEphem.chm=$(AppPath)
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\acvs1.1.dat=$(AppPath)
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\BAV_Sterne.mdb=$(AppPath)
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\sternkoord.txt=$(AppPath)
+
+[Package|Standardmäßiges Setup-Paket 1|Configure Shared Files]
+Applicable=Yes
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\VarEphem.exe=No
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\BAV_MinMax_Daten\Hilfedatei\BAVMinMax.chm=No
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MDAC_TYP.EXE=No
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\VarEphem.chm=No
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\acvs1.1.dat=No
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\BAV_Sterne.mdb=No
+C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\sternkoord.txt=No
+
+[Package|Standardmäßiges Setup-Paket 1|DepFile]
+DepCabFile=VarEphem.CAB
+DepCabRun=VarEphem.INF
+
+[Package|Standardmäßiges Setup-Paket 1|Distribution]
+Type=single
+Size=
+Title=VarEphem_1.1.0
+
+[Package|Standardmäßiges Setup-Paket 1|Package]
+PackageFolder=C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\weitergabe
+ProjectFolder=C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem
+ServerSideCab=
+File1=C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\weitergabe\setup.exe
+File2=C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\weitergabe\Setup.Lst
+File3=C:\Dokumente und Einstellungen\Jörg\Eigene Dateien\VB_Projekte\VarEphem\weitergabe\VarEphem.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
+
+[Package|Standardmäßiges Setup-Paket 1|IconGroups]
+Group0=VarEphem
+PrivateGroup0=-1
+Parent0=$(Programs)
+
+[Package|Standardmäßiges Setup-Paket 1|VarEphem]
+Icon1=VarEphem.exe
+Title1=VarEphem
+StartIn1=$(AppPath)
+Key1=Icon1

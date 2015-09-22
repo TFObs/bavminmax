@@ -872,6 +872,15 @@ End Sub
 Private Sub cmdCRTS_Click()
 
   If GetSearchStar <> "-" Then
+  'CALTEC-FORMAT (Stand 250215)
+  'Suche nach Ort--> http://nunuku.cacr.caltech.edu/cgi-bin/getcssconedb_release_img.cgi?
+  'RA=<RA> Dec=<DEC> Radius(<3): Rad=<Radius> Display: IMG=<dss,nun,sdss> 
+  'Suche nach Name -->http://nesssi.cacr.caltech.edu/cgi-bin/getcssconedbid_release2.cgi
+  'Name: Name=<Name>: Radius:Rad=<Radius>
+  'Jede Abfrage:
+  'Database: DB=<photcat,orphancat>
+  'Output: OUT=<web,csv,vot> Format: SHORT=<short,long> Plot: PLOT=<plot, >
+ 
     Connstr = "http://nesssi.cacr.caltech.edu/cgi-bin/getcssconedbid_release.cgi?Name=" & Trim(searchstar(0)) & " " & Trim(searchstar(1)) & _
     "&DB=photcat&Rad=0.5&OUT=csv&SHORT=short&PLOT=plot"
 

@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin VB.Form frmBerechnungsfilter 
    BorderStyle     =   1  'Fest Einfach
-   Caption         =   "     Filter bei der Berechnung"
+   Caption         =   "   Filter bei der Berechnung"
    ClientHeight    =   8145
    ClientLeft      =   45
    ClientTop       =   330
@@ -15,18 +15,18 @@ Begin VB.Form frmBerechnungsfilter
    ShowInTaskbar   =   0   'False
    Begin VB.Frame fraSpalten 
       Caption         =   "Spalten ein- und ausblenden"
-      Height          =   3855
+      Height          =   3975
       Left            =   120
       TabIndex        =   13
-      Top             =   4200
+      Top             =   4080
       Width           =   2655
       Begin VB.CheckBox chkSpalte 
          Caption         =   "Check1"
          Height          =   255
          Index           =   11
-         Left            =   1680
+         Left            =   1320
          TabIndex        =   34
-         Top             =   3480
+         Top             =   3420
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -34,9 +34,9 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Check1"
          Height          =   255
          Index           =   10
-         Left            =   1680
+         Left            =   1320
          TabIndex        =   33
-         Top             =   3135
+         Top             =   3080
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -44,9 +44,9 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Check1"
          Height          =   255
          Index           =   9
-         Left            =   1680
+         Left            =   1320
          TabIndex        =   32
-         Top             =   2790
+         Top             =   2740
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -54,19 +54,19 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Check1"
          Height          =   255
          Index           =   8
-         Left            =   1680
+         Left            =   2280
          TabIndex        =   31
-         Top             =   2790
+         Top             =   2740
          Value           =   1  'Aktiviert
-         Width           =   255
+         Width           =   240
       End
       Begin VB.CheckBox chkSpalte 
          Caption         =   "Check1"
          Height          =   255
          Index           =   7
-         Left            =   1680
+         Left            =   1320
          TabIndex        =   30
-         Top             =   2445
+         Top             =   2400
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -74,9 +74,9 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Check1"
          Height          =   255
          Index           =   6
-         Left            =   1680
+         Left            =   1320
          TabIndex        =   29
-         Top             =   2100
+         Top             =   2060
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -84,9 +84,9 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Check1"
          Height          =   255
          Index           =   5
-         Left            =   1680
+         Left            =   1320
          TabIndex        =   28
-         Top             =   1740
+         Top             =   1720
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -94,9 +94,9 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Check1"
          Height          =   255
          Index           =   4
-         Left            =   1680
+         Left            =   1320
          TabIndex        =   27
-         Top             =   1395
+         Top             =   1380
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -104,9 +104,9 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Check1"
          Height          =   255
          Index           =   3
-         Left            =   1680
+         Left            =   1320
          TabIndex        =   26
-         Top             =   1050
+         Top             =   1040
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -114,9 +114,9 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Check1"
          Height          =   255
          Index           =   2
-         Left            =   1680
+         Left            =   1320
          TabIndex        =   25
-         Top             =   705
+         Top             =   700
          Value           =   1  'Aktiviert
          Width           =   255
       End
@@ -124,7 +124,7 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Check1"
          Height          =   255
          Index           =   1
-         Left            =   1680
+         Left            =   1320
          TabIndex        =   24
          Top             =   360
          Value           =   1  'Aktiviert
@@ -134,10 +134,20 @@ Begin VB.Form frmBerechnungsfilter
          BorderStyle     =   1  'Fest Einfach
          Caption         =   "Label5"
          Height          =   255
+         Index           =   9
+         Left            =   120
+         TabIndex        =   39
+         Top             =   2745
+         Width           =   1110
+      End
+      Begin VB.Label lblSpalte 
+         BorderStyle     =   1  'Fest Einfach
+         Caption         =   "Label5"
+         Height          =   255
          Index           =   11
-         Left            =   360
+         Left            =   120
          TabIndex        =   23
-         Top             =   3480
+         Top             =   3420
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -145,29 +155,30 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Label5"
          Height          =   255
          Index           =   10
-         Left            =   360
+         Left            =   120
          TabIndex        =   22
-         Top             =   3135
+         Top             =   3075
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
+         Alignment       =   2  'Zentriert
          BorderStyle     =   1  'Fest Einfach
          Caption         =   "Label5"
          Height          =   255
          Index           =   8
-         Left            =   360
+         Left            =   1560
          TabIndex        =   21
-         Top             =   2790
-         Width           =   1110
+         Top             =   2745
+         Width           =   615
       End
       Begin VB.Label lblSpalte 
          BorderStyle     =   1  'Fest Einfach
          Caption         =   "Label5"
          Height          =   255
          Index           =   7
-         Left            =   360
+         Left            =   120
          TabIndex        =   20
-         Top             =   2445
+         Top             =   2400
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -175,9 +186,9 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Label5"
          Height          =   255
          Index           =   6
-         Left            =   360
+         Left            =   120
          TabIndex        =   19
-         Top             =   2100
+         Top             =   2055
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -185,9 +196,9 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Label5"
          Height          =   255
          Index           =   5
-         Left            =   360
+         Left            =   120
          TabIndex        =   18
-         Top             =   1740
+         Top             =   1725
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -195,9 +206,9 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Label5"
          Height          =   255
          Index           =   4
-         Left            =   360
+         Left            =   120
          TabIndex        =   17
-         Top             =   1395
+         Top             =   1380
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -205,9 +216,9 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Label5"
          Height          =   255
          Index           =   3
-         Left            =   360
+         Left            =   120
          TabIndex        =   16
-         Top             =   1050
+         Top             =   1035
          Width           =   1110
       End
       Begin VB.Label lblSpalte 
@@ -215,7 +226,7 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Label5"
          Height          =   255
          Index           =   2
-         Left            =   360
+         Left            =   120
          TabIndex        =   15
          Top             =   705
          Width           =   1110
@@ -225,7 +236,7 @@ Begin VB.Form frmBerechnungsfilter
          Caption         =   "Label5"
          Height          =   255
          Index           =   1
-         Left            =   360
+         Left            =   120
          TabIndex        =   14
          Top             =   360
          Width           =   1110
@@ -252,28 +263,18 @@ Begin VB.Form frmBerechnungsfilter
       Width           =   1455
    End
    Begin VB.Frame frmFilter 
-      Height          =   3015
+      Height          =   3135
       Left            =   120
       TabIndex        =   2
-      Top             =   600
+      Top             =   480
       Width           =   2655
-      Begin VB.TextBox txtMag 
-         Alignment       =   2  'Zentriert
-         BackColor       =   &H00C0FFFF&
-         Height          =   285
-         Left            =   1560
-         TabIndex        =   40
-         Top             =   120
-         Visible         =   0   'False
-         Width           =   495
-      End
       Begin VB.ComboBox cmbBpro 
          BackColor       =   &H00C0FFFF&
          Height          =   315
          Left            =   1200
          TabIndex        =   37
          ToolTipText     =   "BAV-Beobachtungsprogramm bzw. Typfilter auswählen"
-         Top             =   2040
+         Top             =   2640
          Width           =   1215
       End
       Begin VB.ComboBox cmbStbld 
@@ -282,7 +283,7 @@ Begin VB.Form frmBerechnungsfilter
          Left            =   1200
          TabIndex        =   35
          ToolTipText     =   "BAV-Beobachtungsprogramm bzw. Typfilter auswählen"
-         Top             =   240
+         Top             =   360
          Width           =   735
       End
       Begin VB.TextBox txtMonddist 
@@ -291,7 +292,7 @@ Begin VB.Form frmBerechnungsfilter
          Height          =   285
          Left            =   1320
          TabIndex        =   11
-         Top             =   2520
+         Top             =   1800
          Width           =   615
       End
       Begin VB.ComboBox cmbTyp 
@@ -300,7 +301,7 @@ Begin VB.Form frmBerechnungsfilter
          Left            =   1200
          TabIndex        =   9
          ToolTipText     =   "BAV-Beobachtungsprogramm bzw. Typfilter auswählen"
-         Top             =   1680
+         Top             =   2280
          Width           =   1215
       End
       Begin VB.TextBox txtAzi_o 
@@ -309,7 +310,7 @@ Begin VB.Form frmBerechnungsfilter
          Height          =   285
          Left            =   2040
          TabIndex        =   7
-         Top             =   1200
+         Top             =   1320
          Width           =   495
       End
       Begin VB.TextBox txtAzi_u 
@@ -318,7 +319,7 @@ Begin VB.Form frmBerechnungsfilter
          Height          =   285
          Left            =   1200
          TabIndex        =   6
-         Top             =   1200
+         Top             =   1320
          Width           =   495
       End
       Begin VB.TextBox txthoe 
@@ -327,25 +328,15 @@ Begin VB.Form frmBerechnungsfilter
          Height          =   285
          Left            =   1200
          TabIndex        =   4
-         Top             =   720
+         Top             =   840
          Width           =   495
-      End
-      Begin VB.Label Label7 
-         Alignment       =   2  'Zentriert
-         Caption         =   "Helligkeit :  >                 "
-         Height          =   255
-         Left            =   480
-         TabIndex        =   39
-         Top             =   120
-         Visible         =   0   'False
-         Width           =   1815
       End
       Begin VB.Label Label6 
          Caption         =   "Beob Prog. :"
          Height          =   375
          Left            =   120
          TabIndex        =   38
-         Top             =   2040
+         Top             =   2640
          Width           =   975
       End
       Begin VB.Label Label5 
@@ -353,15 +344,15 @@ Begin VB.Form frmBerechnungsfilter
          Height          =   375
          Left            =   120
          TabIndex        =   36
-         Top             =   240
+         Top             =   360
          Width           =   975
       End
       Begin VB.Label Label1 
          Caption         =   "Monddistanz : >"
-         Height          =   350
+         Height          =   345
          Left            =   120
          TabIndex        =   12
-         Top             =   2520
+         Top             =   1800
          Width           =   1215
       End
       Begin VB.Label Label4 
@@ -369,7 +360,7 @@ Begin VB.Form frmBerechnungsfilter
          Height          =   375
          Left            =   120
          TabIndex        =   8
-         Top             =   1680
+         Top             =   2280
          Width           =   975
       End
       Begin VB.Label Label3 
@@ -378,7 +369,7 @@ Begin VB.Form frmBerechnungsfilter
          Height          =   255
          Left            =   120
          TabIndex        =   5
-         Top             =   1200
+         Top             =   1320
          Width           =   1815
       End
       Begin VB.Label Label2 
@@ -387,7 +378,7 @@ Begin VB.Form frmBerechnungsfilter
          Height          =   255
          Left            =   120
          TabIndex        =   3
-         Top             =   720
+         Top             =   840
          Width           =   975
       End
    End
@@ -409,7 +400,7 @@ Begin VB.Form frmBerechnungsfilter
       Style           =   1  'Grafisch
       TabIndex        =   1
       ToolTipText     =   "Filter anwenden"
-      Top             =   3720
+      Top             =   3600
       Width           =   1695
    End
    Begin VB.CommandButton cmdClose 
@@ -475,6 +466,9 @@ Const SW_MAXIMIZE = 3
 Dim fs As New FileSystemObject
 
 Private Sub chkSpalte_Click(Index As Integer)
+
+coltrigger(Index - 1) = IIf(chkSpalte(Index).Value = 1, 1, 0)
+
 If chkSpalte(Index).Value = 0 Then
     frmHaupt.grdergebnis.ColWidth(Index) = 0
     
@@ -487,15 +481,16 @@ ElseIf chkSpalte(Index).Value = 1 Then
     Case Is = 7: frmHaupt.grdergebnis.ColWidth(7) = 600
     Case Is = 8: frmHaupt.grdergebnis.ColWidth(8) = 600
     Case Is = 9: frmHaupt.grdergebnis.ColWidth(9) = 1300
-    Case Is = 10: frmHaupt.grdergebnis.ColWidth(10) = 1200
+    Case Is = 10: frmHaupt.grdergebnis.ColWidth(10) = 1500
     Case Else: frmHaupt.grdergebnis.ColWidth(Index) = 945
 End Select
 
-    If Index = 9 And Database >= 2 Then
-     frmHaupt.grdergebnis.ColWidth(9) = 1300
-    End If
+    'If Index = 9 And Database >= 2 Then
+     'frmHaupt.grdergebnis.ColWidth(9) = 1300
+   ' End If
      
 End If
+frmGridGross.grossGrid_füllen
 End Sub
 
 Private Sub cmdaktual_Click()
@@ -520,7 +515,9 @@ If IsNumeric(txthoe.text) And IsNumeric(txtAzi_u.text) And _
     & "es sind nur numerische Werte erlaubt.", vbExclamation, "Fehleingabe!"
         Exit Sub
 End If
-ReDim sSQL(5)
+
+ReDim sSQL(4)
+
 'Aufstellen des Abfragefilters
 If Not cmbStbld.text = "alle" Then
      sSQL(0) = "Stbld = '" & cmbStbld.text & "'"
@@ -535,13 +532,6 @@ If Not cmbStbld.text = "alle" Then
  
  sSQL(2) = "Höhe >= " & txthoe.text & " AND Monddist >= " & txtMonddist.text
  
- ' sSQL = sSQL & "Höhe >= " & txthoe.text & " AND Azimut BETWEEN " & txtAzi_u.text & _
-'" AND  360 AND Azimut BETWEEN 0 AND " & txtAzi_o.text & " AND Monddist >= " & txtMonddist.text
-'Else
-'sSQL = sSQL & "Höhe >= " & txthoe.text & " AND Azimut >= " & txtAzi_u.text & _
-'" AND Azimut <= " & txtAzi_o.text & " AND Monddist >= " & txtMonddist.text
-'End If
-
 If Database = 0 Or Database = 1 Or Database = 5 Then
     'Filter für Typ oder Bprog
     If Not cmbTyp.text = "alle" Then
@@ -566,12 +556,10 @@ If Database = 0 Or Database = 1 Or Database = 5 Then
          End If
    End If
 
-    
-    'sSQL(3) = sSQL(3) & " AND BProg = '" & cmbBpro.text & "'"
 End If
 
 If Database > 1 And Not Database = 5 Then
-If Not cmbTyp.text = "alle" Then
+  If Not cmbTyp.text = "alle" Then
     If cmbTyp.text = "alle E" Then
         sSQL(3) = "Typ  Like 'E%' "
     ElseIf cmbTyp.text = "alle RR" Then
@@ -583,10 +571,9 @@ If Not cmbTyp.text = "alle" Then
     Else
        sSQL(3) = "Typ LIKE '" & cmbTyp.text & "%'"
     End If
+  End If
 End If
-End If
- 
-'sSQL(4) = "Max <= " & CDbl(txtMag.text) & " OR MinI <= " & CDbl(txtMag.text)
+
 
 frmHaupt.gridfüllen (sSQL)
 frmGridGross.grossGrid_füllen
@@ -635,11 +622,9 @@ End If
  cmbBpro.Clear
  cmbTyp.Clear
  'BAV_Sterne oder BAV_sonstige?
- 'Füllen der Combobox
  If Database = "" Then
   If frmHaupt.grdergebnis.TextMatrix(1, 8) <> "" Then
-  Database = 0
-  'Else: Database = 1
+    Database = 0
   End If
 End If
 
@@ -648,6 +633,7 @@ cmbStbld.AddItem "alle"
  For x = 0 To UBound(stbldwerte)
     cmbStbld.AddItem stbldwerte(x)
  Next x
+ 
  cmbStbld.ListIndex = 0
    
 If Database = 0 Or Database = 5 Then
@@ -688,8 +674,10 @@ If Database = 0 Or Database = 5 Then
   .ListIndex = 0
   End With
   'Label4.Caption = "      Typ. :"
-  lblSpalte(8) = frmHaupt.grdergebnis.ColHeaderCaption(0, 9)
-  chkSpalte(8).Visible = False
+  lblSpalte(8) = frmHaupt.grdergebnis.ColHeaderCaption(0, 8)
+  chkSpalte(8).Visible = True
+  lblSpalte(9) = frmHaupt.grdergebnis.ColHeaderCaption(0, 9)
+  chkSpalte(9).Visible = True
   
   ElseIf Database >= 2 Then
   With cmbTyp
@@ -706,8 +694,9 @@ If Database = 0 Or Database = 5 Then
   .ListIndex = 0
   End With
   Label4.Caption = "      Typ. :"
-  lblSpalte(8) = frmHaupt.grdergebnis.ColHeaderCaption(0, 9)
-  chkSpalte(8).Visible = False
+  lblSpalte(8) = frmHaupt.grdergebnis.ColHeaderCaption(0, 8)
+  'chkSpalte(8).Visible = False: lblSpalte(8).Visible = False
+  lblSpalte(9) = frmHaupt.grdergebnis.ColHeaderCaption(0, 9)
   chkSpalte(9).Visible = True
 End If
 
@@ -717,12 +706,14 @@ If INIGetValue(datei, "Standard", "Sternbild") = "" Then
 End If
 
  'Für den FAll, dass ältere Ini-Version vorhanden ist, Standardwerte ergänzen
- If INIGetValue(datei, "Standard", "Monddist") = "" Then
-    Call INISetValue(datei, "Standard", "Typ", "alle")
-    Call INISetValue(datei, "Standard", "Monddist", 30)
-    Call INISetValue(datei, "filter", "Typ", "alle")
-    Call INISetValue(datei, "filter", "Monddist", 30)
- End If
+ 'If INIGetValue(datei, "Standard", "Monddist") = "" Then
+  '  Call INISetValue(datei, "Standard", "Typ", "alle")
+  '  Call INISetValue(datei, "Standard", "Monddist", 30)
+  '  Call INISetValue(datei, "filter", "Typ", "alle")
+ '   Call INISetValue(datei, "filter", "Monddist", 30)
+ 'End If
+ 
+ 
 
  txthoe.text = INIGetValue(datei, "filter", "höhe")
  txtAzi_u.text = INIGetValue(datei, "filter", "Azimut_u")
@@ -736,7 +727,9 @@ End If
   'Else 'If Database = 1 Then
     cmbTyp.text = INIGetValue(datei, "filter", "Typ")
  'End If
- 
+ For x = 1 To 10
+    chkSpalte(x).Value = coltrigger(x - 1)
+ Next x
  
  cmdStandard.Enabled = True
  
@@ -760,6 +753,7 @@ lblSpalte(10) = frmHaupt.grdergebnis.ColHeaderCaption(0, 10)
 lblSpalte(11) = frmHaupt.grdergebnis.ColHeaderCaption(0, 11)
 If Database <> 0 And Database <> 5 Then
  Label6.Enabled = False: cmbBpro.Enabled = False
+ 'chkSpalte(8).Enabled = False: lblSpalte(8).Enabled = False
  Else
  Label5.Visible = True: cmbBpro.Visible = True
 End If
@@ -768,11 +762,11 @@ End Sub
 
 
 Private Sub Form_Unload(Cancel As Integer)
-If frmAladin.Visible = False Then
-sSQL = ""
-frmHaupt.gridfüllen
-End If
-Timer1.Enabled = False
+    If frmAladin.Visible = False Then
+        sSQL = ""
+        frmHaupt.gridfüllen
+    End If
+    Timer1.Enabled = False
 End Sub
 
 

@@ -1,8 +1,8 @@
 VERSION 5.00
 Begin VB.Form frmSterninfo 
    BorderStyle     =   1  'Fest Einfach
-   Caption         =   "     Informationsfenster"
-   ClientHeight    =   8505
+   Caption         =   "Informationsfenster"
+   ClientHeight    =   8145
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   2340
@@ -10,115 +10,124 @@ Begin VB.Form frmSterninfo
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5522.728
+   ScaleHeight     =   5288.961
    ScaleMode       =   0  'Benutzerdefiniert
    ScaleWidth      =   2340
    ShowInTaskbar   =   0   'False
    Begin VB.Frame fraMondEphem 
       Caption         =   "Mondephemeriden"
-      Height          =   1575
+      Height          =   1935
       Left            =   120
       TabIndex        =   14
       Top             =   0
       Width           =   2055
+      Begin VB.Label lblDist 
+         Caption         =   "-"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   120
+         TabIndex        =   40
+         Top             =   1610
+         Width           =   1815
+      End
       Begin VB.Image imgMoonPhase 
          Height          =   615
-         Left            =   1320
+         Left            =   1370
          Stretch         =   -1  'True
-         Top             =   360
+         Top             =   240
          Width           =   615
       End
-      Begin VB.Image imgPhase 
-         Height          =   495
-         Index           =   0
-         Left            =   0
-         Picture         =   "frmSterninfo.frx":0000
-         Stretch         =   -1  'True
-         Top             =   1080
-         Visible         =   0   'False
-         Width           =   495
-      End
-      Begin VB.Image imgPhase 
-         Height          =   495
-         Index           =   7
-         Left            =   480
-         Picture         =   "frmSterninfo.frx":0349
-         Stretch         =   -1  'True
-         Top             =   2520
-         Visible         =   0   'False
-         Width           =   495
-      End
-      Begin VB.Image imgPhase 
-         Height          =   495
-         Index           =   6
-         Left            =   0
-         Picture         =   "frmSterninfo.frx":06DA
-         Stretch         =   -1  'True
-         Top             =   2520
-         Visible         =   0   'False
-         Width           =   495
-      End
-      Begin VB.Image imgPhase 
-         Height          =   495
-         Index           =   5
-         Left            =   480
-         Picture         =   "frmSterninfo.frx":0A78
-         Stretch         =   -1  'True
-         Top             =   2040
-         Visible         =   0   'False
-         Width           =   495
-      End
-      Begin VB.Image imgPhase 
-         Height          =   495
-         Index           =   4
-         Left            =   0
-         Picture         =   "frmSterninfo.frx":0E05
-         Stretch         =   -1  'True
-         Top             =   2040
-         Visible         =   0   'False
-         Width           =   495
-      End
-      Begin VB.Image imgPhase 
-         Height          =   495
-         Index           =   3
-         Left            =   480
-         Picture         =   "frmSterninfo.frx":10CA
-         Stretch         =   -1  'True
-         Top             =   1560
-         Visible         =   0   'False
-         Width           =   495
-      End
-      Begin VB.Image imgPhase 
-         Height          =   495
-         Index           =   2
-         Left            =   0
-         Picture         =   "frmSterninfo.frx":149A
-         Stretch         =   -1  'True
-         Top             =   1560
-         Visible         =   0   'False
-         Width           =   495
-      End
-      Begin VB.Image imgPhase 
-         Height          =   495
-         Index           =   1
-         Left            =   480
-         Picture         =   "frmSterninfo.frx":1838
-         Stretch         =   -1  'True
-         Top             =   1080
-         Visible         =   0   'False
-         Width           =   495
-      End
-      Begin VB.Label lblJAVA 
-         Height          =   1215
+      Begin VB.Label lblPhase 
+         Caption         =   "-"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
          Left            =   120
-         TabIndex        =   15
-         Top             =   240
+         TabIndex        =   39
+         Top             =   1320
          Width           =   1815
+      End
+      Begin VB.Label lblPhaseText 
+         Caption         =   "-"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   38
+         Top             =   1080
+         Width           =   1815
+      End
+      Begin VB.Label lblUnter 
+         Alignment       =   2  'Zentriert
+         Caption         =   "--:--"
+         Height          =   255
+         Left            =   840
+         TabIndex        =   37
+         Top             =   720
+         Width           =   495
+      End
+      Begin VB.Label lblTrans 
+         Alignment       =   2  'Zentriert
+         Caption         =   "--:--"
+         Height          =   255
+         Left            =   840
+         TabIndex        =   36
+         Top             =   480
+         Width           =   495
+      End
+      Begin VB.Label lblAuf 
+         Alignment       =   2  'Zentriert
+         Caption         =   "--:--"
+         Height          =   255
+         Left            =   840
+         TabIndex        =   35
+         Top             =   240
+         Width           =   495
+      End
+      Begin VB.Label Label16 
+         Caption         =   "Untergg:"
+         Height          =   255
+         Index           =   2
+         Left            =   120
+         TabIndex        =   34
+         Top             =   720
+         Width           =   855
+      End
+      Begin VB.Label Label16 
+         Caption         =   "Transit:"
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         TabIndex        =   33
+         Top             =   480
+         Width           =   735
+      End
+      Begin VB.Label Label16 
+         Caption         =   "Aufgang:"
+         Height          =   255
+         Index           =   0
+         Left            =   120
+         TabIndex        =   32
+         Top             =   240
+         Width           =   735
       End
    End
    Begin VB.Frame Frame1 
       Caption         =   "Datenbank-Infos"
-      Height          =   6255
+      Height          =   6135
       Left            =   120
       TabIndex        =   0
       Top             =   1920
@@ -138,7 +147,7 @@ Begin VB.Form frmSterninfo
          EndProperty
          Height          =   285
          Left            =   600
-         TabIndex        =   33
+         TabIndex        =   31
          Top             =   2160
          Width           =   1335
       End
@@ -146,7 +155,7 @@ Begin VB.Form frmSterninfo
          Caption         =   "L.B.:"
          Height          =   255
          Left            =   120
-         TabIndex        =   32
+         TabIndex        =   30
          Top             =   2160
          Width           =   495
       End
@@ -154,7 +163,7 @@ Begin VB.Form frmSterninfo
          Caption         =   "Quelle/BP:"
          Height          =   255
          Left            =   120
-         TabIndex        =   31
+         TabIndex        =   29
          Top             =   1800
          Width           =   855
       End
@@ -173,7 +182,7 @@ Begin VB.Form frmSterninfo
          EndProperty
          Height          =   285
          Left            =   960
-         TabIndex        =   30
+         TabIndex        =   28
          Top             =   1800
          Width           =   975
       End
@@ -181,7 +190,7 @@ Begin VB.Form frmSterninfo
          Caption         =   "Mo:"
          Height          =   375
          Left            =   120
-         TabIndex        =   29
+         TabIndex        =   27
          Top             =   1080
          Width           =   375
       End
@@ -191,7 +200,7 @@ Begin VB.Form frmSterninfo
          BorderStyle     =   1  'Fest Einfach
          Height          =   285
          Left            =   600
-         TabIndex        =   28
+         TabIndex        =   26
          Top             =   1080
          Width           =   1335
       End
@@ -201,8 +210,8 @@ Begin VB.Form frmSterninfo
          BorderStyle     =   1  'Fest Einfach
          Height          =   285
          Left            =   720
-         TabIndex        =   27
-         Top             =   4320
+         TabIndex        =   25
+         Top             =   4200
          Width           =   855
       End
       Begin VB.Label lblkd 
@@ -211,8 +220,8 @@ Begin VB.Form frmSterninfo
          BorderStyle     =   1  'Fest Einfach
          Height          =   285
          Left            =   720
-         TabIndex        =   26
-         Top             =   4680
+         TabIndex        =   24
+         Top             =   4560
          Width           =   855
       End
       Begin VB.Label lblMM 
@@ -221,8 +230,8 @@ Begin VB.Form frmSterninfo
          BorderStyle     =   1  'Fest Einfach
          Height          =   285
          Left            =   720
-         TabIndex        =   25
-         Top             =   5040
+         TabIndex        =   23
+         Top             =   4920
          Width           =   855
       End
       Begin VB.Label lblMinI 
@@ -231,7 +240,7 @@ Begin VB.Form frmSterninfo
          BorderStyle     =   1  'Fest Einfach
          Height          =   285
          Left            =   720
-         TabIndex        =   24
+         TabIndex        =   22
          Top             =   3240
          Width           =   855
       End
@@ -241,7 +250,7 @@ Begin VB.Form frmSterninfo
          BorderStyle     =   1  'Fest Einfach
          Height          =   285
          Left            =   720
-         TabIndex        =   23
+         TabIndex        =   21
          Top             =   3600
          Width           =   855
       End
@@ -251,7 +260,7 @@ Begin VB.Form frmSterninfo
          BorderStyle     =   1  'Fest Einfach
          Height          =   285
          Left            =   720
-         TabIndex        =   22
+         TabIndex        =   20
          Top             =   2880
          Width           =   855
       End
@@ -261,7 +270,7 @@ Begin VB.Form frmSterninfo
          BorderStyle     =   1  'Fest Einfach
          Height          =   285
          Left            =   840
-         TabIndex        =   21
+         TabIndex        =   19
          Top             =   1440
          Width           =   1095
       End
@@ -271,7 +280,7 @@ Begin VB.Form frmSterninfo
          BorderStyle     =   1  'Fest Einfach
          Height          =   285
          Left            =   600
-         TabIndex        =   20
+         TabIndex        =   18
          Top             =   720
          Width           =   1335
       End
@@ -290,7 +299,7 @@ Begin VB.Form frmSterninfo
          EndProperty
          Height          =   285
          Left            =   600
-         TabIndex        =   19
+         TabIndex        =   17
          Top             =   360
          Width           =   1335
       End
@@ -310,7 +319,7 @@ Begin VB.Form frmSterninfo
          Height          =   495
          Left            =   120
          TabIndex        =   13
-         Top             =   5640
+         Top             =   5520
          Width           =   1815
       End
       Begin VB.Label Label12 
@@ -318,7 +327,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   12
-         Top             =   5040
+         Top             =   4920
          Width           =   615
       End
       Begin VB.Label Label11 
@@ -326,7 +335,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   11
-         Top             =   4680
+         Top             =   4560
          Width           =   615
       End
       Begin VB.Label Label10 
@@ -334,7 +343,7 @@ Begin VB.Form frmSterninfo
          Height          =   285
          Left            =   240
          TabIndex        =   10
-         Top             =   4320
+         Top             =   4200
          Width           =   615
       End
       Begin VB.Label Label9 
@@ -384,7 +393,7 @@ Begin VB.Form frmSterninfo
          Height          =   255
          Left            =   120
          TabIndex        =   5
-         Top             =   5400
+         Top             =   5280
          Width           =   1695
       End
       Begin VB.Label Label5 
@@ -402,7 +411,7 @@ Begin VB.Form frmSterninfo
          Height          =   375
          Left            =   240
          TabIndex        =   4
-         Top             =   4020
+         Top             =   3900
          Width           =   1695
       End
       Begin VB.Label Label4 
@@ -443,40 +452,98 @@ Begin VB.Form frmSterninfo
    End
    Begin VB.Timer Timer1 
       Interval        =   10
-      Left            =   0
-      Top             =   1200
+      Left            =   120
+      Top             =   3000
    End
-   Begin VB.Label lblDist 
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   255
+   Begin VB.Image imgPhase 
+      Height          =   615
+      Index           =   7
+      Left            =   840
+      Picture         =   "frmSterninfo.frx":0000
+      Stretch         =   -1  'True
+      Top             =   3960
+      Width           =   615
+   End
+   Begin VB.Image imgPhase 
+      Height          =   615
+      Index           =   6
       Left            =   240
-      TabIndex        =   18
-      Top             =   1680
-      Width           =   1815
+      Picture         =   "frmSterninfo.frx":0391
+      Stretch         =   -1  'True
+      Top             =   3960
+      Width           =   615
+   End
+   Begin VB.Image imgPhase 
+      Height          =   615
+      Index           =   5
+      Left            =   840
+      Picture         =   "frmSterninfo.frx":072F
+      Stretch         =   -1  'True
+      Top             =   3360
+      Width           =   615
+   End
+   Begin VB.Image imgPhase 
+      Height          =   615
+      Index           =   4
+      Left            =   240
+      Picture         =   "frmSterninfo.frx":0ABC
+      Stretch         =   -1  'True
+      Top             =   3360
+      Width           =   615
+   End
+   Begin VB.Image imgPhase 
+      Height          =   615
+      Index           =   3
+      Left            =   840
+      Picture         =   "frmSterninfo.frx":0D81
+      Stretch         =   -1  'True
+      Top             =   2760
+      Width           =   615
+   End
+   Begin VB.Image imgPhase 
+      Height          =   615
+      Index           =   2
+      Left            =   240
+      Picture         =   "frmSterninfo.frx":1151
+      Stretch         =   -1  'True
+      Top             =   2760
+      Width           =   615
+   End
+   Begin VB.Image imgPhase 
+      Height          =   615
+      Index           =   1
+      Left            =   840
+      Picture         =   "frmSterninfo.frx":14EF
+      Stretch         =   -1  'True
+      Top             =   2160
+      Width           =   615
+   End
+   Begin VB.Image imgPhase 
+      Height          =   600
+      Index           =   0
+      Left            =   240
+      Picture         =   "frmSterninfo.frx":187C
+      Stretch         =   -1  'True
+      Top             =   2160
+      Width           =   600
    End
    Begin VB.Label lblStarDec 
+      BorderStyle     =   1  'Fest Einfach
       Caption         =   "Label1"
       Height          =   255
-      Left            =   120
-      TabIndex        =   17
-      Top             =   360
+      Left            =   480
+      TabIndex        =   16
+      Top             =   2640
       Visible         =   0   'False
       Width           =   1455
    End
    Begin VB.Label lblStarRA 
+      BorderStyle     =   1  'Fest Einfach
       Caption         =   "Label1"
       Height          =   255
-      Left            =   0
-      TabIndex        =   16
-      Top             =   0
+      Left            =   720
+      TabIndex        =   15
+      Top             =   2280
       Visible         =   0   'False
       Width           =   1215
    End
@@ -527,42 +594,6 @@ Const SW_NORMAL = 1
 Const SW_MINIMIZED = 2
 Const SW_MAXIMIZE = 3
 Dim fs As New FileSystemObject
-
-Sub Mondinfo()
-Dim Day, Month, year, Uhrzeit
-Dim sonne, mond, ephem, monddist
-
-'Wichtig! Hier Deklaration von PI,RAD,Degree
-Mpi = 4 * Atn(1)
-Mdeg = (4 * Atn(1)) / 180
-Mrad = 180 / (4 * Atn(1))
-
-'Ermitteln der Zeitangaben aus dem Grid
-Uhrzeit = Format(frmHaupt.grdergebnis.TextMatrix(frmHaupt.grdergebnis.Row, 4), "#.00000") * 24
-Day = CDbl(Left(CDate(frmHaupt.grdergebnis.TextMatrix(frmHaupt.grdergebnis.Row, 3)), 2))
-Month = CDbl(Mid(CDate(frmHaupt.grdergebnis.TextMatrix(frmHaupt.grdergebnis.Row, 3)), 4, 2))
-year = CDbl(Right(CDate(frmHaupt.grdergebnis.TextMatrix(frmHaupt.grdergebnis.Row, 3)), 4))
-
-'Berechnung von Sonnen und Mondephemeriden
-sonne = SunPosition(CalcJD(Day, Month, year, Uhrzeit))
-mond = MoonPosition(sonne(2), sonne(3), CalcJD(Day, Month, year, Uhrzeit))
-ephem = MoonRise(CalcJD(Day, Month, year, Uhrzeit), 65, 10 * Mdeg, 50 * Mdeg, 0, 1)
-monddist = Moondistance(lblStarRA.Caption, lblStarDec.Caption, (mond(0) * Mrad / 15) / 24 * 360, mond(1) * Mrad)
-
-'Ausgabe in Labelfeld
-lblJAVA.Caption = "Aufgang: " & Format(ephem(0) / 24, "hh:mm") & Chr(13) & _
-"Transit   : " & Format(ephem(1) / 24, "hh:mm") & Chr(13) & "Untergg : " & Format(ephem(2) / 24, "hh:mm") & Chr(13) & Chr(13) & _
-mond(2) & Chr(13) & "Phase: " & Format(mond(3), "#.0 %")
-lblDist.Caption = "Monddistanz: " & Format(Round(monddist), "# °")
-imgMoonPhase.Picture = imgPhase(mond(6))
-
-End Sub
-
-
-
-
-
-
 
 Private Sub Form_Unload(Cancel As Integer)
 Timer1.Enabled = False

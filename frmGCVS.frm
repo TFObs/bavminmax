@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Begin VB.Form frmGCVS 
    BorderStyle     =   4  'Festes Werkzeugfenster
@@ -176,6 +176,7 @@ Option Explicit
 
 Dim fs As FileSystemObject
 Dim rsa As ADODB.Recordset
+Dim rsaFil As ADODB.Recordset
 Dim einstrom As TextStream
 Dim ausstrom As TextStream
 Dim zeile
@@ -184,7 +185,8 @@ Dim zähler As Integer
 Dim GCVSThere As Boolean
 Dim result
 Dim DBFilter As String
-
+Dim mini As String
+Dim maxi As String
 
 Private Sub cmdDownload_Click()
 If optD_umwand = True Then
@@ -203,6 +205,7 @@ With cdlgGCVS
 .FileName = ""
 .ShowOpen
 If .FileName = "" Then Exit Sub
+lblSpeichPfad.Caption = "Umwandlung..."
 Call DownAndChange
 End With
 
@@ -229,6 +232,9 @@ Sub DownAndChange()
 
 Set fs = New FileSystemObject
 Set rsa = New ADODB.Recordset
+
+floatwindow Me.hWnd
+
 On Error GoTo ErrorHandler
 Me.MousePointer = 11
 DoEvents
@@ -253,6 +259,7 @@ If optD_Down = True Then
       Exit Sub
     ElseIf result = True Then
     
+    
     result = MsgBox("Achtung! Der Download kann bei langsamer Internetverbindung " & _
     "sehr lange dauern." & vbCrLf & "Der Download benötigt sämtliche Systemresourcen und der PC " & Chr(34) & _
     "hängt" & Chr(34) & " in dieser Zeit scheinbar." & vbCrLf & vbCrLf & _
@@ -267,6 +274,10 @@ If optD_Down = True Then
     
 End If
 
+fehler.ort = "frmGCVS, Download erfolgreich"
+
+cmdDownload.Caption = "Download beendet."
+
 If fs.FileExists(App.Path & "\gcvs.txt") = False And Not optD_umwand = True Then
      MsgBox "Es ist ein Fehler beim Download aufgetreten" & vbCrLf & _
      "Bitte versuchen Sie es erneut..", vbCritical, "Download nicht erfolgreich"
@@ -276,6 +287,7 @@ If fs.FileExists(App.Path & "\gcvs.txt") = False And Not optD_umwand = True Then
      Exit Sub
 End If
 
+fehler.ort = "frmGCVS, Recordset erzeugen"
 With rsa
      .Fields.Append ("ID"), adInteger
      .Fields.Append ("Kürzel"), adVarChar, 6
@@ -283,7 +295,7 @@ With rsa
      .Fields.Append ("BP"), adChar, 4
      .Fields.Append ("LBeob"), adDouble
      .Fields.Append ("Max"), adDouble
-     .Fields.Append ("MinI"), adVarChar, 5
+     .Fields.Append ("MinI"), adDouble
      .Fields.Append ("Spektr"), adVarChar, 17
      .Fields.Append ("Typ"), adVarChar, 12
      .Fields.Append ("Epoche"), adDouble
@@ -322,6 +334,9 @@ Wend
 
 rsa.Open
 zähler = 1
+cmdDownload.Caption = "Umwandlung.."
+lblSpeichPfad.Caption = "Umwandlung..."
+fehler.ort = "frmGCVS, dritte Zeile"
 
 While Not einstrom.AtEndOfStream
     zeile = Split(einstrom.ReadLine, "|")
@@ -336,28 +351,36 @@ While Not einstrom.AtEndOfStream
         .Fields("Kürzel") = stern(0)
         .Fields("Stbld") = stern(1)
         .Fields("BP") = "GCVS"
-        .Fields("Max") = Trim(Mid(zeile(4), 2, 5))
-        .Fields("MinI") = Trim(Mid(zeile(5), 2, 5))
+    fehler.ort = "frmGCVS, Max, MinI"
+        maxi = Trim(Mid(zeile(4), 2, 5))
+        mini = Replace(Replace(Trim(Mid(zeile(5), 2, 5)), "<", ""), "(", "")
+        If maxi = "" Then maxi = 0
+        If mini = "" Then mini = 0
+        .Fields("Max") = CDbl(maxi)
+        .Fields("MinI") = CDbl(mini)
         .Fields("Spektr") = Trim(zeile(11))
         .Fields("Typ") = Trim(zeile(3))
         .Fields("LBeob") = 0
+        
+        fehler.ort = "frmGCVS, Epoche IF"
+        
         If InStr(1, zeile(7), ":") <> 0 Then
            zeile(7) = Trim(Left(zeile(7), InStr(zeile(7), ":") - 1))
            Else
            zeile(7) = Trim(Left(zeile(7), InStr(1, zeile(7), " ")))
         End If
         
-        .Fields("Epoche") = zeile(7)
-        .Fields("Periode") = Trim(Mid(zeile(9), 2, 16))
-        .Fields("hh") = Left(zeile(2), 2)
-        .Fields("mm") = Mid(zeile(2), 3, 2)
-        .Fields("ss") = Trim(Mid(zeile(2), 5, 4))
+        .Fields("Epoche") = CDbl(zeile(7))
+        .Fields("Periode") = CDbl(Trim(Mid(zeile(9), 2, 16)))
+        .Fields("hh") = CInt(Left(zeile(2), 2))
+        .Fields("mm") = CInt(Mid(zeile(2), 3, 2))
+        .Fields("ss") = CDbl(Trim(Mid(zeile(2), 5, 4)))
         .Fields("vz") = Mid(zeile(2), 9, 1)
-        .Fields("o") = Mid(zeile(2), 10, 2)
-        .Fields("m") = Round(Mid(zeile(2), 12, 2) + CDbl(Mid(zeile(2), 14, 2)) / 60, 3)
-        .Fields("Dec") = FormatNumber(CDbl(.Fields("vz") & .Fields("o") + .Fields("m") / 60), 4)
+        .Fields("o") = CInt(Mid(zeile(2), 10, 2))
+        .Fields("m") = CDbl(Round(Mid(zeile(2), 12, 2) + CDbl(Mid(zeile(2), 14, 2)) / 60, 3))
+        .Fields("Dec") = CDbl(FormatNumber(CDbl(.Fields("vz") & .Fields("o") + .Fields("m") / 60), 4))
         .Update
-     
+     fehler.ort = "frmGCVS, nach Update"
     End With
      zähler = zähler + 1
 
@@ -365,33 +388,61 @@ While Not einstrom.AtEndOfStream
 
 Wend
 
+fehler.ort = "frmGCVS, close recordset"
    einstrom.Close
-   DBFilter = "DEC > " & CInt(txtFilter.text)
-   rsa.Filter = DBFilter
+   fehler.ort = "frmGCVS, save"
    rsa.Save App.Path & "\gcvs.dat"
-   Me.MousePointer = 1
+   fehler.ort = "frmGCVS, close"
    rsa.Close
+   
+   'DBFilter = "Dec >= " & CStr(CInt(txtFilter.text))
+   
+Set rsaFil = New ADODB.Recordset
+With rsaFil
+    .Open App.Path & "\gcvs.dat"
+    fehler.ort = "frmGCVS, Filter"
+    .Filter = "Dec >= " & txtFilter.text
+    fehler.ort = "frmGCVS, save"
+    .Save App.Path & "\gcvs.dat"
+    .Close
+End With
+   'rsaFil.Filter = "Dec >= " & txtFilter.text
+   'fehler.ort = "frmGCVS, save"
+   'rsaFil.Save App.Path & "\gcvs.dat"
+    'fehler.ort = "frmGCVS, Mouse"
+   Me.MousePointer = 1
+    'fehler.ort = "frmGCVS, close"
+   'rsa.Close
+   'rsaFil.Close
+   
     fs.DeleteFile (App.Path & "\gcvs.txt")
     Set einstrom = Nothing
     Set rsa = Nothing
+    Set rsaFil = Nothing
     Set fs = Nothing
+     fehler.ort = "frmGCVS, frmHaupt_Load"
     frmHaupt.Form_Load
     
+    fehler.ort = "frmGCVS, add to frmHaupt"
+     
      For x = 1 To frmHaupt.cmbGrundlage.ListCount
-   If frmHaupt.cmbGrundlage.List(x) = "GCVS" Then
-    frmHaupt.cmbGrundlage.ListIndex = x
-    Exit For
-   End If
- Next
-
+         If frmHaupt.cmbGrundlage.List(x) = "GCVS" Then
+            frmHaupt.cmbGrundlage.ListIndex = x
+            Exit For
+        End If
+    Next
+    cmdDownload.Caption = "Start"
+    lblSpeichPfad.Caption = "Bitte Pfad zu der Datei iii.dat angeben:"
     MsgBox "Die GCVS-Datenbank kann jetzt für" & vbCrLf & "Berechnungen verwendet werden..", vbInformation, "Implementierung erfolgreich"
     frmHaupt.cmdListe.Enabled = True: frmHaupt.VTabs.TabEnabled(1) = True
     frmHaupt.cmbGrundlage.Enabled = True
+    
     Unload Me
     Exit Sub
     
 ErrorHandler:
-     MsgBox "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut", vbCritical, "Fehler: Download/Umwandlung nicht erfolgreich"
+     MsgBox "Es ist ein Fehler aufgetreten." & vbCrLf & fehler.ort & " --> " & Err.Number & vbCrLf & _
+     Err.Description & vbCrLf & vbCrLf & "Bitte versuchen Sie es erneut", vbCritical, "Fehler: Download/Umwandlung nicht erfolgreich"
      cmdDownload.BackColor = &H8000000F
      cmdDownload.Caption = "Start"
      Me.MousePointer = 1

@@ -61,7 +61,9 @@ Public dicStbld As Dictionary
     Public Database
     Public sorter As Boolean
     Public SternName As String, maxSternLen As Byte
-
+    Public coltrigger
+    Public minMag_max As Double, minMag_min As Double
+    
 'Deklaration: Globale Form API-Konstanten
 Public Const SWP_NOMOVE As Long = &H2
 Public Const SWP_NOSIZE As Long = &H1
@@ -147,6 +149,8 @@ Call INISetValue(datei, "Standard", "BProg", "alle")
 Call INISetValue(datei, "Standard", "Typ", "alle")
 Call INISetValue(datei, "Standard", "Monddist", 90)
 Call INISetValue(datei, "Standard", "Sternbild", "alle")
+Call INISetValue(datei, "filter", "minMag_Max", 18)
+Call INISetValue(datei, "filter", "minMag_Min", 18)
 
 End Sub
 
@@ -224,13 +228,13 @@ Dim JDo As Double, ST As Double
     'Uhrzeit muﬂ in Stundenbruchteilen eingegeben werden
     'Sternzeit wird in Tagesbruchteilen berechnet
 
-    ST = 6.66452 + 0.0657098244 * (JDo - 2451544.5) + 1.0027379093 * Uhrzeit + l‰nge / 15
+    ST = 6.66452 + 0.0657098244 * (JDo - 2451544.5) + 1.0027379093 * Uhrzeit
     If ST < 0 Then
         ST = ((24 + ST / 24) - Int(24 + ST / 24))
         Else: ST = ((ST / 24) - Int(ST / 24))
     End If
     
-    STZT = ST 'Ausgabe in Tagesbruchteilen
+    STZT = ST + (l‰nge / 15 / 24) 'Ausgabe in Tagesbruchteilen
 End Function
 
 'Berechnung des Stundenwinkels
@@ -338,7 +342,8 @@ End Select
 'Zeitdifferenz
 If ((Sin(sonnenaufgang) - Sin(b) * Sin(ds)) / _
 (Cos(b) * Cos(ds))) <= -1 Then
- AufUnter = "25"
+ AU(0) = 25: AU(1) = 25
+ AufUnter = AU
  Exit Function
  Else
 zeitdifferenz = 12 * arccos((Sin(sonnenaufgang) - Sin(b) * Sin(ds)) / _
