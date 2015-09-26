@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
 Begin VB.Form frmGCVS 
    BorderStyle     =   4  'Festes Werkzeugfenster
    Caption         =   "Aktualisierung der GCVS-DB"
@@ -180,7 +180,7 @@ Dim rsaFil As ADODB.Recordset
 Dim einstrom As TextStream
 Dim ausstrom As TextStream
 Dim zeile
-Dim stern(2)
+Dim stern, sPer
 Dim zähler As Integer
 Dim GCVSThere As Boolean
 Dim result
@@ -340,10 +340,18 @@ fehler.ort = "frmGCVS, dritte Zeile"
 
 While Not einstrom.AtEndOfStream
     zeile = Split(einstrom.ReadLine, "|")
-    stern(0) = Trim(Left(zeile(1), 6))
-    stern(1) = Mid(zeile(1), 7, 3)
+    stern = Split(StripDuplicates(zeile(1)), " ")
+    If Len(stern(1)) > 3 Then
+        ReDim Preserve stern(3)
+        stern(2) = Right(stern(1), Len(stern(1)) - 3)
+        stern(1) = Left(stern(1), 3)
+        
+        
+    End If
+    'stern(0) = Trim(Left(zeile(1), 6))
+    'stern(1) = Mid(zeile(1), 7, 3)
 
-   If Not zeile(2) = "" And Not Trim(zeile(7)) = "" And Not Trim(zeile(9)) = "" Then
+   If Not zeile(2) = "" And Not Trim(zeile(8)) = "" And Not Trim(zeile(10)) = "" Then
     'On Error GoTo errhandler
     With rsa
         .AddNew
@@ -358,20 +366,24 @@ While Not einstrom.AtEndOfStream
         If mini = "" Then mini = 0
         .Fields("Max") = CDbl(maxi)
         .Fields("MinI") = CDbl(mini)
-        .Fields("Spektr") = Trim(zeile(11))
+        .Fields("Spektr") = Trim(zeile(12))
         .Fields("Typ") = Trim(zeile(3))
         .Fields("LBeob") = 0
         
         fehler.ort = "frmGCVS, Epoche IF"
-        
-        If InStr(1, zeile(7), ":") <> 0 Then
-           zeile(7) = Trim(Left(zeile(7), InStr(zeile(7), ":") - 1))
+        'Änderungen in 2015 Feld 7 =V/p, Feld 9 = Jahr
+        If InStr(1, zeile(8), ":") <> 0 Then
+           zeile(8) = Trim(Left(zeile(8), InStr(zeile(8), ":") - 1))
            Else
-           zeile(7) = Trim(Left(zeile(7), InStr(1, zeile(7), " ")))
+           zeile(8) = Trim(Left(zeile(8), InStr(1, zeile(8), " ")))
         End If
         
-        .Fields("Epoche") = CDbl(zeile(7))
-        .Fields("Periode") = CDbl(Trim(Mid(zeile(9), 2, 16)))
+        .Fields("Epoche") = CDbl(zeile(8))
+        'Debug.Print zähler & " " & stern(0) & " " & stern(1)
+        zeile(10) = Replace(zeile(10), "(", " ")
+        sPer = Split(StripDuplicates(zeile(10)), " ")
+        .Fields("Periode") = CDbl(sPer(1))
+        
         .Fields("hh") = CInt(Left(zeile(2), 2))
         .Fields("mm") = CInt(Mid(zeile(2), 3, 2))
         .Fields("ss") = CDbl(Trim(Mid(zeile(2), 5, 4)))
@@ -383,7 +395,7 @@ While Not einstrom.AtEndOfStream
      fehler.ort = "frmGCVS, nach Update"
     End With
      zähler = zähler + 1
-
+        
    End If
 
 Wend

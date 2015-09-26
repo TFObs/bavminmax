@@ -1,4 +1,4 @@
-Copyright Jörg Hanisch (c) 2006-2012
+Copyright Jörg Hanisch (c) 2006-2015
 
 Dieses Programm ist die Vollversion des Programmes VarEphem.
 Es ist nicht in irgendeinem kommerziellen Interesse geschrieben worden
@@ -24,11 +24,11 @@ Die Benutzung geschieht auf eigene Gefahr und Verantwortung!!
 Für etwaige Schäden, die durch die Benutzung dieses Programmes entstehen
 kann keine Haftung übernommen werden.
 
-Sie sind im Begriff die Version 1.1.0 Rev.5 des Programmes zu installieren.
+Sie sind im Begriff die Version 1.1.0 Rev.6 des Programmes zu installieren.
 
 Mit der Nutzung des Programms werden meine Copyrights anerkannt!
 
-Gescher, 01.05.2012
+Gescher, 26.09.2015
 				Jörg Hanisch
 
 

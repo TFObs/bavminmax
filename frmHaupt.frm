@@ -182,7 +182,7 @@ Begin VB.Form frmHaupt
             CalendarBackColor=   16777088
             CalendarTitleBackColor=   8421504
             CalendarTitleForeColor=   16777215
-            Format          =   16515075
+            Format          =   73924611
             CurrentDate     =   3
          End
          Begin MSComCtl2.DTPicker DTPicker1 
@@ -197,7 +197,7 @@ Begin VB.Form frmHaupt
             CalendarBackColor=   12648447
             CalendarTitleBackColor=   8421504
             CalendarTitleForeColor=   16777215
-            Format          =   16515075
+            Format          =   73924611
             CurrentDate     =   2
          End
          Begin MSComctlLib.ProgressBar Balken 
@@ -875,6 +875,7 @@ End If
  Call LoadGridData(grdergebnis, vstrfile, ";")
  
 grdergebnis.Visible = True
+frmHaupt.cmdStarChart.Visible = True
 
     'Einstellen der Spaltenbreiten
     With grdergebnis
@@ -1180,8 +1181,8 @@ End Sub
 
 Private Sub DBGcvs_aktual_Click()
 
-result = CheckInetConnection(Me.hWnd)
-If result = False Then Exit Sub
+'result = CheckInetConnection(Me.hWnd)
+'If result = False Then Exit Sub
 frmGCVS.show
 End Sub
 
@@ -1189,8 +1190,8 @@ End Sub
 
 Private Sub DBKrein_aktual_Click()
 
-result = CheckInetConnection(Me.hWnd)
-If result = False Then Exit Sub
+'result = CheckInetConnection(Me.hWnd)
+'If result = False Then Exit Sub
 frmKrein.show
 End Sub
 
@@ -2060,6 +2061,7 @@ End If
       cmdGridgross.Enabled = True
       cmdListdrucken.Enabled = True
       grdergebnis.Visible = True
+          frmHaupt.cmdStarChart.Visible = True
     Me.MousePointer = 1
     Exit Sub
     
@@ -2287,7 +2289,7 @@ End Sub
 
 
 Private Sub Ueber_Click()
-MsgBox "VarEphem, Version 1.1.0.5, Stand: 01.05.2012" & vbCrLf & vbCrLf & _
+MsgBox "VarEphem, Version 1.1.0.6, Stand: 26.09.2015" & vbCrLf & vbCrLf & _
 "geschrieben von: Jörg Hanisch, Gescher" & vbCrLf & _
 "Alle Rechte vorbehalen" & vbCrLf & vbCrLf & _
 "Fragen, Anregungen, (Spenden ;)) bitte per E-Mail an: " & vbCrLf & _

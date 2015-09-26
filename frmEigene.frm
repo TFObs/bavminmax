@@ -492,7 +492,7 @@ Else
             
             .Fields("o") = CInt(Int(DECWert))
             .Fields("m") = CDbl(FormatNumber((DECWert - Int(DECWert)) * 60, 3))
-            If chkopt(0).Value = True Then
+            If chkopt(0).Value = 1 Then
                 .Fields("Typ") = stern(cmbCol(7).List(cmbCol(7).ListIndex) - 1)
                 Else
                 .Fields("Typ") = ""
@@ -500,7 +500,7 @@ Else
             
             .Fields("Max") = 0 'IIf(chk2.Value, CDbl(stern(cmbCol(7).List(cmbCol(7).ListIndex) - 1)), 0)
             .Fields("MinI") = 0 ' IIf(chk3.Value, CDbl(stern(cmbCol(8).List(cmbCol(8).ListIndex) - 1)), 0)
-            If chkopt(1).Value = True Then
+            If chkopt(1).Value = 1 Then
                 .Fields("LBeob") = stern(cmbCol(6).List(cmbCol(6).ListIndex) - 1)
                 Else
                 .Fields("LBeob") = 0

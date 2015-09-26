@@ -154,6 +154,27 @@ Call INISetValue(datei, "filter", "minMag_Min", 18)
 
 End Sub
 
+Public Function StripDuplicates(ByVal Value As Variant, _
+Optional ByVal sChar As String = " ") As Variant
+
+If IsNull(Value) Then
+    StripDuplicates = Null
+Else
+    If Value = String$(Len(Value), sChar) Then
+        Value = sChar
+    Else
+    While Len(Value) > 0 And InStr(1, Value, sChar & sChar) > 0
+        Value = Replace(Value, sChar & sChar, sChar)
+    Wend
+    End If
+    StripDuplicates = Value
+End If
+    
+        
+    
+End Function
+
+
 '==============================================================================================================
 '=======================ASTRONOMISCHE BERECHNUNGSFUNKTIONEN====================================================
 '==============================================================================================================

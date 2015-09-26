@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmKrein 
    BorderStyle     =   4  'Festes Werkzeugfenster
    Caption         =   "Aktualisierung der Kreiner-DB"
@@ -261,11 +261,11 @@ zähler = 1
 Dim zeile3
 While Not einstrom.AtEndOfStream
 zeile3 = einstrom.ReadLine
-zeile1 = Split(Replace(zeile3, "  ", " "), " ")
+zeile1 = Split(StripDuplicates(zeile3), " ") 'Split(Replace(zeile3, "  ", " "), " ")
 
 zeile2 = einstrom.ReadLine
 If Mid(zeile2, 1, 1) = " " Then zeile2 = "0" & Right(zeile2, Len(zeile2) - 1)
-zeile2 = Split(Replace(zeile2, "  ", " "), " ")
+zeile2 = Split(StripDuplicates(zeile2), " ") 'Split(Replace(zeile2, "  ", " "), " ")
 
 
 'On Error Resume Next
@@ -384,6 +384,8 @@ ErrorHandler:
      Unload Me
      
 End Sub
+
+
 
 
 
