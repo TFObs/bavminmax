@@ -13,7 +13,7 @@ Begin VB.Form frmAladin
    ScaleWidth      =   7470
    StartUpPosition =   3  'Windows-Standard
    Begin VB.CheckBox chkAladDirekt 
-      Caption         =   "für Aladin übernehmen"
+      Caption         =   "fÃ¼r Aladin Ã¼bernehmen"
       Height          =   255
       Left            =   5280
       TabIndex        =   34
@@ -363,7 +363,7 @@ Begin VB.Form frmAladin
          Width           =   975
       End
       Begin VB.Label Label4 
-         Caption         =   "Bildgröße:"
+         Caption         =   "BildgrÃ¶ÃŸe:"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -684,7 +684,7 @@ chkESA.Value = 1
 chkHog.Value = 1
 chk2MASS.Value = 1
 
-    'Füllen der ComboBox für die Bildgröße
+    'FÃ¼llen der ComboBox fÃ¼r die BildgrÃ¶ÃŸe
     With cmbPicMeas
     .AddItem "15' x 15'"
     .AddItem "30' x 30'"
@@ -781,7 +781,7 @@ End If
 Exit Function
 errhandler:
 unfloatwindow Me.hWnd
-MsgBox "Fehler: " & Err.Number & " : " & Err.Description & vbCrLf & "Bitte Eingabe überprüfen!"
+MsgBox "Fehler: " & Err.Number & " : " & Err.Description & vbCrLf & "Bitte Eingabe Ã¼berprÃ¼fen!"
 GetAladinURL = "-"
 floatwindow Me.hWnd
 End Function
@@ -880,8 +880,10 @@ Private Sub cmdCRTS_Click()
   'Jede Abfrage:
   'Database: DB=<photcat,orphancat>
   'Output: OUT=<web,csv,vot> Format: SHORT=<short,long> Plot: PLOT=<plot, >
+   '2018: Ã„nderung der Website auf http://nesssi.cacr.caltech.edu/cgi-bin/getcssconedbid_release2.cgi?
+   'Usage: http://nesssi.cacr.caltech.edu/DataRelease/usage_obj.html
  
-    Connstr = "http://nesssi.cacr.caltech.edu/cgi-bin/getcssconedbid_release.cgi?Name=" & Trim(searchstar(0)) & " " & Trim(searchstar(1)) & _
+    Connstr = "http://nesssi.cacr.caltech.edu/cgi-bin/getcssconedbid_release2.cgi?Name=" & Trim(searchstar(0)) & " " & Trim(searchstar(1)) & _
     "&DB=photcat&Rad=0.5&OUT=csv&SHORT=short&PLOT=plot"
 
     URLGoTo Me.hWnd, Connstr
